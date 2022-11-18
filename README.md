@@ -1,12 +1,12 @@
-# general
-- PAS DE é
-- francais (sauf debut nom méthode)
+# General
+- Pas d'accent
+- En français (sauf debut des noms de méthodes)
 
-# attributs
-- commence par une minuscule
-- Mot séparé par des Maj (Pas de "_")
+# Attributs
+- Commence par une minuscule
+- Mots séparés par des Majuscules (Pas de "_")
 
-# méthodes
-- commence par une minuscule
-- Mot séparé par des Maj (Pas de "_")
-- get / set / add / del (pour les débuts de méthode (si besoin))
+# Méthodes
+- Commence par une minuscule
+- Mots séparés par des Majuscules (Pas de "_")
+Exemple de début de méthode : get / set / add / del
