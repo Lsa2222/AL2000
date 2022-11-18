@@ -41,7 +41,7 @@ Executez la commande ``git clone https://github.com/Lsa2222/AL2000.git``
 Liste des versions : [Cliquer pour afficher](https://github.com/Lsa2222/AL2000/tags)
 
 ## Auteurs
-* **Joan Besante** _alias_ [besantej4](https://github.com/besantej4)
+* **Joan Besante** _alias_ [besantej](https://github.com/besantej)
 * **Timothée Rognon** _alias_ [ar7-612](https://github.com/ar7-612)
 * **Lucas Sauvayre** _alias_ [lsa2222](https://github.com/Lsa2222)
 * **Noé Romain** _alias_ [IronLyzhard](https://github.com/IronLyzhard)
