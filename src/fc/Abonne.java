@@ -8,20 +8,15 @@ public class Abonne extends Personne{
 	private String prenom;
 	private String nom;
 	private String adrMail;
-	private int id;
+	int cb;
 	private String adrPhys;
 	private int credit;
 	private HashSet<Tag> rest = new HashSet<>();
 	private HashSet<LocationBR> locBr = new HashSet<>();
 	private HashSet<LocationQR> locQr = new HashSet<>();
-	private HashSet<EntreeHistorique> hist = new HashSet<>();
 	
-	public Abonne(String prenom, String nom, String adrMail, String adrPhys, HashSet<Tag> rest, int credit, long cb) {
-		if(credit<15) {
-			System.out.print("mettre + de 15e");
-		}
-		else {
-			super.id=cb;
+	public Abonne(String prenom, String nom, String adrMail, String adrPhys, HashSet<Tag> rest, int credit, int cb) {
+			this.cb=cb;
 			this.prenom = prenom;
 			this.nom = nom;
 			this.adrMail = adrMail;
@@ -29,7 +24,6 @@ public class Abonne extends Personne{
 			this.rest = rest;
 			this.credit=credit;
 			//enregistrer abo dans BD
-		}
 	}
 		
 	//retourne 1 si la location c'est bien effectue, 3 si il y a deja 3 film, 4 si tag interdit
