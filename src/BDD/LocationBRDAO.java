@@ -1,46 +1,48 @@
-package fc;
+package dao;
 
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
+import java.sql.Connection;
+import java.sql.SQLException;
 
-public class LocationBR extends Location {
-	final static int PRIXBR=5;
-	
-	public LocationBR(BluRay br, Personne p) {
-		super(br.film, p);
-		this.br=br;
-	}
-	BluRay br;
-	
-	int enregistrer(){
-		int v = this.p.addLocation(this);
-		if(v==1) {
-			//sortir le bluray
-			//envoyer a la bd
-			System.out.print("loc enregistrer\n");
+import java.util.HashSet;
+import java.util.Set;
 
-			return 1;
-		}
-		return v;
-	}
-	
-	boolean rendre() {
-		if(this.br.estBon==false/*il faudrais demandé si on arrive a le lire*/) {
-			System.out.print("c'est gratuit\n");
-			return true;
-		}
-		Date ajd= new java.util.Date();
-	    long diffInMillies = Math.abs(ajd.getTime() - this.date.getTime());
-	    long total = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS)+1;
-		if(this.p.payer(total*PRIXBR)){
-			System.out.print("film rendu\n");
-			return true;
-		}
-		System.out.print("pas assez de credit\n");
-		return false;
-	}
-	
-	
+public class LocationBRDAO<LocationBR> extends DAO {    
+    protected DAO(Connection conn) {
+        super(conn);
+    }
+    
+    public boolean create(Location obj) {
+        try {
+            PreparedStatement statm1 = conn.PreparedStatement(
+                "INSERT INTO LesLocationsBR "+
+                "VALUES (?,?,?,?)");
+            statm1.setInt(1,/*generer id personne*/ );
+            statm1.setInt(2,obj.getBR().getId());//Changer model
+            statm1.setInt(3,obj.getDate());
+            statm1.execute();
+        } catch (SQLException e) {
+            System.out.println("Hu,Ho...");
+        }
+    }
 
-	
+    public Location read (Object obj) {
+        return null;
+    }
+
+    public boolean update (Location obj) {
+        return false;
+    }
+
+    public boolean delete(Location obj) {
+        try {
+            PreparedStatement statm1 = conn.PreparedStatement(
+                "DELETE INTO LesLocationsBR "+
+                "WHERE id=? AND idBR=?");
+            statm1.setInt(1,obj.getPersonne().getId());//Changer model
+            statm1.setInt(2,obj.getBR().getId());
+            statm1.execute();
+        } catch (SQLException e) {
+            System.out.println("Hu,Ho...");
+        }
+    }
 }
