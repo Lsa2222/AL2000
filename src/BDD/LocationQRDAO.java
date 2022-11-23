@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
-public class LocationQRDAO<LocationBR> extends DAO {    
+public class LocationQRDAO extends DAO<LocationBR> {    
     protected DAO(Connection conn) {
         super(conn);
     }

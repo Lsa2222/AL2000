@@ -1,20 +1,34 @@
-package fc;
+package dao;
 
-import java.util.Date;
-
-public abstract class  Location {
-	Film film;
-	Date date;
-	Personne p;
+public class LocationDAO extends DAO<Location> {
 	
-	public Location(Film film, Personne p) {
-		this.film = film;
-		this.p = p;
-		this.date= new java.util.Date();
-	}
+	protected DAO(Connection conn) {
+		System.err.println("NON IMPLEMENTEES !!!!");
+        super(conn);
+    }
 	
-	//test si la location est valide, si oui l'enregistre
-	//sinon 2:pas assez d'argent	3:trop de film sur ce compte	4:tag interdis
-	abstract int enregistrer();
+    public boolean create(Film obj) {
+        try {
+            return false;
+        } catch (SQLException e) {
+            System.out.println("Hu,Ho...");
+        }
+    }
 
+    public Film read (Object obj) {
+        return null;
+    }
+
+    public boolean update (Film obj) {
+        return false;
+    }
+
+    public boolean delete(Film obj) {
+        try {
+            return false;
+        } catch (SQLException e) {
+            System.out.println("Hu,Ho...");
+        }
+    }
 }
+

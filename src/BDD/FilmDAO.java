@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
-public class FilmDAO<LocationBR> extends DAO {    
+public class FilmDAO extends DAO<Film> {    
     protected DAO(Connection conn) {
         super(conn);
     }

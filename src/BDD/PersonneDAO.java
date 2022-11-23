@@ -1,9 +1,34 @@
-package fc;
+package dao;
 
-public abstract class Personne {
-	long id;
-	abstract int addLocation(LocationBR loc);
-	abstract int addLocation(LocationQR loc);
-	public abstract boolean payer(long l);
+public class PersonneDAO extends DAO<Personne> {
 	
+	protected DAO(Connection conn) {
+		System.err.println("NON IMPLEMENTEES !!!!");
+        super(conn);
+    }
+	
+    public boolean create(Film obj) {
+        try {
+            return false;
+        } catch (SQLException e) {
+            System.out.println("Hu,Ho...");
+        }
+    }
+
+    public Film read (Object obj) {
+        return null;
+    }
+
+    public boolean update (Film obj) {
+        return false;
+    }
+
+    public boolean delete(Film obj) {
+        try {
+            return false;
+        } catch (SQLException e) {
+            System.out.println("Hu,Ho...");
+        }
+    }
 }
+

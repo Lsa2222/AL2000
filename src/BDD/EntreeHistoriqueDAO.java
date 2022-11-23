@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
-public class EntreeHistoriqueDAO<LocationBR> extends DAO {    
+public class EntreeHistoriqueDAO extends DAO<EntreeHistorique> {    
     protected DAO(Connection conn) {
         super(conn);
     }

@@ -1,37 +1,34 @@
-package fc;
+package dao;
 
-import java.util.HashSet;
+public class GuestDAO extends DAO<Guest> {
+	
+	protected DAO(Connection conn) {
+		System.err.println("NON IMPLEMENTEES !!!!");
+        super(conn);
+    }
+	
+    public boolean create(Film obj) {
+        try {
+            return false;
+        } catch (SQLException e) {
+            System.out.println("Hu,Ho...");
+        }
+    }
 
-public class Guest extends Personne {
-	private LocationBR locBr;
-	private HashSet<LocationQR> locQr;
-	
-	public Guest(long cb) {
-		this.locQr = new HashSet<>();
-		super.id=cb;
-	}
-	
-	public int addLocation(LocationBR loc) {
-		if (this.locBr != null) {
-			System.out.print("vous avez deja loue un film");
-			return 3;
-		}
-		this.locBr=loc;
-		return 1;
-	}
-	
-	public int addLocation(LocationQR loc) {
-		if (loc==loc/*acces a la banque*/) {
-			System.out.print("pas assez d'argent");
-			return 2;
-		}
-		this.locQr.add(loc);
-		return 1;
-	}
-	
-	public boolean payer(long argent) {
-		return(true);//voir avec sa banque	
-	}
+    public Film read (Object obj) {
+        return null;
+    }
 
+    public boolean update (Film obj) {
+        return false;
+    }
+
+    public boolean delete(Film obj) {
+        try {
+            return false;
+        } catch (SQLException e) {
+            System.out.println("Hu,Ho...");
+        }
+    }
 }
 
