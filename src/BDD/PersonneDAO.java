@@ -1,34 +1,32 @@
-package dao;
+package BDD;
+
+import java.sql.Connection;
+
+import fc.Personne;
 
 public class PersonneDAO extends DAO<Personne> {
 	
-	protected DAO(Connection conn) {
+	protected PersonneDAO(Connection conn) {
+		super(conn);
 		System.err.println("NON IMPLEMENTEES !!!!");
-        super(conn);
+        
     }
 	
-    public boolean create(Film obj) {
-        try {
-            return false;
-        } catch (SQLException e) {
-            System.out.println("Hu,Ho...");
-        }
+    public boolean create(Personne obj) {
+    	return false;
     }
 
-    public Film read (Object obj) {
+    public Personne read (Object obj) {
         return null;
     }
 
-    public boolean update (Film obj) {
+    public boolean update (Personne obj) {
         return false;
     }
 
-    public boolean delete(Film obj) {
-        try {
-            return false;
-        } catch (SQLException e) {
-            System.out.println("Hu,Ho...");
-        }
+    public boolean delete(Personne obj) {
+    	return false;
+
     }
 }
 

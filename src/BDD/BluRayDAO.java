@@ -1,27 +1,29 @@
-package dao;
+package BDD;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import java.util.HashSet;
-import java.util.Set;
+import fc.BluRay;
 
 public class BluRayDAO extends DAO<BluRay> {    
-    protected DAO(Connection conn) {
+    protected BluRayDAO(Connection conn) {
         super(conn);
     }
     
     public boolean create(BluRay obj) {
         try {
-            PreparedStatement statm1 = conn.PreparedStatement(
+            PreparedStatement statm1 = conn.prepareStatement(
                 "INSERT INTO LesBlueRay "+
                 "VALUES (?,?,?)");
             statm1.setInt(1,obj.getId());
-            statm1.setInt(2,obj.getFilm().getFilm());//Changer model
-			statm1.setVarchar2(3,obj.getEtat());
+            statm1.setInt(2,obj.getFilmId());
+			statm1.setBoolean(3,obj.getEtat());
             statm1.execute();
+            return true;
         } catch (SQLException e) {
             System.out.println("Hu,Ho...");
+            return false;
         }
     }
 
@@ -35,13 +37,15 @@ public class BluRayDAO extends DAO<BluRay> {
 
     public boolean delete(BluRay obj) {
         try {
-            PreparedStatement statm1 = conn.PreparedStatement(
+            PreparedStatement statm1 = conn.prepareStatement(
                 "DELETE INTO LesBlueRay "+
                 "WHERE idBR=?");
             statm1.setInt(1,obj.getId());//Changer model
             statm1.execute();
+            return true;
         } catch (SQLException e) {
             System.out.println("Hu,Ho...");
+            return false;
         }
     }
 }

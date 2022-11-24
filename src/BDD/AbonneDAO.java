@@ -1,34 +1,30 @@
-package dao;
+package BDD;
+
+import java.sql.Connection;
+
+import fc.Abonne;
 
 public class AbonneDAO extends DAO<Abonne> {
 	
-	protected DAO(Connection conn) {
+	protected AbonneDAO(Connection conn) {
+		super(conn);
 		System.err.println("NON IMPLEMENTEES !!!!");
-        super(conn);
     }
 	
-    public boolean create(Film obj) {
-        try {
-            return false;
-        } catch (SQLException e) {
-            System.out.println("Hu,Ho...");
-        }
-    }
-
-    public Film read (Object obj) {
-        return null;
-    }
-
-    public boolean update (Film obj) {
+    public boolean create(Abonne obj) {
         return false;
     }
 
-    public boolean delete(Film obj) {
-        try {
-            return false;
-        } catch (SQLException e) {
-            System.out.println("Hu,Ho...");
-        }
+    public Abonne read (Object obj) {
+        return null;
+    }
+
+    public boolean update (Abonne obj) {
+        return false;
+    }
+
+    public boolean delete(Abonne obj) {
+        return false;
     }
 }
 

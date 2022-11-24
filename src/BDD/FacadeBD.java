@@ -1,6 +1,12 @@
-package dao;
+package BDD;
 
 import java.util.HashSet;
+
+import fc.Abonne;
+import fc.Film;
+import fc.LocationBR;
+import fc.LocationQR;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -33,6 +39,7 @@ public class FacadeBD {
 	
 	//enregistre l'abonne, renvoi faux si il a deja trop de compte(trigger)
 	public boolean newAbonne(Abonne a) {
+		return false;
 		//Create de AbonneDAO
 	}
 	//recupére l'abonne avec le numero de carte num 
@@ -41,6 +48,7 @@ public class FacadeBD {
 	}
 
 	public HashSet<Film> getCatalogueGlobal(){
+		return null;
 		//Pas le read de FilmDAO mais une autre fonction qui renvois un HashSet<Film>
 	}
 	
@@ -51,22 +59,42 @@ public class FacadeBD {
 	
 	public void newLocation(LocationBR br) {
 		//Create de LocationBRDAO
-		locBRDAO.create(br);
+		try {
+			locBRDAO.create(br);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void newLocation(LocationQR qr) {
 		//Create de LocationQRDAO
-		locQRDAO.create(qr);
+		try {
+			locQRDAO.create(qr);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void delLocation(LocationBR br) {
 		//Delete de LocationBRDAO
-		locBRDAO.delete(br);
+		try {
+			locBRDAO.delete(br);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void delLocation(LocationQR qr) {
 		//Delete de LocationQRDAO
-		locQRDAO.delete(qr);
+		try {
+			locQRDAO.delete(qr);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

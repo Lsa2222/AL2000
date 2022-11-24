@@ -1,34 +1,32 @@
-package dao;
+package BDD;
+
+import java.sql.Connection;
+
+import fc.Guest;
 
 public class GuestDAO extends DAO<Guest> {
 	
-	protected DAO(Connection conn) {
+	protected GuestDAO(Connection conn) {
+		super(conn);
 		System.err.println("NON IMPLEMENTEES !!!!");
-        super(conn);
     }
 	
-    public boolean create(Film obj) {
-        try {
-            return false;
-        } catch (SQLException e) {
-            System.out.println("Hu,Ho...");
-        }
+    public boolean create(Guest obj) {
+        return false;
+
     }
 
-    public Film read (Object obj) {
+    public Guest read (Object obj) {
         return null;
     }
 
-    public boolean update (Film obj) {
+    public boolean update (Guest obj) {
         return false;
     }
 
-    public boolean delete(Film obj) {
-        try {
-            return false;
-        } catch (SQLException e) {
-            System.out.println("Hu,Ho...");
-        }
+    public boolean delete(Guest obj) {
+        return false;
+
     }
 }
 
