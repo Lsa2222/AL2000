@@ -16,6 +16,21 @@ public class Film {
 	private String reali;
 	private String descr;
 	public HashSet<Tag> restr = new HashSet<>();
+	public int getId() {
+		return id;
+	}
+	public String getTitre() {
+		return titre;
+	}
+	public String getRealisateur() {
+		return reali;
+	}
+	public String getGenre() {
+		return null;//TODO
+	}
+	public String getResumer() {
+		return descr;
+	}
 	
 	
 }

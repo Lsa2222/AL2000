@@ -22,6 +22,10 @@ public class LocationQR extends Location{
 		}
 		return v;
 	}
+
+	public int getPersonneId() {
+		return p.getId();
+	}
 	
 	
 }

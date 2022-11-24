@@ -5,5 +5,5 @@ public enum Tag {
 	PEGI16,
 	PEGI3,
 	PEGI101,
-	ACTION
+	ACTION;
 }
