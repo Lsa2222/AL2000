@@ -10,12 +10,14 @@ drop table LesFilms;
 drop table LesPersonnes;
 
 create table LesPersonnes (
-    id integer not null,
+    id integer not null AUTO_INCREMENT,
+    cb number(23)
     constraint LesPersonnes_Key primary key (id)
 );
 
 create table LesAbonnes(
     id integer not null,
+    cb number(23),
     prenom varchar2(20),
     nom varchar2(20),
     credit number(9),
@@ -76,7 +78,6 @@ create table LesBlueRay(
 
 create table LesLocationsBR(
     id integer not null,
-    noFilm integer not null,
     idBR integer not null,
     dateDebut date,
     constraint LesLocations_Key primary key (id, noFilm, idBR),
