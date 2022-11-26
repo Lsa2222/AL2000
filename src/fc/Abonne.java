@@ -4,37 +4,32 @@ import java.util.HashSet;
 
 public class Abonne extends Personne{
 	final static int PRIXQR=10;
+	Banque banque= Banque.creer();
+
 	
 	private String prenom;
 	private String nom;
 	private String adrMail;
-	int cb;
+	long cb;
 	private String adrPhys;
 	private int credit;
-	private HashSet<Tag> rest = new HashSet<>();
 	private HashSet<LocationBR> locBr = new HashSet<>();
 	private HashSet<LocationQR> locQr = new HashSet<>();
+	private HashSet<Enfant> enfant = new HashSet<>();
+	int numCarte;
 	
-	public Abonne(String prenom, String nom, String adrMail, String adrPhys, HashSet<Tag> rest, int credit, int cb) {
-			this.cb=cb;
+	public Abonne(String prenom, String nom, String adrMail, String adrPhys, int credit, long cb) {
+			super.id=cb;
 			this.prenom = prenom;
 			this.nom = nom;
 			this.adrMail = adrMail;
 			this.adrPhys = adrPhys;
-			this.rest = rest;
 			this.credit=credit;
-			//enregistrer abo dans BD
 	}
 		
 	//retourne 1 si la location c'est bien effectue, 3 si il y a deja 3 film, 4 si tag interdit
 	public int addLocation(LocationBR loc) {
-		HashSet<Tag> inter = new HashSet<>(loc.film.restr);
-		inter.retainAll(this.rest);
-		//on cree l'intersection des deux liste de restriction pour voir si un tag est interdit
-		if (inter.isEmpty()==false) {
-			System.out.print("tag interdit:"+inter+"\n");
-			return 4;
-		}
+		
 		if (this.locBr.size()>=3) {
 			System.out.print("vous avez deja loue 3film\n");
 			return 3;
@@ -53,8 +48,12 @@ public class Abonne extends Personne{
 		return 1;
 	}
 	
-	public boolean addCredit() {
-		//demander a la banque
+	public boolean addCredit(int c) {
+		boolean res=banque.debiter(this.cb, c);
+		if(res) {
+			//mettre a jour BD avec this.credit +c
+			return true;
+		}
 		return false;
 	}
 
@@ -102,9 +101,14 @@ public class Abonne extends Personne{
 			return true;
 		}
 		else {
-			System.out.print("pas assez d'argent");
+			System.out.print("pas assez de credit");
 			return(false);
 		}
+	}
+	
+	public void creerEnfant(String prenom, String nom, int credit, HashSet<Tag> rest, int nbMax) {
+		Enfant e = new Enfant (prenom, nom, adrMail, adrPhys, credit, cb, rest, nbMax);
+		this.enfant.add(e);
 	}
 
 	

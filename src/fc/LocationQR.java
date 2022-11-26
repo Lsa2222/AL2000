@@ -1,6 +1,7 @@
 package fc;
 
 import java.util.Date;
+import java.util.Timer;
 
 public class LocationQR extends Location{
 	Date activation;
@@ -16,15 +17,20 @@ public class LocationQR extends Location{
 			//generer le qr code
 			//imprimer le qrcode
 			//envoyer a la bd
-			System.out.print("locqr enregistrer\n");
+			this.lienUrl="";
+			this.date=new Date();
+			System.out.print(this.date.toString()+"locqr enregistrer\n");
 
 			return 1;
 		}
 		return v;
 	}
-
-	public int getPersonneId() {
-		return p.getId();
+	
+	void activer() {
+		this.activation=new Date();
+	    Timer timer = new Timer();
+	    long delay = 3000;
+	    timer.schedule(new MaTask(this),delay);
 	}
 	
 	

@@ -9,16 +9,4 @@ public class BluRay {
 	int id;
 	Film film;
 	boolean estBon;
-	
-	public int getId() {
-		return id;
-	}
-
-	public int getFilmId() {
-		return film.getId();
-	}
-
-	public boolean getEtat() {
-		return estBon;
-	}
 }

@@ -1,8 +1,9 @@
 package fc;
 
 public class Banque {
+	int solde;
 	private Banque(){
-		
+		this.solde=20;
 	}
 	
 	static boolean exist = false;
@@ -18,12 +19,13 @@ public class Banque {
 		}
 	}
 	
-	boolean debiter(int numCmt, int solde) {
-		if(solde%10==9) {
-			System.out.println("client "+numCmt+" n'as pas assez d'argent");
+	boolean debiter(long cb, int achat) {
+		if(solde<achat) {
+			System.out.println("client "+cb+" n'as pas assez d'argent");
 			return false;
 		}
-		System.out.println("client "+numCmt+" debiter de "+solde);
+		
+		System.out.println("client "+cb+" debiter de "+achat);
 		return true;
 	}
 }

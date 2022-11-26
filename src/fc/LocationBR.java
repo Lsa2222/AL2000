@@ -39,13 +39,8 @@ public class LocationBR extends Location {
 		System.out.print("pas assez de credit\n");
 		return false;
 	}
+	
+	
 
-	public int getBRId() {
-		return br.getId();
-	}
-
-	public int getPersonneId() {
-		return p.getId();
-	}
 	
 }
