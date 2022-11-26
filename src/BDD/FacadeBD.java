@@ -3,59 +3,84 @@ package BDD;
 import java.util.HashSet;
 
 import fc.Abonne;
+import fc.Enfant;
 import fc.Film;
 import fc.LocationBR;
 import fc.LocationQR;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class FacadeBD {
-
-	static final String connAdre = "jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag";
-	static final String connUser = "rognont";//?
-	static final String connPasw = "b67429290d";//?
-	private Connection conn;
-	
+		
 	private DAO<Abonne> aboDAO;
+	private EnfantDAO enfDAO;
 	private DAO<Film> filmDAO;
 	private DAO<LocationBR> locBRDAO;
 	private DAO<LocationQR> locQRDAO;
 	
+	private Session ses;
+	private Connection conn;
+	
 	FacadeBD(){
-		try{
-			conn=DriverManager.getConnection(connAdre,connUser,connPasw);
-			
-			aboDAO = new AbonneDAO(conn);
-			filmDAO = new FilmDAO(conn);
-			locBRDAO = new LocationBRDAO(conn);
-			locQRDAO = new LocationQRDAO(conn);
-		} catch (SQLException e) {
-			System.out.println(e);//CRITIQUE
-		}
+		ses = new Session();
+		conn = ses.open();
 		
+		aboDAO = new AbonneDAO(conn);
+		enfDAO = new EnfantDAO(conn);
+		filmDAO = new FilmDAO(conn);
+		locBRDAO = new LocationBRDAO(conn);
+		locQRDAO = new LocationQRDAO(conn);
 	}
+	
+	//AbonneDAO
 	
 	//enregistre l'abonne, renvoi faux si il a deja trop de compte(trigger)
 	public boolean newAbonne(Abonne a) {
-		return false;
-		//Create de AbonneDAO
+		try {
+			return aboDAO.create(a);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
+	public boolean newEnfant(Enfant a) {
+		try {
+			return enfDAO.create(a);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 	//recupére l'abonne avec le numero de carte num 
-	public void getAbonne(int num) {
-		//Read de AbonneDAO (Objet=num)
+	public Abonne getAbonne(int num) {
+		try {
+			return aboDAO.read(num);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
-
+	//met à c le crédit de l'abonne a;
+	public boolean updCredit(Abonne a,int c) {
+		a.setCredit(c);
+		try {
+			return aboDAO.update(a);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	//FilmDAO
+	
 	public HashSet<Film> getCatalogueGlobal(){
 		return null;
 		//Pas le read de FilmDAO mais une autre fonction qui renvois un HashSet<Film>
 	}
 	
-	//met à c le crédit de l'abonne a;
-	public void updCredit(Abonne a,int c) {
-		//Update de AbonneDAO
-	}
+	// LocationDAO
 	
 	public void newLocation(LocationBR br) {
 		//Create de LocationBRDAO
@@ -66,7 +91,6 @@ public class FacadeBD {
 			e.printStackTrace();
 		}
 	}
-	
 	public void newLocation(LocationQR qr) {
 		//Create de LocationQRDAO
 		try {
@@ -76,7 +100,6 @@ public class FacadeBD {
 			e.printStackTrace();
 		}
 	}
-	
 	public void delLocation(LocationBR br) {
 		//Delete de LocationBRDAO
 		try {
@@ -86,7 +109,6 @@ public class FacadeBD {
 			e.printStackTrace();
 		}
 	}
-	
 	public void delLocation(LocationQR qr) {
 		//Delete de LocationQRDAO
 		try {

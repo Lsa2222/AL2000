@@ -3,7 +3,7 @@ package BDD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,42 +14,30 @@ public class LocationBRDAO extends DAO<LocationBR> {
         super(conn);
     }
     
-    public boolean create(LocationBR obj) {
-        try {
-            PreparedStatement statm1 = conn.prepareStatement(
-                "INSERT INTO LesLocationsBR "+
-                "VALUES (?,?,?,?)");
-            statm1.setInt(1,/*generer id personne*/ );
-            statm1.setInt(2,obj.getBRId());//Changer model
-            statm1.setDate(3,);//TODO : date
-            statm1.execute();
-            return true;
-        } catch (SQLException e) {
-            System.out.println("Hu,Ho...");
-            return false;
-        }
+    public boolean create(LocationBR obj) throws SQLException {
+        PreparedStatement statmLocation = conn.prepareStatement(
+        		"INSERT INTO LesLocationsBR "+
+        		"VALUES (?,?,?,?)");
+        statmLocation.setInt(1,obj.getPersonneId());
+        statmLocation.setInt(2,obj.getBRId());//Changer model
+        statmLocation.setDate(3,new java.sql.Date(obj.getDate()));//TODO : date ?
+        return statmLocation.execute();
     }
 
-    public LocationBR read (Object obj) {
+    public LocationBR read (Object obj) throws SQLException {
         return null;
     }
 
-    public boolean update (LocationBR obj) {
+    public boolean update (LocationBR obj) throws SQLException {
         return false;
     }
 
-    public boolean delete(LocationBR obj) {
-        try {
+    public boolean delete(LocationBR obj) throws SQLException {
             PreparedStatement statm1 = conn.prepareStatement(
                 "DELETE INTO LesLocationsBR "+
                 "WHERE id=? AND idBR=?");
-            statm1.setInt(1,obj.getPersonneId());//Changer model
+            statm1.setInt(1,obj.getPersonneId());
             statm1.setInt(2,obj.getBRId());
-            statm1.execute();
-            return true;
-        } catch (SQLException e) {
-            System.out.println("Hu,Ho...");
-            return false;
-        }
+            return statm1.execute();
     }
 }

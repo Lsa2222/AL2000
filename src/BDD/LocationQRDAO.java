@@ -14,21 +14,16 @@ public class LocationQRDAO extends DAO<LocationQR> {
         super(conn);
     }
     
-    public boolean create(LocationQR obj) {
-        try {
+    public boolean create(LocationQR obj) throws SQLException {
             PreparedStatement statm1 = conn.prepareStatement(
                 "INSERT INTO LesLocationsQR "+
                 "VALUES (?,?,?,?)");
-            statm1.setInt(1,/*generer id personne*/ );
+            statm1.setInt(1,obj.getPersonneId());
             statm1.setInt(2,obj.getFilmId());//Changer model
-			statm1.setDate(3,obj.getActivationDate());//TODO
-            statm1.setDate(4,obj.getDate());//TODO
-            statm1.execute();
-            return true;
-        } catch (SQLException e) {
-            System.out.println("Hu,Ho...");
-            return false;
-        }
+			statm1.setDate(3,new java.sql.Date(obj.getActivationDate()));//TODO
+            statm1.setDate(4,new java.sql.Date(obj.getDate()));//TODO
+            return statm1.execute();
+
     }
 
     public LocationQR read (Object obj) {
@@ -39,17 +34,14 @@ public class LocationQRDAO extends DAO<LocationQR> {
         return false;
     }
 
-    public boolean delete(LocationQR obj) {
-        try {
+    public boolean delete(LocationQR obj) throws SQLException {
             PreparedStatement statm1 = conn.prepareStatement(
                 "DELETE INTO LesLocationsQR "+
-                "WHERE id=? AND noFilm=? AND dateActivation=?");
+                "WHERE id=? AND noFilm=?");
             statm1.setInt(1,obj.getPersonneId());//Changer model
-            statm1.setInt(2,obj.getQRId());//???????
-			statm1.setDate(3, obj.getActivationDate());//TODO
-            statm1.execute();
-        } catch (SQLException e) {
-            System.out.println("Hu,Ho...");
-        }
+            statm1.setInt(2,obj.getFilmId());
+            return statm1.execute();
+
     }
+    
 }

@@ -19,14 +19,16 @@ public class EntreeHistoriqueDAO extends DAO<EntreeHistorique> {
             PreparedStatement statm1 = conn.prepareStatement(
                 "INSERT INTO HistoriqueLocation "+
                 "VALUES (?,?,?,?,?)");
-            statm1.setInt(1,/*generer id personne*/ );
+            //statm1.setInt(1,/*generer id personne*/ );
             statm1.setInt(2,obj.getFilmId());//Changer model
 			statm1.setInt(3,obj.getBRId());
-            statm1.setDate(4,obj.getDate());//TODO : Convertion date
-			statm1.setDate(5,/*récup date actuelle*/);
+            //statm1.setDate(4,obj.getDate());//TODO : Convertion date
+			//statm1.setDate(5,/*récup date actuelle*/);
             statm1.execute();
+            return true;
         } catch (SQLException e) {
             System.out.println("Hu,Ho...");
+            return false;
         }
     }
 

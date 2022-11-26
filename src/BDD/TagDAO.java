@@ -2,11 +2,13 @@ package BDD;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import fc.Film;
 import fc.Tag;
 
 public class TagDAO extends DAO<Tag> {    
@@ -48,5 +50,19 @@ public class TagDAO extends DAO<Tag> {
             System.out.println("Hu,Ho...");
             return false;
         }
+    }
+    
+    public HashSet<Tag> listTagFilm(int idFilm) throws SQLException{
+    	HashSet<Tag> tab= new HashSet();
+    	PreparedStatement queryFilm = conn.prepareStatement(""
+    			+ "SELECT tag"
+    			+ "FROM TagsFilm"
+    			+ "WHERE noFilm = ?");
+    	queryFilm.setInt(1,idFilm);
+    	ResultSet res = queryFilm.executeQuery();
+    	while(res.next()) {
+    		tab.add(Tag.strToTag(res.getString(1)));
+    	}
+    	return tab;
     }
 }
