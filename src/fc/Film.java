@@ -18,4 +18,19 @@ public class Film {
 	public HashSet<Tag> restr = new HashSet<>();
 	public String image;
 	
+	public int getId() {
+		return id;
+	}
+	public String getTitre() {
+		return titre;
+	}
+	public String getRealisateur() {
+		return reali;
+	}
+	public String getGenre() {
+		return null;//TODO
+	}
+	public String getResumer() {
+		return descr;
+	}
 }

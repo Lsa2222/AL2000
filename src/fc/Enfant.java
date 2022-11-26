@@ -7,7 +7,7 @@ public class Enfant extends Abonne {
 	int nbMax;
 	
 	
-	public Enfant(String prenom, String nom, String adrMail, String adrPhys, int credit, long cb, HashSet<Tag> rest,int nbMax) {
+	public Enfant(String prenom, String nom, String adrMail, String adrPhys, int credit, int cb, HashSet<Tag> rest,int nbMax) {
 		super(prenom, nom, adrMail, adrPhys, credit, cb);
 		this.rest=rest;
 		this.nbMax=nbMax;

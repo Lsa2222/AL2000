@@ -15,7 +15,7 @@ public class Main {
 		 t3.add(Tag.PEGI16);
 		 t3.add(Tag.PEGI18);
 		 
-		 long cb=1234567891234567L;
+		 int cb=123456789;
 	     
 		 
 	     Abonne a = new Abonne(null, null, null, null, 20, cb);

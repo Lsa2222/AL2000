@@ -6,7 +6,7 @@ public class Guest extends Personne {
 	private LocationBR locBr;
 	private HashSet<LocationQR> locQr;
 	
-	public Guest(long cb) {
+	public Guest(int cb) {
 		this.locQr = new HashSet<>();
 		super.id=cb;
 	}

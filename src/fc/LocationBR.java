@@ -40,7 +40,13 @@ public class LocationBR extends Location {
 		return false;
 	}
 	
-	
+	public int getBRId() {
+		return br.getId();
+	}
+
+	public int getPersonneId() {
+		return p.getId();
+	}
 
 	
 }

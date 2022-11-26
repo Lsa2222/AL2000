@@ -33,5 +33,8 @@ public class LocationQR extends Location{
 	    timer.schedule(new MaTask(this),delay);
 	}
 	
+	public int getPersonneId() {
+		return p.getId();
+	}
 	
 }

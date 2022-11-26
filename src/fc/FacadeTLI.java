@@ -2,33 +2,39 @@ package fc;
 
 import java.util.HashSet;
 
+import BDD.FacadeBD;
+
 public class FacadeTLI {
-	
+	FacadeBD bd;
 	Abonne a;
 	Banque banque= Banque.creer();
 	Al2000 al=new Al2000();
 	CatalogueLocal c=CatalogueLocal.creer();
 	
 	//renvoi 2 si pas assez d'argent, 0 si il a déja trois compte, 1 si ca marche 
-	public int creerAbonne(String prenom, String nom, String adrMail, String adrPhys, int credit, long cb) {
+	public int creerAbonne(String prenom, String nom, String adrMail, String adrPhys, int credit, int cb) {
 		if(!banque.debiter(cb, credit)) {
 			return(2); 
 		}
-		this.a = new Abonne(prenom,nom,adrMail,adrPhys,credit,cb);
-		//res=envoyer a la bd
-		int res = 1;
-		return res;
+		Abonne abo = new Abonne(prenom,nom,adrMail,adrPhys,credit,cb);
+		if(bd.newAbonne(abo)) {
+		this.a=abo;
+		return 1;
+		}
+		return 0;
 	}
 	
-	//dire si c'est enfant ou adulte 1 adulte 2 enfant
-	public boolean connection() {
+	//0 echec 1 adulte 2 enfant
+	public int connection(int num) {
 		if(al.carte()==0) {
-			return false;
+			return 0;
 		}
 		else {
-			//abo:demandé a la BD
-			//this.a=abo
-			return true;
+			this.a=bd.getAbonne(num);
+			if(a instanceof Enfant) {
+				return 2;
+			}
+			return 1;
 		}
 	}
 	
@@ -37,24 +43,28 @@ public class FacadeTLI {
 	}
 	
 	public HashSet<Film> catalogueGlobal() {
-		//get cat BD
+		bd.getCatalogueGlobal();
 		return null;
 	}
 	
 	public boolean recharger(int c) {
 		return this.a.addCredit(c) ;
 	}
-	//return des message d'erreur
+
 	//precondition:on est abonne
 	public int creerEnfant(String prenom, String nom, int credit, HashSet<Tag> rest, int nbMax) {
 		if(!banque.debiter(this.a.cb, credit)) {
 			return(2); 
 		}
-		this.a.creerEnfant(prenom, nom, credit, rest, nbMax);
+		Enfant e=this.a.creerEnfant(prenom, nom, credit, rest, nbMax);
+		if(bd.newEnfant(a)) {
+			return 0;
+		}
 		return 1;
 	}
 	
 	public void deconecte() {
+		//bd update abonne
 		this.a=null;
 	}
 	
