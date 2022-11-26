@@ -8,11 +8,11 @@ drop table LesLocationsQR;
 drop table Tags;
 drop table LesFilms;
 drop table LesPersonnes;
+drop sequence id_gens;
 
-create table LesPersonnes (
-    id integer not null AUTO_INCREMENT,
+create table LesPersonnes(
+    id INT PRIMARY KEY NOT NULL,
     cb number(23)
-    constraint LesPersonnes_Key primary key (id)
 );
 
 create table LesAbonnes(
@@ -30,7 +30,7 @@ create table LesAbonnes(
 
 create table LesFilms(
     noFilm integer not null,
-    titre varchar2(20),
+    titre varchar2(100),
     realisateur varchar2(20),
     genre varchar2(200),
     resumer varchar2(500),
@@ -80,9 +80,8 @@ create table LesLocationsBR(
     id integer not null,
     idBR integer not null,
     dateDebut date,
-    constraint LesLocations_Key primary key (id, noFilm, idBR),
-    constraint LesLocations_Fkid foreign key (id) references LesPersonnes (id),
-    constraint LesLocations_FknoFilm foreign key (noFilm) references LesFilms (noFilm)
+    constraint LesLocations_Key primary key (id, idBR),
+    constraint LesLocations_Fkid foreign key (id) references LesPersonnes (id)
 );
 
 create table HistoriqueLocation (
@@ -95,3 +94,15 @@ create table HistoriqueLocation (
     constraint HistoriqueLocation_FKid foreign key (id) references LesPersonnes (id),
     constraint HistoriqueLocation_FKnoFilm foreign key (noFilm) references LesFilms (noFilm)
 );
+
+create sequence id_gens;
+
+create or replace trigger aut_enum
+before insert on LesPersonnes
+for each row
+begin
+    select id_gens.nextval
+    into :new.id
+    from dual;
+end;
+/
