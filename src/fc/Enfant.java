@@ -5,12 +5,14 @@ import java.util.HashSet;
 public class Enfant extends Abonne {
 	private HashSet<Tag> rest = new HashSet<>();
 	int nbMax;
+	Abonne parent;
 	
 	
-	public Enfant(String prenom, String nom, String adrMail, String adrPhys, int credit, int cb, HashSet<Tag> rest,int nbMax) {
+	public Enfant(String prenom, String nom, String adrMail, String adrPhys, int credit, int cb,Abonne parent, HashSet<Tag> rest,int nbMax) {
 		super(prenom, nom, adrMail, adrPhys, credit, cb);
 		this.rest=rest;
 		this.nbMax=nbMax;
+		this.parent=parent;
 	}
 
 	public int addLocation(LocationBR loc) {

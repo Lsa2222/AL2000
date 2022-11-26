@@ -68,4 +68,11 @@ public class FacadeTLI {
 		this.a=null;
 	}
 	
+	boolean rendre(LocationBR loc){
+		int res=loc.rendre();
+		if(this.a.payer(res)) {
+			return true;
+		}
+		return false;
+	}
 }

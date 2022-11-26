@@ -24,20 +24,15 @@ public class LocationBR extends Location {
 		return v;
 	}
 	
-	boolean rendre() {
+	int rendre() {
 		if(this.br.estBon==false/*il faudrais demandé si on arrive a le lire*/) {
 			System.out.print("c'est gratuit\n");
-			return true;
+			return 0;
 		}
 		Date ajd= new java.util.Date();
 	    long diffInMillies = Math.abs(ajd.getTime() - this.date.getTime());
 	    long total = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS)+1;
-		if(this.p.payer(total*PRIXBR)){
-			System.out.print("film rendu\n");
-			return true;
-		}
-		System.out.print("pas assez de credit\n");
-		return false;
+		return (int) (total*PRIXBR);
 	}
 	
 	public int getBRId() {

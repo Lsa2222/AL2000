@@ -5,5 +5,5 @@ public enum Tag {
 	PEGI16,
 	ACTION,
 	POLICIER,
-	WORLDWAR;
+	WORLDWAR, FANTASY;
 }

@@ -27,10 +27,13 @@ public class Film {
 	public String getRealisateur() {
 		return reali;
 	}
-	public String getGenre() {
-		return null;//TODO
+	public HashSet<Tag> getGenre() {
+		return restr;
 	}
 	public String getResumer() {
 		return descr;
+	}
+	public String getImage() {
+		return image;
 	}
 }

@@ -10,7 +10,8 @@ public class Abonne extends Personne{
 	private String prenom;
 	private String nom;
 	private String adrMail;
-	int cb;
+	private int cb;
+	private int id;
 	private String adrPhys;
 	private int credit;
 	private HashSet<LocationBR> locBr = new HashSet<>();
@@ -19,7 +20,7 @@ public class Abonne extends Personne{
 	int numCarte;
 	
 	public Abonne(String prenom, String nom, String adrMail, String adrPhys, int credit, int cb) {
-			super.id=cb;
+			super.cb=cb;
 			this.prenom = prenom;
 			this.nom = nom;
 			this.adrMail = adrMail;
@@ -107,10 +108,19 @@ public class Abonne extends Personne{
 	}
 	
 	public Enfant creerEnfant(String prenom, String nom, int credit, HashSet<Tag> rest, int nbMax) {
-		Enfant e = new Enfant (prenom, nom, adrMail, adrPhys, credit, cb, rest, nbMax);
+		Enfant e = new Enfant (prenom, nom, adrMail, adrPhys, credit, cb, this, rest, nbMax);
 		this.enfant.add(e);
 		return e;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 
 	
 	
