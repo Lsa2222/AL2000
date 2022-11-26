@@ -1,12 +1,15 @@
-create or replace trigger limite_souscompte
-after insert on LesAbonnes
+create or replace trigger ajoutehistoriqueBR
+after delete on LesLocationsBR
 for each row
-declare 
-    nb_sscompte integer;
 begin
-    select count(*)into nb_sscompte from LesAbonnes a where :old.cb = a.cb
-    if (nb_sscompte > 5) then 
-        raise_application_error(-201,'Trop de sous-compte')
-    end if;
+	insert into HistoriqueLocation values (:old.id, (select b.nofilm from LesBlueRay b where :old.idbr=b.idbr), :old.idBR, :old.dateDebut, SYSDATE);
+end;
+/
+
+create or replace trigger ajoutehistoriqueQR
+after delete on LesLocationsQR
+for each row
+begin
+    insert into HistoriqueLocation values (:old.id, :old.noFilm, 0, :old.dateAchat, SYSDATE);
 end;
 /
