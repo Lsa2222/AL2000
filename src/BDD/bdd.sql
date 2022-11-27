@@ -28,6 +28,14 @@ create table LesAbonnes(
     constraint LesAbonnes_money check (credit >= 0)
 );
 
+create table LesEnfants (
+    idEnfant integer not null,
+    idParent integer not null,
+    constraint LesEnfants_Key primary key (idEnfant),
+    constraint LesEnfants_FKparent foreign key (idParent) references LesAbonnes(id),
+    constraint LesEnfants_FKenfant foreign key (idEnfant) references LesAbonnes(id)
+);
+
 create table LesFilms(
     noFilm integer not null,
     titre varchar2(100),
