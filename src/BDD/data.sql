@@ -3,17 +3,20 @@ insert into LesPersonnes values (0,51651651600000000000000);
 insert into LesPersonnes values (0,51651651600000000000000);
 insert into LesPersonnes values (0,51651651600000000000000);
 insert into LesPersonnes values (0,51651651600000000000000);
-insert into LesPersonnes values (0,51651651600000000000000);
 insert into LesPersonnes values (0,14986549800000000000000);
 insert into LesPersonnes values (0,98562185600000000000000);
+
+insert into LesEnfants values (2,1);
+insert into LesEnfants values (3,1);
+insert into LesEnfants values (4,1);
+insert into LesEnfants values (5,1);
 
 insert into LesAbonnes values (1,51651651600000000000000, 'Kevin','Duchamp',15,'Kevdu92@gmail.com','5 rue de la wesh');
 insert into LesAbonnes values (2,51651651600000000000000, 'Astride', 'Duchamp', 15, 'asasbor@gmail.com', '5 rue de la wesh');
 insert into LesAbonnes values (3,51651651600000000000000, 'KevinA', 'Duchamp', 15, 'aled@gmail.com', '5 rue de la wesh');
 insert into LesAbonnes values (4,51651651600000000000000, 'Kevin XV', 'Duchamp', 15, 'KevinLeDiheu@gmail.com','5 rue de la wesh');
 insert into LesAbonnes values (5,51651651600000000000000, 'EncoreunEnfant','Dupre', 15, 'eue@gmail.com', '5 rue de la wesh');
-insert into LesAbonnes values (6,51651651600000000000000, 'EnfantCache', 'Duchamp', 582, 'bwahah@gmail.com', '5 rue de la wesh');
-insert into LesAbonnes values (8,98562185600000000000000, 'Lucas', 'Sauvayre', 15, 'lulu@gmail.com','à la fac');
+insert into LesAbonnes values (7,98562185600000000000000, 'Lucas', 'Sauvayre', 15, 'lulu@gmail.com','à la fac');
 
 insert into LesFilms values (1, 'Le retour des moineaux', 'Inconnu', 'Space Opera', 'Il était une fois...');
 insert into LesFilms values (2, 'Jenaipas', 'Timothee', 'documentaire', 'Ba, il savait pas');
