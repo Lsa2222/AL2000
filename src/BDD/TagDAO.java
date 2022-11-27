@@ -6,9 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import java.util.HashSet;
-import java.util.Set;
 
-import fc.Film;
 import fc.Tag;
 
 public class TagDAO extends DAO<Tag> {    
@@ -57,7 +55,7 @@ public class TagDAO extends DAO<Tag> {
 		
 		int idFilm = (int) obj;
 		
-		HashSet<Tag> tab= new HashSet();
+		HashSet<Tag> tab= new HashSet<>();
     	PreparedStatement queryFilm = conn.prepareStatement(""
     			+ "SELECT tag"
     			+ "FROM TagsFilm"
@@ -65,7 +63,7 @@ public class TagDAO extends DAO<Tag> {
     	queryFilm.setInt(1,idFilm);
     	ResultSet res = queryFilm.executeQuery();
     	while(res.next()) {
-    		tab.add(Tag.strToTag(res.getString(1)));
+    		tab.add(Tag.valueOf(res.getString(1)));
     	}
     	return tab;
 	}

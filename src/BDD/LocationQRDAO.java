@@ -6,11 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import java.util.HashSet;
-import java.util.Set;
 
-import fc.Abonne;
 import fc.Film;
-import fc.LocationBR;
 import fc.LocationQR;
 import fc.Personne;
 import fc.Tag;

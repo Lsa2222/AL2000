@@ -4,14 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Set;
 
 import fc.BluRay;
 import fc.Film;
 import fc.LocationBR;
-import fc.LocationQR;
 import fc.Personne;
 import fc.Tag;
 

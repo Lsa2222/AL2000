@@ -52,7 +52,7 @@ public class EnfantDAO extends DAO<Enfant>{
 
 	@Override
 	public Enfant read(Object obj) throws SQLException {
-		Enfant ret = (Enfant) aboDAO.read(obj);
+		Enfant ret = Enfant.aboToEnfant(aboDAO.read(obj));
 		int idEnf = (int) obj;
 		PreparedStatement querryEnfant = conn.prepareStatement(""
 				+ "SELECT idParent "
