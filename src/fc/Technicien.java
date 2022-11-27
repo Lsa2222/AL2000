@@ -32,11 +32,11 @@ public Technicien() {
 	Film f2= new Film(1,"Les Évadés","Frank Darabont",d2,t2,"data/lesevades.jpg");
 	Film f3= new Film(1,"La Liste de Schindler","Steven Spielberg",d3,t3,"data/lalistedeschindler.jpg");
 	Film f4= new Film(1,"Parasite","Bong Joon-ho",d4,t4,"data/parasite.jpg");
-	Film f5= new Film(1,"Pulp Fiction","Quentin Tarantino",d5,t5,"data/.jpg");
-	Film f6= new Film(1,"The Dark Knight : Le Chevalier noir","Christopher Nolan",d6,t6,"data/.jpg");
+	Film f5= new Film(1,"Pulp Fiction","Quentin Tarantino",d5,t5,"data/pulpfiction.jpg");
+	Film f6= new Film(1,"The Dark Knight : Le Chevalier noir","Christopher Nolan",d6,t6,"data/thedarkknight.jpg");
 	Film f7= new Film(1,"Inception","Christopher Nolan",d7,t7,"data/inception.jpg");
 	Film f8= new Film(1,"La Ligne verte","Frank Darabont",d8,t8,"data/laligneverte.jpg");
-	Film f9= new Film(1,"Le Seigneur des anneaux : Le Retour du roi","Peter Jackson",d9,t9,"data/leseigneurdesanneaux:leretourduroi.jpg");
+	Film f9= new Film(1,"Le Seigneur des anneaux : Le Retour du roi","Peter Jackson",d9,t9,"data/leseigneurdesanneauxleretourduroi.jpg");
 	Film f10= new Film(1,"Forrest Gump","Robert Zemeckis",d10,t10,"data/forrestgump.jpg");
 	
 	this.l1 = new HashSet<Film>(Arrays.asList(f1,f2,f3,f4,f5,f6,f7,f8,f9,f10));
