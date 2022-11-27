@@ -36,5 +36,17 @@ public class LocationQR extends Location{
 	public int getPersonneId() {
 		return p.getId();
 	}
+
+	public int getFilmId() {
+		return super.film.getId();
+	}
+
+	public long getActivationDate() {
+		return super.date.getTime();//TODO : Activation ? Date ?
+	}
+
+	public long getDate() {
+		return super.date.getTime();//TODO : Activation ? Date ?
+	}
 	
 }

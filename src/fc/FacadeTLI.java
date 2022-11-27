@@ -16,7 +16,7 @@ public class FacadeTLI {
 		if(!banque.debiter(cb, credit)) {
 			return(2); 
 		}
-		Abonne abo = new Abonne(prenom,nom,adrMail,adrPhys,credit,cb);
+		Abonne abo = new Abonne(0,prenom,nom,adrMail,adrPhys,credit,cb);
 		if(bd.newAbonne(abo)) {
 		this.a=abo;
 		return 1;
@@ -53,11 +53,11 @@ public class FacadeTLI {
 
 	//precondition:on est abonne
 	public int creerEnfant(String prenom, String nom, int credit, HashSet<Tag> rest, int nbMax) {
-		if(!banque.debiter(this.a.cb, credit)) {
+		if(!banque.debiter(this.a.getCb(), credit)) {
 			return(2); 
 		}
 		Enfant e=this.a.creerEnfant(prenom, nom, credit, rest, nbMax);
-		if(bd.newEnfant(a)) {
+		if(bd.newEnfant(e)) {
 			return 0;
 		}
 		return 1;

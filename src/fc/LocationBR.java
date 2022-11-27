@@ -43,5 +43,9 @@ public class LocationBR extends Location {
 		return p.getId();
 	}
 
+	public long getDate() {
+		return super.date.getTime();
+	}
+
 	
 }

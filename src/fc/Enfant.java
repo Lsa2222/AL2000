@@ -1,18 +1,19 @@
 package fc;
 
 import java.util.HashSet;
+import java.util.Iterator;
 
 public class Enfant extends Abonne {
 	private HashSet<Tag> rest = new HashSet<>();
-	int nbMax;
-	Abonne parent;
+	
+	private int idParent;
 	
 	
-	public Enfant(String prenom, String nom, String adrMail, String adrPhys, int credit, int cb,Abonne parent, HashSet<Tag> rest,int nbMax) {
-		super(prenom, nom, adrMail, adrPhys, credit, cb);
+	public Enfant(int id, String prenom, String nom, String adrMail, String adrPhys, int credit, int cb,int idParent, HashSet<Tag> rest,int nbMax) {
+		super(id, prenom, nom, adrMail, adrPhys, credit, cb);
 		this.rest=rest;
-		this.nbMax=nbMax;
-		this.parent=parent;
+		super.nbMax=nbMax;
+		this.idParent=idParent;
 	}
 
 	public int addLocation(LocationBR loc) {
@@ -34,6 +35,26 @@ public class Enfant extends Abonne {
 			return 4;
 		}
 		return super.addLocation(loc);
+	}
+
+	public Iterator<Tag> getRestrIterator() {
+		return rest.iterator();
+	}
+
+	public static Enfant aboToEnfant(Abonne a) {
+		Enfant ret = (Enfant) a;
+		ret.rest=new HashSet<>();
+		ret.nbMax=168;
+		ret.idParent=-1;
+		return null;
+	}
+
+	public int getParentId() {
+		return idParent;
+	}
+
+	public void setIdParent(int i) {
+		idParent = i;
 	}
 
 }

@@ -6,12 +6,12 @@ public class Abonne extends Personne{
 	final static int PRIXQR=10;
 	Banque banque= Banque.creer();
 
+	protected int nbMax;
 	
 	private String prenom;
 	private String nom;
 	private String adrMail;
 	private int cb;
-	private int id;
 	private String adrPhys;
 	private int credit;
 	private HashSet<LocationBR> locBr = new HashSet<>();
@@ -19,13 +19,14 @@ public class Abonne extends Personne{
 	private HashSet<Enfant> enfant = new HashSet<>();
 	int numCarte;
 	
-	public Abonne(String prenom, String nom, String adrMail, String adrPhys, int credit, int cb) {
-			super.cb=cb;
+	public Abonne(int idPersonne, String prenom, String nom, String adrMail, String adrPhys, int credit, int cb) {
+			super(idPersonne,cb);
 			this.prenom = prenom;
 			this.nom = nom;
 			this.adrMail = adrMail;
 			this.adrPhys = adrPhys;
 			this.credit=credit;
+			this.nbMax=168;
 	}
 		
 	//retourne 1 si la location c'est bien effectue, 3 si il y a deja 3 film, 4 si tag interdit
@@ -108,23 +109,8 @@ public class Abonne extends Personne{
 	}
 	
 	public Enfant creerEnfant(String prenom, String nom, int credit, HashSet<Tag> rest, int nbMax) {
-		Enfant e = new Enfant (prenom, nom, adrMail, adrPhys, credit, cb, this, rest, nbMax);
+		Enfant e = new Enfant (0, prenom, nom, adrMail, adrPhys, credit, cb, this.id, rest, nbMax);
 		this.enfant.add(e);
 		return e;
 	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-
-	
-	
-	
-	
-	
 }
