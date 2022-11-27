@@ -3,6 +3,7 @@ package BDD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.HashSet;
 
 import fc.BluRay;
 
@@ -48,4 +49,10 @@ public class BluRayDAO extends DAO<BluRay> {
             return false;
         }
     }
+
+	@Override
+	public HashSet<BluRay> readAll(Object obj) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

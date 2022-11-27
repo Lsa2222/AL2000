@@ -1,6 +1,8 @@
 package BDD;
 
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.HashSet;
 
 import fc.Guest;
 
@@ -28,5 +30,11 @@ public class GuestDAO extends DAO<Guest> {
         return false;
 
     }
+
+	@Override
+	public HashSet<Guest> readAll(Object obj) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 

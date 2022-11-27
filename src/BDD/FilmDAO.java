@@ -2,13 +2,20 @@ package BDD;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
 
 import fc.Film;
+import fc.Tag;
 
-public class FilmDAO extends DAO<Film> {    
-    protected FilmDAO(Connection conn) {
+public class FilmDAO extends DAO<Film> {
+	
+	DAO<Tag> tagDAO;
+	
+    protected FilmDAO(Connection conn, DAO<Tag> tagDAO) {
         super(conn);
+        this.tagDAO = tagDAO;
     }
     
     public boolean create(Film obj) {
@@ -51,4 +58,23 @@ public class FilmDAO extends DAO<Film> {
             return false;
         }
     }
+
+	@Override
+	public HashSet<Film> readAll(Object obj) throws SQLException {
+		PreparedStatement queryFilm = conn.prepareStatement(""
+				+ "SELECT "
+        		+ "noFilm, titre, realisateur, resumer, genre "
+        		+ "FROM LesFilms ");
+		HashSet<Film> liste = new HashSet<>();
+		ResultSet res = queryFilm.executeQuery();
+		while(res.next()) {
+			liste.add(new Film(res.getInt(1),
+					res.getString(2),
+					res.getString(3),
+					res.getString(4),
+					tagDAO.readAll(res.getInt(1)),
+					res.getString(5)));
+		}
+		return liste;
+	}
 }

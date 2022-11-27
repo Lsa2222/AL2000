@@ -55,4 +55,10 @@ public class EntreeHistoriqueDAO extends DAO<EntreeHistorique> {
             return false;
         }
     }
+
+	@Override
+	public HashSet<EntreeHistorique> readAll(Object obj) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

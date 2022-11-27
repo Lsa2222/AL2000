@@ -2,6 +2,9 @@ package BDD;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashSet;
+
+import fc.LocationQR;
 
 public abstract class DAO<T> {
     protected Connection conn;
@@ -17,5 +20,7 @@ public abstract class DAO<T> {
     public abstract boolean update (T obj) throws SQLException;
 
     public abstract boolean delete(T obj) throws SQLException;
+    
+    public abstract HashSet<T> readAll (Object obj) throws SQLException;
 
 }

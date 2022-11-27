@@ -51,9 +51,13 @@ public class TagDAO extends DAO<Tag> {
             return false;
         }
     }
-    
-    public HashSet<Tag> listTagFilm(int idFilm) throws SQLException{
-    	HashSet<Tag> tab= new HashSet();
+
+	@Override
+	public HashSet<Tag> readAll(Object obj) throws SQLException {
+		
+		int idFilm = (int) obj;
+		
+		HashSet<Tag> tab= new HashSet();
     	PreparedStatement queryFilm = conn.prepareStatement(""
     			+ "SELECT tag"
     			+ "FROM TagsFilm"
@@ -64,5 +68,5 @@ public class TagDAO extends DAO<Tag> {
     		tab.add(Tag.strToTag(res.getString(1)));
     	}
     	return tab;
-    }
+	}
 }
