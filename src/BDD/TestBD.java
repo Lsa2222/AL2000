@@ -90,7 +90,7 @@ public class TestBD {
 	
 	static void testLocBR(FacadeBD fbd) {
 		System.out.println("Add loc br = ");
-		Abonne a = fbd.getAbonne(2);
+		Abonne a = fbd.getAbonne(1);
 		
 		//BluRay br, Personne p
 		
@@ -103,7 +103,13 @@ public class TestBD {
 			System.out.println("    "  + locBr.next().toString());
 		}
 		
-		fbd.newLocation(l);
+		if(fbd.newLocation(l)) {
+			System.out.println("Location reussie !");
+		} else {
+			System.out.println("echec");
+			return;
+		}
+		a = fbd.getAbonne(1);
 		
 		System.out.println(a.toString());
 		locBr = a.getLocBr().iterator();
@@ -112,6 +118,7 @@ public class TestBD {
 		}
 		
 		fbd.delLocation(l);
+		a = fbd.getAbonne(1);
 		
 		System.out.println(a.toString());
 		locBr = a.getLocBr().iterator();

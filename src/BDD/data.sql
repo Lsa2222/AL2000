@@ -23,17 +23,17 @@ insert into LesFilms values (2, 'Jenaipas', 'Timothee', 'documentaire', 'Ba, il 
 insert into LesFilms values (3, 'jeregardepasbeaucoupdefilm', 'Lucas', 'comedie', 'Comme resume ? un film un peu vide');
 insert into LesFilms values (4, 'aucuneidee', 'Joan', 'baaucuneideeaussi', 'aucune idee, ça va être génial pour la réu');
 
-insert into Tags values ('Pegi18');
-insert into Tags values ('Pegi12');
-insert into Tags values ('Pegi16');
+insert into Tags values ('PEGI18');
+insert into Tags values ('PEGI12');
+insert into Tags values ('PEGI16');
 
-insert into TagsFilm values ('Pegi18', 1);
-insert into TagsFilm values ('Pegi12', 3);
-insert into TagsFilm values ('Pegi12', 4);
+insert into TagsFilm values ('PEGI18', 1);
+insert into TagsFilm values ('PEGI12', 3);
+insert into TagsFilm values ('PEGI12', 4);
 
-insert into LesRestrictions values (3, 'Pegi18');
-insert into LesRestrictions values (4, 'Pegi12');
-insert into LesRestrictions values (4, 'Pegi18');
+insert into LesRestrictions values (3, 'PEGI18');
+insert into LesRestrictions values (4, 'PEGI12');
+insert into LesRestrictions values (4, 'PEGI18');
 
 insert into LesLocationsQR values (1,1,sysdate,sysdate);
 insert into LesLocationsQR values (2,1,sysdate,sysdate);
@@ -56,3 +56,5 @@ delete from LesLocationsQR q where q.id=1 and q.nofilm=1;
 delete from LesLocationsBR b where b.id=1 and b.idbr=1;
 
 select * from HistoriqueLocation;
+
+

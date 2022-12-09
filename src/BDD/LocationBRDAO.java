@@ -21,13 +21,19 @@ public class LocationBRDAO extends DAO<LocationBR> {
     }
     
     public boolean create(LocationBR obj) throws SQLException {
-        PreparedStatement statmLocation = conn.prepareStatement(
-        		"INSERT INTO LesLocationsBR "+
-        		"VALUES (?,?,?)");
-        statmLocation.setInt(1,obj.getPersonneId());
-        statmLocation.setInt(2,obj.getBRId());
-        statmLocation.setDate(3,new java.sql.Date(obj.getDate()));//TODO : date ?
-        return statmLocation.execute();
+    	try {
+    		PreparedStatement statmLocation = conn.prepareStatement(
+            		"INSERT INTO LesLocationsBR "+
+            		"VALUES (?,?,?)");
+            statmLocation.setInt(1,obj.getPersonneId());
+            statmLocation.setInt(2,obj.getBRId());
+            statmLocation.setDate(3,new java.sql.Date(obj.getDate()));//TODO : date ?
+            statmLocation.execute();
+            return true;
+    	} catch(SQLException e) {
+    		return false;
+    	}
+        
     }
 
     public LocationBR read (Object obj) throws SQLException {
@@ -56,7 +62,6 @@ public class LocationBRDAO extends DAO<LocationBR> {
         		etatBool = true;
 			}
         	liste.add(new LocationBR(
-        			
         			new BluRay(
         					res3.getInt(6),
         					new Film(res3.getInt(1),
