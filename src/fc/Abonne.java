@@ -1,5 +1,6 @@
 package fc;
 
+import java.math.BigInteger;
 import java.util.HashSet;
 
 public class Abonne extends Personne{
@@ -11,7 +12,7 @@ public class Abonne extends Personne{
 	private String prenom;
 	private String nom;
 	private String adrMail;
-	private int cb;
+	//private BigInteger cb;
 	private String adrPhys;
 	private int credit;
 	private HashSet<LocationBR> locBr = new HashSet<>();
@@ -19,7 +20,7 @@ public class Abonne extends Personne{
 	private HashSet<Enfant> enfant = new HashSet<>();
 	int numCarte;
 	
-	public Abonne(int idPersonne, String prenom, String nom, String adrMail, String adrPhys, int credit, int cb) {
+	public Abonne(int idPersonne, String prenom, String nom, String adrMail, String adrPhys, int credit, BigInteger cb) {
 			super(idPersonne,cb);
 			this.prenom = prenom;
 			this.nom = nom;
@@ -27,6 +28,11 @@ public class Abonne extends Personne{
 			this.adrPhys = adrPhys;
 			this.credit=credit;
 			this.nbMax=168;
+	}
+	
+	
+	public String toString() {
+		return super.toString() + " " + prenom + " "+ nom + " "+ adrMail + " "+ adrPhys + " "+ credit;
 	}
 		
 	//retourne 1 si la location c'est bien effectue, 3 si il y a deja 3 film, 4 si tag interdit
@@ -46,6 +52,16 @@ public class Abonne extends Personne{
 			return 2;
 		}
 		this.credit-=PRIXQR;
+		this.locQr.add(loc);
+		return 1;
+	}
+	
+	public int addLocationAdmin(LocationBR loc) {
+		this.locBr.add(loc);
+		return 1;
+	}
+	
+	public int addLocationAdmin(LocationQR loc) {
 		this.locQr.add(loc);
 		return 1;
 	}

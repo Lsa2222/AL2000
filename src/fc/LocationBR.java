@@ -12,6 +12,10 @@ public class LocationBR extends Location {
 	}
 	BluRay br;
 	
+	public String toString() {
+		return super.toString() + " " + br;
+	}
+	
 	int enregistrer(){
 		int v = this.p.addLocation(this);
 		if(v==1) {
@@ -33,6 +37,10 @@ public class LocationBR extends Location {
 	    long diffInMillies = Math.abs(ajd.getTime() - this.date.getTime());
 	    long total = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS)+1;
 		return (int) (total*PRIXBR);
+	}
+	
+	public BluRay getBR() {
+		return br;
 	}
 	
 	public int getBRId() {

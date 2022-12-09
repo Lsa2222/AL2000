@@ -1,5 +1,6 @@
 package fc;
 
+import java.math.BigInteger;
 import java.util.HashSet;
 
 public class Main {
@@ -14,8 +15,7 @@ public class Main {
 		 t3.add(Tag.PEGI16);
 		 t3.add(Tag.PEGI18);
 		 
-		 int cb=123456789;
-	     
+		 BigInteger cb = BigInteger.valueOf(123456789);
 		 
 	     Abonne a = new Abonne(0, null, null, null, null, 20, cb);
 	     Film f1 =new Film(0, null, null, null, t3, null);

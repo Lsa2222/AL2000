@@ -7,6 +7,10 @@ public class LocationQR extends Location{
 	Date activation;
 	String lienUrl;
 	
+	public String toString() {
+		return super.toString() + " " + activation + " " + lienUrl;
+	}
+	
 	public LocationQR(Film film,Personne p) {
 		super(film,p);
 	}

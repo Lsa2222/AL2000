@@ -1,5 +1,6 @@
 package fc;
 
+import java.math.BigInteger;
 import java.util.HashSet;
 
 import BDD.FacadeBD;
@@ -12,7 +13,7 @@ public class FacadeTLI {
 	CatalogueLocal c=CatalogueLocal.creer();
 	
 	//renvoi 2 si pas assez d'argent, 0 si il a déja trois compte, 1 si ca marche 
-	public int creerAbonne(String prenom, String nom, String adrMail, String adrPhys, int credit, int cb) {
+	public int creerAbonne(String prenom, String nom, String adrMail, String adrPhys, int credit, BigInteger cb) {
 		if(!banque.debiter(cb, credit)) {
 			return(2); 
 		}

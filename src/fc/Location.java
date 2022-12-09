@@ -7,6 +7,10 @@ public abstract class  Location {
 	Date date;
 	Personne p;
 	
+	public String toString() {
+		return film + " " + date + " " + p;
+	}
+	
 	public Location(Film film, Personne p) {
 		this.film = film;
 		this.p = p;

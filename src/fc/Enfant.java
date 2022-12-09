@@ -1,5 +1,6 @@
 package fc;
 
+import java.math.BigInteger;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -8,12 +9,21 @@ public class Enfant extends Abonne {
 	
 	private int idParent;
 	
+	public String toString() {
+		return super.toString();
+	}
 	
-	public Enfant(int id, String prenom, String nom, String adrMail, String adrPhys, int credit, int cb,int idParent, HashSet<Tag> rest,int nbMax) {
+	public Enfant(int id, String prenom, String nom, String adrMail, String adrPhys, int credit, BigInteger cb,int idParent, HashSet<Tag> rest,int nbMax) {
 		super(id, prenom, nom, adrMail, adrPhys, credit, cb);
 		this.rest=rest;
 		super.nbMax=nbMax;
 		this.idParent=idParent;
+	}
+	
+	public static Enfant aboToEnfant(Abonne a) {
+		Enfant ret = new Enfant(a.getId(),a.getPrenom(),a.getNom(),a.getAdrMail(),a.getAdrPhys(),a.getCredit(),a.getCb(),-1,null,168);
+		ret.rest=new HashSet<>();
+		return ret;
 	}
 
 	public int addLocation(LocationBR loc) {
@@ -36,18 +46,20 @@ public class Enfant extends Abonne {
 		}
 		return super.addLocation(loc);
 	}
+	
+	public int addLocationAdmin(LocationBR loc) {
+		return super.addLocationAdmin(loc);
+	}
+	
+	public int addLocationAdmin(LocationQR loc) {
+		return super.addLocationAdmin(loc);
+	}
 
 	public Iterator<Tag> getRestrIterator() {
 		return rest.iterator();
 	}
 
-	public static Enfant aboToEnfant(Abonne a) {
-		Enfant ret = (Enfant) a;
-		ret.rest=new HashSet<>();
-		ret.nbMax=168;
-		ret.idParent=-1;
-		return null;
-	}
+	
 
 	public int getParentId() {
 		return idParent;
