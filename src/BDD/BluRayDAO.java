@@ -19,7 +19,15 @@ public class BluRayDAO extends DAO<BluRay> {
                 "VALUES (?,?,?)");
             statm1.setInt(1,obj.getId());
             statm1.setInt(2,obj.getFilmId());
-			statm1.setBoolean(3,obj.getEtat());
+            
+            String etatStr;
+            if(obj.getEtat()) {
+            	etatStr = "good";
+            } else {
+            	etatStr = "raye";
+            }
+            
+			statm1.setString(3,etatStr);
             statm1.execute();
             return true;
         } catch (SQLException e) {

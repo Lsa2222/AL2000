@@ -27,8 +27,10 @@ public class EnfantDAO extends DAO<Enfant>{
 			return false;
 		}
 		
+		
+		
 		PreparedStatement statmRestriction = conn.prepareStatement(
-                "INSERT INTO LesRestrictions"+
+                "INSERT INTO LesRestrictions "+
                 "VALUES (?,?)");
 		Iterator<Tag> it = obj.getRestrIterator();
 		statmRestriction.setInt(1, obj.getId());
@@ -41,7 +43,7 @@ public class EnfantDAO extends DAO<Enfant>{
 		}
 		
 		PreparedStatement statmEnfant = conn.prepareStatement(
-                "INSERT INTO LesEnfants"+
+                "INSERT INTO LesEnfants "+
                 "VALUES (?,?)");
 		statmEnfant.setInt(1, obj.getId());
 		statmEnfant.setInt(2, obj.getParentId());

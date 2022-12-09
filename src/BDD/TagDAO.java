@@ -17,7 +17,7 @@ public class TagDAO extends DAO<Tag> {
     public boolean create(Tag obj) {
         try {
             PreparedStatement statm1 = conn.prepareStatement(
-                "INSERT INTO Tags"+
+                "INSERT INTO Tags "+
                 "VALUES (?)");
             statm1.setString(1,obj.toString());
             statm1.execute();
@@ -57,8 +57,8 @@ public class TagDAO extends DAO<Tag> {
 		
 		HashSet<Tag> tab= new HashSet<>();
     	PreparedStatement queryFilm = conn.prepareStatement(""
-    			+ "SELECT tag"
-    			+ "FROM TagsFilm"
+    			+ "SELECT tag "
+    			+ "FROM TagsFilm "
     			+ "WHERE noFilm = ?");
     	queryFilm.setInt(1,idFilm);
     	ResultSet res = queryFilm.executeQuery();

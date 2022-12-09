@@ -23,9 +23,9 @@ public class LocationBRDAO extends DAO<LocationBR> {
     public boolean create(LocationBR obj) throws SQLException {
         PreparedStatement statmLocation = conn.prepareStatement(
         		"INSERT INTO LesLocationsBR "+
-        		"VALUES (?,?,?,?)");
+        		"VALUES (?,?,?)");
         statmLocation.setInt(1,obj.getPersonneId());
-        statmLocation.setInt(2,obj.getBRId());//Changer model
+        statmLocation.setInt(2,obj.getBRId());
         statmLocation.setDate(3,new java.sql.Date(obj.getDate()));//TODO : date ?
         return statmLocation.execute();
     }
@@ -40,10 +40,10 @@ public class LocationBRDAO extends DAO<LocationBR> {
     	Personne per = (Personne) obj;
     	PreparedStatement querryLocationBR = conn.prepareStatement(""
         		+ "SELECT "
-        		+ "f.noFilm, f.titre, f.realisateur, f.resumer, f.genre, b.idBR, b.etat"
-        		+ "FROM LesLocationsQR l, LesFilms f, LesBlueRay b"//JOIN
+        		+ "f.noFilm, f.titre, f.realisateur, f.resumer, f.genre, b.idBR, b.etat "
+        		+ "FROM LesLocationsBR l, LesFilms f, LesBlueRay b "//JOIN
         		+ "WHERE l.id = ? AND "
-        		+ "f.noFilm = l.noFilm AND"
+        		+ "b.idBr = b.idBr AND "
         		+ "f.noFilm = b.noFilm");
     	querryLocationBR.setInt(1, per.getId());
         ResultSet res3 = querryLocationBR.executeQuery();
@@ -51,7 +51,12 @@ public class LocationBRDAO extends DAO<LocationBR> {
         HashSet<LocationBR> liste = new HashSet<>();
         
         while(res3.next()) {
+        	Boolean etatBool = false;
+        	if(res3.getString(7).equals("good")) {
+        		etatBool = true;
+			}
         	liste.add(new LocationBR(
+        			
         			new BluRay(
         					res3.getInt(6),
         					new Film(res3.getInt(1),
@@ -60,7 +65,7 @@ public class LocationBRDAO extends DAO<LocationBR> {
                 					res3.getString(4),
                 					tagDAO.readAll(res3.getInt(1)),
                 					res3.getString(5)),//?
-        					res3.getBoolean(7)
+        					etatBool
         					),
         			per
         			));

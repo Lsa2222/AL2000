@@ -93,10 +93,10 @@ public class FacadeBD {
 			Iterator<LocationBR> locBR = locBRDAO.readAll(jean).iterator();
 			Iterator<LocationQR> locQR = locQRDAO.readAll(jean).iterator();
             while(locQR.hasNext()) {
-            	jean.addLocation(locQR.next());
+            	jean.addLocationAdmin(locQR.next());
             }
             while(locBR.hasNext()) {
-            	jean.addLocation(locBR.next());
+            	jean.addLocationAdmin(locBR.next());
             }
 			return jean;
 		} catch (SQLException e) {
@@ -111,10 +111,10 @@ public class FacadeBD {
 			Iterator<LocationBR> locBR = locBRDAO.readAll(jean).iterator();
 			Iterator<LocationQR> locQR = locQRDAO.readAll(jean).iterator();
             while(locQR.hasNext()) {
-            	jean.addLocation(locQR.next());
+            	jean.addLocationAdmin(locQR.next());
             }
             while(locBR.hasNext()) {
-            	jean.addLocation(locBR.next());
+            	jean.addLocationAdmin(locBR.next());
             }
 			return jean;
 		} catch (SQLException e) {
