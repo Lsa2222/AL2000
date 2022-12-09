@@ -7,12 +7,12 @@ public class LocationQR extends Location{
 	Date activation;
 	String lienUrl;
 	
-	public String toString() {
-		return super.toString() + " " + activation + " " + lienUrl;
-	}
-	
 	public LocationQR(Film film,Personne p) {
 		super(film,p);
+	}
+	
+		public String toString() {
+		return super.toString() + " " + activation + " " + lienUrl;
 	}
 
 	int enregistrer(){
@@ -40,8 +40,8 @@ public class LocationQR extends Location{
 	public int getPersonneId() {
 		return p.getId();
 	}
-
-	public int getFilmId() {
+	
+		public int getFilmId() {
 		return super.film.getId();
 	}
 

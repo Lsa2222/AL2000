@@ -12,14 +12,12 @@ public class LocationBR extends Location {
 	}
 	BluRay br;
 	
-	public String toString() {
+		public String toString() {
 		return super.toString() + " " + br;
 	}
-	
 	int enregistrer(){
 		int v = this.p.addLocation(this);
 		if(v==1) {
-			//sortir le bluray
 			//envoyer a la bd
 			System.out.print("loc enregistrer\n");
 
@@ -39,10 +37,6 @@ public class LocationBR extends Location {
 		return (int) (total*PRIXBR);
 	}
 	
-	public BluRay getBR() {
-		return br;
-	}
-	
 	public int getBRId() {
 		return br.getId();
 	}
@@ -50,10 +44,8 @@ public class LocationBR extends Location {
 	public int getPersonneId() {
 		return p.getId();
 	}
-
-	public long getDate() {
+		public long getDate() {
 		return super.date.getTime();
 	}
-
 	
 }

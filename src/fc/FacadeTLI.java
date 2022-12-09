@@ -1,6 +1,7 @@
 package fc;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import BDD.FacadeBD;
@@ -8,6 +9,8 @@ import BDD.FacadeBD;
 public class FacadeTLI {
 	FacadeBD bd;
 	Abonne a;
+	int connecte=0;
+	Guest g;
 	Banque banque= Banque.creer();
 	Al2000 al=new Al2000();
 	CatalogueLocal c=CatalogueLocal.creer();
@@ -17,7 +20,7 @@ public class FacadeTLI {
 		if(!banque.debiter(cb, credit)) {
 			return(2); 
 		}
-		Abonne abo = new Abonne(0,prenom,nom,adrMail,adrPhys,credit,cb);
+		Abonne abo = new Abonne(prenom,nom,adrMail,adrPhys,credit,cb);
 		if(bd.newAbonne(abo)) {
 		this.a=abo;
 		return 1;
@@ -32,6 +35,7 @@ public class FacadeTLI {
 		}
 		else {
 			this.a=bd.getAbonne(num);
+			this.connecte=1;
 			if(a instanceof Enfant) {
 				return 2;
 			}
@@ -39,13 +43,88 @@ public class FacadeTLI {
 		}
 	}
 	
-	public HashSet<Film> catalogueLocal() {
-		return c.getf();
+	public HashSet<String> getnomfilm(){
+		HashSet<String> res = new HashSet<String>();
+		for (Film f : this.c.film) {
+			res.add(f.titre);
+		}
+		return res;
 	}
 	
-	public HashSet<Film> catalogueGlobal() {
-		bd.getCatalogueGlobal();
-		return null;
+	public ArrayList<ArrayList<String>> getfilm(){
+		//TODO film dispo ?
+		ArrayList<ArrayList<String>> l = new ArrayList<ArrayList<String>>();
+		for (Film f : this.c.film) {
+			ArrayList<String> film = new ArrayList<String>();
+			film.add(f.titre);
+			film.add(f.reali);
+			film.add(f.descr);
+			film.add(f.image);
+			String res="";
+			for (Tag r : f.restr) {
+				res+=r.toString();
+				res+=" ";
+			}
+			film.add(res);
+			l.add(film);
+		}
+		return l;
+	}
+	
+	public int louer_Br(Film f) {
+		Personne p;
+		if(this.connecte==0) {
+			p = g;
+		}
+		else {
+			p = a;
+		}
+		
+		BluRay b = this.c.getBr(f);
+		LocationBR loc = new LocationBR(b,p);
+		int res = loc.enregistrer();
+		if(res == 1) {
+			this.al.sortirBr(b.id);
+			this.c.out(b);
+		}
+		return res;
+	}
+	
+	public int louer_Qr(Film f) {
+		Personne p;
+		if(this.connecte==0) {
+			p = g;
+		}
+		else {
+			p = a;
+		}
+		
+		LocationQR loc = new LocationQR(f, p);
+		int res = loc.enregistrer();
+		if(res == 1) {
+			this.al.sortirQr(f,p);
+		}
+		return res;
+	}
+	
+	public ArrayList<ArrayList<String>> catalogueGlobal() {
+		HashSet<Film> c = bd.getCatalogueGlobal();
+		ArrayList<ArrayList<String>> l = new ArrayList<ArrayList<String>>();
+		for (Film f : c) {
+			ArrayList<String> film = new ArrayList<String>();
+			film.add(f.titre);
+			film.add(f.reali);
+			film.add(f.descr);
+			film.add(f.image);
+			String res="";
+			for (Tag r : f.restr) {
+				res+=r.toString();
+				res+=" ";
+			}
+			film.add(res);
+			l.add(film);
+		}
+		return l;
 	}
 	
 	public boolean recharger(int c) {
@@ -64,6 +143,11 @@ public class FacadeTLI {
 		return 1;
 	}
 	
+	public int creerGuest(BigInteger cb) {
+		g = new Guest(cb);
+		return 0;
+	}
+	
 	public void deconecte() {
 		//bd update abonne
 		this.a=null;
@@ -76,5 +160,4 @@ public class FacadeTLI {
 		}
 		return false;
 	}
-	//todo liste tout les tag
 }

@@ -1,7 +1,5 @@
 package fc;
-
 import java.math.BigInteger;
-
 public class Banque {
 	int solde;
 	private Banque(){
@@ -21,13 +19,13 @@ public class Banque {
 		}
 	}
 	
-	boolean debiter(BigInteger bigInteger, int achat) {
+	boolean debiter(BigInteger cb, int achat) {
 		if(solde<achat) {
-			System.out.println("client "+bigInteger+" n'as pas assez d'argent");
+			System.out.println("client "+cb+" n'as pas assez d'argent");
 			return false;
 		}
 		
-		System.out.println("client "+bigInteger+" debiter de "+achat);
+		System.out.println("client "+cb+" debiter de "+achat);
 		return true;
 	}
 }

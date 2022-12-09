@@ -4,15 +4,13 @@ import java.math.BigInteger;
 import java.util.HashSet;
 
 public class Abonne extends Personne{
-	final static int PRIXQR=10;
 	Banque banque= Banque.creer();
 
-	protected int nbMax;
 	
 	private String prenom;
 	private String nom;
 	private String adrMail;
-	//private BigInteger cb;
+	private BigInteger cb;
 	private String adrPhys;
 	private int credit;
 	private HashSet<LocationBR> locBr = new HashSet<>();
@@ -20,21 +18,17 @@ public class Abonne extends Personne{
 	private HashSet<Enfant> enfant = new HashSet<>();
 	int numCarte;
 	
-	public Abonne(int idPersonne, String prenom, String nom, String adrMail, String adrPhys, int credit, BigInteger cb) {
-			super(idPersonne,cb);
+	public Abonne(String prenom, String nom, String adrMail, String adrPhys, int credit, BigInteger cb) {
+			super(cb);
 			this.prenom = prenom;
 			this.nom = nom;
 			this.adrMail = adrMail;
 			this.adrPhys = adrPhys;
 			this.credit=credit;
-			this.nbMax=168;
 	}
-	
-	
-	public String toString() {
+		public String toString() {
 		return super.toString() + " " + prenom + " "+ nom + " "+ adrMail + " "+ adrPhys + " "+ credit;
-	}
-		
+	}	
 	//retourne 1 si la location c'est bien effectue, 3 si il y a deja 3 film, 4 si tag interdit
 	public int addLocation(LocationBR loc) {
 		
@@ -48,20 +42,10 @@ public class Abonne extends Personne{
 	
 	public int addLocation(LocationQR loc) {
 		if (this.credit<PRIXQR) {
-			System.out.print("pas assez d'argent\n");
+			System.out.print("pas assez de credit \n");
 			return 2;
 		}
 		this.credit-=PRIXQR;
-		this.locQr.add(loc);
-		return 1;
-	}
-	
-	public int addLocationAdmin(LocationBR loc) {
-		this.locBr.add(loc);
-		return 1;
-	}
-	
-	public int addLocationAdmin(LocationQR loc) {
 		this.locQr.add(loc);
 		return 1;
 	}
@@ -113,7 +97,7 @@ public class Abonne extends Personne{
 	}
 
 	@Override
-	public boolean payer(long argent) {
+	public boolean payer(int argent) {
 		if(this.credit>=argent) {
 			this.credit-=argent;
 			return true;
@@ -125,8 +109,23 @@ public class Abonne extends Personne{
 	}
 	
 	public Enfant creerEnfant(String prenom, String nom, int credit, HashSet<Tag> rest, int nbMax) {
-		Enfant e = new Enfant (0, prenom, nom, adrMail, adrPhys, credit, cb, this.id, rest, nbMax);
+		Enfant e = new Enfant (prenom, nom, adrMail, adrPhys, credit, cb, this, rest, nbMax);
 		this.enfant.add(e);
 		return e;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+
+	
+	
+	
+	
+	
 }

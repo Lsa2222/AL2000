@@ -1,14 +1,15 @@
 package fc;
-
 import java.math.BigInteger;
 import java.util.HashSet;
 
 public class Guest extends Personne {
 	private LocationBR locBr;
 	private HashSet<LocationQR> locQr;
+	Banque banque= Banque.creer();
 	
 	public Guest(BigInteger cb) {
-		super(0,cb);
+		super(cb);
+		//TODO est déja présent dans BD ? 
 		this.locQr = new HashSet<>();
 	}
 	
@@ -22,16 +23,18 @@ public class Guest extends Personne {
 	}
 	
 	public int addLocation(LocationQR loc) {
-		if (loc==loc/*acces a la banque*/) {
-			System.out.print("pas assez d'argent");
-			return 2;
+		if (banque.debiter(this.cb, this.PRIXQR)) {
+
+			this.locQr.add(loc);
+			return 1;
 		}
-		this.locQr.add(loc);
-		return 1;
+		System.out.print("pas assez d'argent");
+		return 2;
+
 	}
 	
-	public boolean payer(long argent) {
-		return(true);//voir avec sa banque	
+	public boolean payer(int argent) {
+		return(banque.debiter(this.cb, argent));	
 	}
 
 }

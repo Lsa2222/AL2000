@@ -4,7 +4,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 public class Technicien {
-	HashSet<Film> l1;
+	HashSet l1;
+	HashSet lb1;
+
 
 public Technicien() {
 	String d1="La Seconde Guerre mondiale vient de s'achever. À New York, le « parrain » Don Corleone, l'un des chefs respectés de la mafia, se sent vieillir. Il refuse de s'adapter à son temps et de se lancer, comme ses pairs, dans le trafic de drogue. Une frilosité qui entrave la bonne marche des affaires des autres « familles » et qui lui vaut d'être la cible d'un attentat. Don Corleone survit à ses blessures, mais reste très diminué. Mike, son plus jeune fils, qui jusque-là se tenait à l'écart des affaires de son père, devient le plus dévoué de ses héritiers. Plus efficace que ses frères, Sonny et Fredo, il venge son père et organise l'élimination de ses adversaires…";
@@ -32,18 +34,32 @@ public Technicien() {
 	Film f2= new Film(1,"Les Évadés","Frank Darabont",d2,t2,"data/lesevades.jpg");
 	Film f3= new Film(1,"La Liste de Schindler","Steven Spielberg",d3,t3,"data/lalistedeschindler.jpg");
 	Film f4= new Film(1,"Parasite","Bong Joon-ho",d4,t4,"data/parasite.jpg");
-	Film f5= new Film(1,"Pulp Fiction","Quentin Tarantino",d5,t5,"data/pulpfiction.jpg");
-	Film f6= new Film(1,"The Dark Knight : Le Chevalier noir","Christopher Nolan",d6,t6,"data/thedarkknight.jpg");
+	Film f5= new Film(1,"Pulp Fiction","Quentin Tarantino",d5,t5,"data/.jpg");
+	Film f6= new Film(1,"The Dark Knight : Le Chevalier noir","Christopher Nolan",d6,t6,"data/.jpg");
 	Film f7= new Film(1,"Inception","Christopher Nolan",d7,t7,"data/inception.jpg");
 	Film f8= new Film(1,"La Ligne verte","Frank Darabont",d8,t8,"data/laligneverte.jpg");
-	Film f9= new Film(1,"Le Seigneur des anneaux : Le Retour du roi","Peter Jackson",d9,t9,"data/leseigneurdesanneauxleretourduroi.jpg");
+	Film f9= new Film(1,"Le Seigneur des anneaux : Le Retour du roi","Peter Jackson",d9,t9,"data/leseigneurdesanneaux:leretourduroi.jpg");
 	Film f10= new Film(1,"Forrest Gump","Robert Zemeckis",d10,t10,"data/forrestgump.jpg");
 	
 	this.l1 = new HashSet<Film>(Arrays.asList(f1,f2,f3,f4,f5,f6,f7,f8,f9,f10));
+	
+	BluRay b1 = new BluRay(1,f1,true);
+	BluRay b2 = new BluRay(2,f1,true);
+	BluRay b3 = new BluRay(3,f2,true);
+	BluRay b4 = new BluRay(4,f2,true);
+	BluRay b5 = new BluRay(5,f3,true);
+	BluRay b6 = new BluRay(6,f4,true);
+	BluRay b7 = new BluRay(7,f5,true);
+	BluRay b8 = new BluRay(8,f6,true);
+	BluRay b9 = new BluRay(9,f7,true);
+	BluRay b10 = new BluRay(10,f1,true);
+	
+	this.lb1 = new HashSet<BluRay>(Arrays.asList(b1,b2,b3,b4,b5,b6,b7,b8,b9,b10));
 }
 	
 public void update_Catalogue_1(CatalogueLocal c) {
 	c.setf(l1);	
+	c.br=lb1;
 }
 
 }

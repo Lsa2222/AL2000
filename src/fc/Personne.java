@@ -1,24 +1,24 @@
 package fc;
-
 import java.math.BigInteger;
 
 public abstract class Personne {
-	BigInteger cb;
 	int id;
-	Personne(int id,BigInteger cb2){
-		this.id=id;
+	BigInteger cb;
+	final int PRIXQR=10;
+
+	
+		Personne(BigInteger cb2){
 		this.cb=cb2;
 	}
-	
-	public String toString() {
+		public String toString() {
 		return id + " " + cb + " ";
 	}
 	
 	abstract int addLocation(LocationBR loc);
 	abstract int addLocation(LocationQR loc);
-	public abstract boolean payer(long l);
+	public abstract boolean payer(int l);
 	
-	public BigInteger getCb() {
+		public BigInteger getCb() {
 		return cb;
 	}
 	public int getId() {

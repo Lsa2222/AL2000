@@ -7,14 +7,14 @@ public abstract class  Location {
 	Date date;
 	Personne p;
 	
-	public String toString() {
-		return film + " " + date + " " + p;
-	}
-	
 	public Location(Film film, Personne p) {
 		this.film = film;
 		this.p = p;
 		this.date= new java.util.Date();
+	}
+	
+		public String toString() {
+		return film + " " + date + " " + p;
 	}
 	
 	//test si la location est valide, si oui l'enregistre
