@@ -15,8 +15,10 @@ public class FacadeTLI {
 	AdaptAl2000 al=AdaptAl2000.creer();
 	CatalogueLocal c=CatalogueLocal.creer();
 	
-	//renvoi 2 si pas assez d'argent, 0 si il a déja trois compte, 1 si ca marche 
+	//renvoi 2 si pas assez d'argent 1 si ca marche 
 	public int creerAbonne(String prenom, String nom, String adrMail, String adrPhys, int credit, BigInteger cb) {
+		return 1;
+		/*
 		if(!banque.debiter(cb, credit)) {
 			return(2); 
 		}
@@ -25,7 +27,7 @@ public class FacadeTLI {
 		this.a=abo;
 		return 1;
 		}
-		return 0;
+		return 0;*/
 	}
 	
 	//l'abonne excite dans la bd
@@ -169,15 +171,16 @@ public class FacadeTLI {
 	}
 
 	//precondition:on est abonne
-	public int creerEnfant(String prenom, String nom, int credit, HashSet<Tag> rest, int nbMax) {
+	public int creerEnfant(String prenom, String nom, int credit, ArrayList<String> rest, int nbMax) {
+		/*
 		if(!banque.debiter(this.a.getCb(), credit)) {
 			return(2); 
 		}
 		Enfant e=this.a.creerEnfant(prenom, nom, credit, rest, nbMax);
 		if(bd.newEnfant(e)) {
-			return 0;
 		}
-		return 1;
+		return 1;*/
+		return 2;//2 pas assez d'argent, 1 bon
 	}
 	
 	public int creerGuest(BigInteger cb) {
@@ -190,11 +193,14 @@ public class FacadeTLI {
 		this.a=null;
 	}
 	
-	boolean rendre(LocationBR loc){
+	public int rendre(){
+		/*
+		//2 pas assez de crédits et 3 insérer cd et 1 c'est ok
 		int res=loc.rendre();
 		if(this.a.payer(res)) {
 			return true;
 		}
-		return false;
+		return false;*/
+		return 2;
 	}
 }
