@@ -74,6 +74,12 @@ public void out(BluRay b) {
 }
 
 public void setBr(BluRay b) {
+	for (Reservation r : this.reservation) {
+		if(r.f==b.film) {
+			r.dispo(b);
+			return;
+		}
+	}
 	this.br.add(b);
 }
 
@@ -86,7 +92,19 @@ public void reserve(String s, Abonne a) {
 	}	
 }
 
-
+//retourn le bluray d'une reservation FINI de l'abonne a
+public BluRay getreserve(Abonne a) {
+	Reservation r = null;
+	for (Reservation res : this.reservation) {
+		if(res.a==a && res.b!=null) {
+			r=res;
+		}
+	}
+	if(r==null) {
+		return null;
+	}
+	return r.b;
+}
 
 
 
