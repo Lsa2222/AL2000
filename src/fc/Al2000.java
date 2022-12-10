@@ -1,6 +1,20 @@
 package fc;
 
 public class Al2000 {
+	
+	static boolean exist = false;
+	static Al2000 al;
+	
+	static Al2000 creer(){
+		if(!exist) {
+			exist = true;
+			al = new Al2000();
+			return al;
+		} else {
+			return al;
+		}
+	}
+	
 	int carte(){
 		return(20);
 	}

@@ -51,6 +51,7 @@ public class FacadeTLI {
 		return res;
 	}
 	
+	//fournis a l'ui toute les info sur un film
 	public ArrayList<ArrayList<String>> getfilm(){
 		//TODO film dispo ?
 		ArrayList<ArrayList<String>> l = new ArrayList<ArrayList<String>>();
@@ -70,8 +71,12 @@ public class FacadeTLI {
 		}
 		return l;
 	}
+
+	public boolean	film_dispo(String f) {
+		return c.dispo(f);
+	}
 	
-	public int louer_Br(Film f) {
+	public int louer_Br(String s) {
 		Personne p;
 		if(this.connecte==0) {
 			p = g;
@@ -80,7 +85,7 @@ public class FacadeTLI {
 			p = a;
 		}
 		
-		BluRay b = this.c.getBr(f);
+		BluRay b = this.c.getBr(s);
 		LocationBR loc = new LocationBR(b,p);
 		int res = loc.enregistrer();
 		if(res == 1) {
@@ -90,7 +95,7 @@ public class FacadeTLI {
 		return res;
 	}
 	
-	public int louer_Qr(Film f) {
+	public int louer_Qr(String s) {
 		Personne p;
 		if(this.connecte==0) {
 			p = g;
@@ -99,6 +104,7 @@ public class FacadeTLI {
 			p = a;
 		}
 		
+		Film f = c.stof(s);
 		LocationQR loc = new LocationQR(f, p);
 		int res = loc.enregistrer();
 		if(res == 1) {
@@ -107,6 +113,10 @@ public class FacadeTLI {
 		return res;
 	}
 	
+	public void reserve(String s) {
+		c.reserve(s);
+	}
+
 	public ArrayList<ArrayList<String>> catalogueGlobal() {
 		HashSet<Film> c = bd.getCatalogueGlobal();
 		ArrayList<ArrayList<String>> l = new ArrayList<ArrayList<String>>();

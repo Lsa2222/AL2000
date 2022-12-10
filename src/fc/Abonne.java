@@ -18,6 +18,8 @@ public class Abonne extends Personne{
 	private HashSet<Enfant> enfant = new HashSet<>();
 	int numCarte;
 	
+	
+	
 	public Abonne(String prenom, String nom, String adrMail, String adrPhys, int credit, BigInteger cb) {
 			super(cb);
 			this.prenom = prenom;
@@ -117,7 +119,17 @@ public class Abonne extends Personne{
 	public int getId() {
 		return id;
 	}
+	
+	public int addLocationAdmin(LocationBR loc) {
+		this.locBr.add(loc);
+		return 1;
+	}
 
+	public int addLocationAdmin(LocationQR loc) {
+		this.locQr.add(loc);
+		return 1;
+	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}

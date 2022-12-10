@@ -7,6 +7,7 @@ HashSet<Film> film = new HashSet<>();
 HashSet<BluRay> br = new HashSet<>();
 static boolean exist = false;
 static CatalogueLocal c;
+HashSet<Reservation> reservation = new HashSet<>(); //tout les film reservé
 
 public static CatalogueLocal creer(){
 	if(!exist) {
@@ -31,9 +32,9 @@ public void add(Film f) {
 public void del(Film f) {
 	c.film.remove(f);
 }
-public boolean dispo(Film f) {
+public boolean dispo(String s) {
 	for (BluRay b : this.br) {
-		if(b.film==f) {
+		if(b.film.titre==s && b.estBon) {
 			return true;
 		}
 	}
@@ -42,13 +43,31 @@ public boolean dispo(Film f) {
 
 public BluRay getBr(Film f) {
 	for (BluRay b : this.br) {
-		if(b.film==f) {
+		if(b.film==f  && b.estBon) {
 			return b;
 		}
 	}
 	return null;
 }
 
+public BluRay getBr(String f) {
+	for (BluRay b : this.br) {
+		if(b.film.titre==f && b.estBon) {
+			return b;
+		}
+	}
+	return null;
+}
+
+//renvoi le film associé au nom donné
+public Film stof(String s) {
+	for (Film f : this.film) {
+		if(f.titre==s) {
+			return f;
+		}
+	}
+	return null;
+}
 
 public void out(BluRay b) {
 	this.br.remove(b);
@@ -56,6 +75,15 @@ public void out(BluRay b) {
 
 public void setBr(BluRay b) {
 	this.br.add(b);
+}
+
+public void reserve(String s, Abonne a) {
+	for (Film f : this.film) {
+		if(f.titre==s) {
+			Reservation r = new Reservation(a,f);
+			this.reservation.add(r);
+		}
+	}	
 }
 
 

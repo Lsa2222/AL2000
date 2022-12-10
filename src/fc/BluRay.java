@@ -13,6 +13,8 @@ public class BluRay {
 	public int getId() {
 		return id;
 	}
+	
+	
 
 	public int getFilmId() {
 		return film.getId();

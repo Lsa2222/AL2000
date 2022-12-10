@@ -41,6 +41,10 @@ public class LocationBR extends Location {
 		return br.getId();
 	}
 
+	public BluRay getBR() {
+		return br;
+	}
+	
 	public int getPersonneId() {
 		return p.getId();
 	}
