@@ -8,7 +8,7 @@ public class Reservation {
 	}
 	Abonne a;
 	Film f;
-	Al2000 al = Al2000.creer();
+	AdaptAl2000 al=AdaptAl2000.creer();
 	BluRay b;
 	
 	//Ce bluray peut être reserve

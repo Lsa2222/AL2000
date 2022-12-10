@@ -12,7 +12,7 @@ public class FacadeTLI {
 	int connecte=0;
 	Guest g;
 	Banque banque= Banque.creer();
-	Al2000 al=Al2000.creer();
+	AdaptAl2000 al=AdaptAl2000.creer();
 	CatalogueLocal c=CatalogueLocal.creer();
 	
 	//renvoi 2 si pas assez d'argent, 0 si il a déja trois compte, 1 si ca marche 
@@ -28,22 +28,26 @@ public class FacadeTLI {
 		return 0;
 	}
 	
+	//l'abonne excite dans la bd
 	//0 echec 1 adulte 2 enfant
 	public int connection() {
 		if(al.carte()==0) {
 			return 0; //carte pas inserer
 		}
 		else {
-			String s = Integer.toString(al.carte);
+			//on récupére le dernier chiffre pour savoir si enfant ou abone
+			String s = Integer.toString(al.carte());
 			char type = s.charAt(s.length()-1);
 			int i=Integer.parseInt(s.substring(1, s.length() - 1));
-			System.out.print("la carte est le "+i+"et de type "+type);
-//			this.a=bd.getAbonne(num);
-//			this.connecte=1;
-//			if(a instanceof Enfant) {
-//				return 2;
-//			}
-			return 1;
+			this.connecte=1;
+			if(type==0) {
+				this.a=bd.getAbonne(i);
+				return 1;
+			}
+			else {
+				this.a=bd.getEnfant(i);
+				return 2;
+			}
 		}
 	}
 	
