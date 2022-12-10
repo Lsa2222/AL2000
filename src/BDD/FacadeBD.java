@@ -25,7 +25,7 @@ public class FacadeBD {
 	private DAO<Tag> tagDAO;
 	
 	private Session ses;
-	private Connection conn;
+	protected Connection conn;
 	
 	FacadeBD(){
 		ses = new Session();

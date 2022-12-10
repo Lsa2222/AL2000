@@ -31,6 +31,7 @@ public class LocationBRDAO extends DAO<LocationBR> {
             statmLocation.execute();
             return true;
     	} catch(SQLException e) {
+    		e.printStackTrace();
     		return false;
     	}
         
@@ -43,13 +44,15 @@ public class LocationBRDAO extends DAO<LocationBR> {
     
     
     public HashSet<LocationBR> readAll (Object obj) throws SQLException {
+    	
     	Personne per = (Personne) obj;
+    	
     	PreparedStatement querryLocationBR = conn.prepareStatement(""
         		+ "SELECT "
         		+ "f.noFilm, f.titre, f.realisateur, f.resumer, f.genre, b.idBR, b.etat "
         		+ "FROM LesLocationsBR l, LesFilms f, LesBlueRay b "//JOIN
         		+ "WHERE l.id = ? AND "
-        		+ "b.idBr = b.idBr AND "
+        		+ "b.idBr = l.idBr AND "
         		+ "f.noFilm = b.noFilm");
     	querryLocationBR.setInt(1, per.getId());
         ResultSet res3 = querryLocationBR.executeQuery();
@@ -85,7 +88,7 @@ public class LocationBRDAO extends DAO<LocationBR> {
 
     public boolean delete(LocationBR obj) throws SQLException {
             PreparedStatement statm1 = conn.prepareStatement(
-                "DELETE INTO LesLocationsBR "+
+                "DELETE FROM LesLocationsBR "+
                 "WHERE id=? AND idBR=?");
             statm1.setInt(1,obj.getPersonneId());
             statm1.setInt(2,obj.getBRId());

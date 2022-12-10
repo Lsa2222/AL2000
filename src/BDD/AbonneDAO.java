@@ -75,24 +75,30 @@ public class AbonneDAO extends DAO<Abonne> {
     	
     }
 
-    public boolean update (Abonne obj) throws SQLException {
-    		PreparedStatement statmAbonne = conn.prepareStatement(
-                    "UPDATE LesAbonnes "+
-                    "SET prenom = '?', "
-                    + 	"nom = '?', "
-                    + 	"credit = '?', "
-                    + 	"adrMail = '?', "
-                    + 	"AdrPhy = '?' "
-                    + "WHERE id = obj.id");
-            statmAbonne.setString(1, obj.getPrenom());
-            statmAbonne.setString(2, obj.getNom());
-            statmAbonne.setInt(3,obj.getCredit());
-            
-            statmAbonne.setString(4, obj.getAdrMail());
-            statmAbonne.setString(5, obj.getAdrPhys());
-            
-            statmAbonne.execute();
-            return true;
+    public boolean update (Abonne obj) {
+    		try {
+    			PreparedStatement statmAbonne = conn.prepareStatement(
+                        "UPDATE LesAbonnes "+
+                        "SET prenom = ?, "
+                        + 	"nom = ?, "
+                        + 	"credit = ?, "
+                        + 	"adrMail = ?, "
+                        + 	"AdrPhy = ? "
+                        + "WHERE id = ? ");
+                statmAbonne.setString(1, obj.getPrenom());
+                statmAbonne.setString(2, obj.getNom());
+                statmAbonne.setInt(3,obj.getCredit());
+                
+                statmAbonne.setString(4, obj.getAdrMail());
+                statmAbonne.setString(5, obj.getAdrPhys());
+                statmAbonne.setInt(6, obj.getId());
+                
+                statmAbonne.execute();
+                return true;
+    		} catch(SQLException e) {
+    			return false;
+    		}
+    		
     }
 
     public boolean delete(Abonne obj) {

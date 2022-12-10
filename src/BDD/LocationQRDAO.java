@@ -21,15 +21,21 @@ public class LocationQRDAO extends DAO<LocationQR> {
         this.tagDAO=tagDAO;
     }
     
-    public boolean create(LocationQR obj) throws SQLException {
-            PreparedStatement statm1 = conn.prepareStatement(
-                "INSERT INTO LesLocationsQR "+
-                "VALUES (?,?,?,?)");
-            statm1.setInt(1,obj.getPersonneId());
-            statm1.setInt(2,obj.getFilmId());//Changer model
-			statm1.setDate(3,new java.sql.Date(obj.getActivationDate()));//TODO
-            statm1.setDate(4,new java.sql.Date(obj.getDate()));//TODO
-            return statm1.execute();
+    public boolean create(LocationQR obj) {
+    	try {
+    		PreparedStatement statm1 = conn.prepareStatement(
+                    "INSERT INTO LesLocationsQR "+
+                    "VALUES (?,?,?,?)");
+                statm1.setInt(1,obj.getPersonneId());
+                statm1.setInt(2,obj.getFilmId());//Changer model
+    			statm1.setDate(3,new java.sql.Date(obj.getActivationDate()));
+                statm1.setDate(4,new java.sql.Date(obj.getDate()));
+                statm1.execute();
+            return true;
+    	} catch (SQLException e) {
+    		return false;
+    	}
+            
 
     }
 
@@ -47,6 +53,7 @@ public class LocationQRDAO extends DAO<LocationQR> {
         		+ "FROM LesLocationsQR l, LesFilms f "//JOIN
         		+ "WHERE l.id = ? AND "
         		+ "f.noFilm = l.noFilm");
+    	
     	querryLocationQR.setInt(1, per.getId());
         ResultSet res3 = querryLocationQR.executeQuery();
         
@@ -71,7 +78,7 @@ public class LocationQRDAO extends DAO<LocationQR> {
 
     public boolean delete(LocationQR obj) throws SQLException {
             PreparedStatement statm1 = conn.prepareStatement(
-                "DELETE INTO LesLocationsQR "+
+                "DELETE FROM LesLocationsQR "+
                 "WHERE id=? AND noFilm=?");
             statm1.setInt(1,obj.getPersonneId());//Changer model
             statm1.setInt(2,obj.getFilmId());

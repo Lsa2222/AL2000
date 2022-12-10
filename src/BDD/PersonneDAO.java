@@ -30,6 +30,8 @@ public class PersonneDAO extends DAO<Personne> {
     		    statmPeronne.execute();
     		    
     		    res = queryPersonne.executeQuery();
+    	    } else {
+    	    	obj.setId(res.getInt(1));
     	    }
     	} catch(SQLException e) {
     		return false;
