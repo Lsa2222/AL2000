@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import BDD.FacadeBD;
-import externe.Banque;
 
 public class FacadeTLI {
 	FacadeBD bd = FacadeBD.creer();
@@ -23,9 +22,7 @@ public class FacadeTLI {
 			return(2); 
 		}
 		Abonne abo = new Abonne(prenom,nom,adrMail,adrPhys,credit,cb); //id ?
-		if(bd.newAbonne(abo)==false) {
-			return 5;
-		}
+		bd.newAbonne(abo);
 		this.a=abo;
 		return 1;
 	}
@@ -183,9 +180,7 @@ public class FacadeTLI {
 			}
 		}
 		Enfant e=this.a.addEnfant(prenom, nom, credit, tag, nbMax);
-		if(bd.newEnfant(e)==false) {
-			return 5;
-		}
+		bd.newEnfant(e);
 		return 1;
 	}
 	
@@ -217,6 +212,8 @@ public class FacadeTLI {
 			if(l.br == br) {
 				int res=l.rendre();
 				if(this.a.payer(res)) {
+					c.setBr(br);
+					bd.delLocation(l);
 					return 1;
 				}
 				else {

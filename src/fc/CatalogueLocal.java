@@ -3,12 +3,12 @@ package fc;
 import java.util.HashSet;
 
 public class CatalogueLocal {
-public HashSet<Film> film = new HashSet<>();
-public HashSet<BluRay> br = new HashSet<>();
+public static HashSet<Film> film = new HashSet<>();
+public static HashSet<BluRay> br = new HashSet<>();
 static boolean exist = false;
 static CatalogueLocal c;
-public HashSet<Reservation> reservation = new HashSet<>(); //tout les film reservé
-public HashSet<Film> film_demande=new HashSet<Film>();
+public static HashSet<Reservation> reservation = new HashSet<>(); //tout les film reservé
+public static HashSet<Film> film_demande=new HashSet<Film>();
 
 public static CatalogueLocal creer(){
 	if(!exist) {

@@ -20,4 +20,6 @@ public abstract class AdaptAl2000 {
 			return al;
 		}
 	}
+	protected abstract void setLireBr(BluRay br1);
+	protected abstract void setCarte(int i);
 }

@@ -35,7 +35,6 @@ public class Abonne extends Personne{
 	public int addLocation(LocationBR loc) {
 		
 		if (this.locBr.size()>=3) {
-			System.out.print("vous avez deja loue 3film\n");
 			return 3;
 		}
 		this.locBr.add(loc);
@@ -44,7 +43,6 @@ public class Abonne extends Personne{
 	
 	public int addLocation(LocationQR loc) {
 		if (this.credit<PRIXQR) {
-			System.out.print("pas assez de credit \n");
 			return 2;
 		}
 		this.credit-=PRIXQR;

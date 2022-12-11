@@ -19,8 +19,6 @@ public class LocationBR extends Location {
 		int v = this.p.addLocation(this);
 		if(v==1) {
 			//envoyer a la bd
-			System.out.print("loc enregistrer\n");
-
 			return 1;
 		}
 		return v;
