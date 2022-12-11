@@ -14,6 +14,7 @@ public class DataBase {
 	void resetBD() {
 		drop();
 		create();
+		trigger();
 		data();
 	}
 	
@@ -181,7 +182,7 @@ public class DataBase {
 			execStatm("insert into LesAbonnes values (2, 'Astride', 'Duchamp', 15, 'asasbor@gmail.com', '5 rue de la wesh')");
 			execStatm("insert into LesAbonnes values (3, 'KevinA', 'Duchamp', 15, 'aled@gmail.com', '5 rue de la wesh')");
 			execStatm("insert into LesAbonnes values (4, 'Kevin XV', 'Duchamp', 15, 'KevinLeDiheu@gmail.com','5 rue de la wesh')");
-			execStatm("insert into LesAbonnes values (5, 'Mario','Dupre', 15, 'eue@gmail.com', '5 rue de la wesh')");
+			execStatm("insert into LesAbonnes values (5, 'EncoreunEnfant','Dupre', 15, 'eue@gmail.com', '5 rue de la wesh')");
 			execStatm("insert into LesAbonnes values (7, 'Lucas', 'Sauvayre', 15, 'lulu@gmail.com','à la fac')");
 			
 			execStatm("insert into LesEnfants values (2,1)");
@@ -223,14 +224,25 @@ public class DataBase {
 			execStatm("insert into LesLocationsBR values (1, 5, sysdate)");
 			execStatm("insert into LesLocationsBR values (2, 5, sysdate)");
 			
+			//execStatm("delete from LesLocationsQR q where q.id=1 and q.nofilm=1");
+			//execStatm("delete from LesLocationsBR b where b.id=1 and b.idbr=1");
+			
 			conn.setAutoCommit(false);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
-		
+	}
+	
+	void trigger() {
+		try {
+			conn.setAutoCommit(true);
+			System.out.println("trigger");
+			System.out.println("echec");
+			conn.setAutoCommit(false);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

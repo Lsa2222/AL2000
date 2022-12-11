@@ -24,8 +24,8 @@ class VoidOutputStream extends OutputStream{
 
 public class TestBD {
 	
-	static void testAbo(PrintStream out) {//echec locations
-		out.println("Abonne = ");
+	static void testGetAbo(PrintStream out) {//echec locations
+		out.println("Get Abonne = ");
 		for(int i = 1 ;i<6;i++) {
 			Abonne a = fbd.getAbonne(i);
 			out.println(a.toString());
@@ -43,8 +43,8 @@ public class TestBD {
 			}
 		}
 	}
-	static void testEnf(PrintStream out) {
-		out.println("Enfant = ");
+	static void testGetEnf(PrintStream out) {
+		out.println("Get Enfant = ");
 		for(int i = 2 ;i<6;i++) {
 			Enfant a = fbd.getEnfant(i);
 			out.println(a.toString());
@@ -58,7 +58,7 @@ public class TestBD {
 			}
 		}
 	}
-	static void testCat(PrintStream out) {
+	static void testGetCat(PrintStream out) {
 		out.println("Catalogue = ");
 		Iterator<Film> catalogue = fbd.getCatalogueGlobal().iterator();
 		while(catalogue.hasNext()) {
@@ -74,14 +74,14 @@ public class TestBD {
 		out.println(a.toString());
 	}
 	static void testNewAbo(PrintStream out) {
-		out.println("Add abonne = ");
+		out.println("New Abonne = ");
 		Abonne a = new Abonne("Personne","Commun","adr@mail.pays","1 rue de l'avenue",123,BigInteger.valueOf(1234567981));
 		if(fbd.newAbonne(a)) {
 			out.println("insertion abonne ok, id="+a.getId());
 		}
 	}
 	static void testNewEnf(PrintStream out) {
-		out.println("Add enfant = ");
+		out.println("New Enfant = ");
 		Enfant e = new Enfant("Gamin","Bruillant","jeune@spam.vc","42 avenu du chemain",123,BigInteger.valueOf(3210),1,new HashSet<Tag>(),1);
 		//Enfant(int id, String prenom, String nom, String adrMail, String adrPhys, int credit, BigInteger cb,int idParent, HashSet<Tag> rest,int nbMax) {
 		if(fbd.newEnfant(e)) {
@@ -171,6 +171,7 @@ public class TestBD {
 		}
 		
 	}
+	
 	static void test() {
 		
 	}
@@ -187,12 +188,13 @@ public class TestBD {
 		
 		DataBase db = new DataBase(fbd.conn);
 		db.resetBD();
+		testGetAbo(out);
 		testNewAbo(out);
-		testNewEnf(out);
-		testAbo(out);
-		testEnf(out);
-		testCat(out);
 		testUpdCred(out);
+		testNewEnf(out);
+		testGetAbo(out);
+		testGetEnf(out);
+		testGetCat(out);
 		testLocBR(out);
 		testLocQR(out);
 		for(int i=0;i<10;i++) {
