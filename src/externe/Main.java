@@ -2,21 +2,30 @@ package externe;
 
 import ui.*;
 import fc.*;
+
+import java.math.BigInteger;
+
 import BDD.*;
 
 public class Main {
-	   public static void main(String[] args) {
+	   public static void main(String[] args) throws Exception {
 		   
-		   fenetre f = new fenetre();
 		   Technicien t=new Technicien();
 		   CatalogueLocal c=new CatalogueLocal();
 		   t.update_Catalogue_1(c);
 		   
-		   FacadeTLI fac = new FacadeTLI();
+		   FacadeBD bd =  FacadeBD.creer();
+		   FacadeTLI tli = new FacadeTLI();	   
+		   Test test = new Test(bd,tli,c);
+		   test.test1();
+		   test.test2();
 		   
-//		   FacadeBD bd = new FacadeBD();
+		   
+		   
+		   
 //		   f.fenetre_origine(false);
 		   
+
 
 	   }
 }
