@@ -8,7 +8,7 @@ import java.util.HashSet;
 
 import fc.Personne;
 
-public class PersonneDAO extends DAO<Personne> {
+public abstract class PersonneDAO extends DAO<Personne> {
 	
 	protected PersonneDAO(Connection conn) {
 		super(conn);
@@ -18,24 +18,14 @@ public class PersonneDAO extends DAO<Personne> {
     	PreparedStatement queryPersonne = null;
     	ResultSet res = null;
     	try {
-    		queryPersonne = conn.prepareStatement(
-                    "SELECT id FROM LesPersonnes WHERE cb = ?");
-    	    queryPersonne.setObject(1,obj.getCb());
-    	    res = queryPersonne.executeQuery();
-    	    if(!res.next()) {
-    	    	PreparedStatement statmPeronne;
-    			statmPeronne = conn.prepareStatement(
+    	    PreparedStatement statmPeronne;
+    		statmPeronne = conn.prepareStatement(
     			        "INSERT INTO LesPersonnes "+
     			        "VALUES (?,?)");
-    			statmPeronne.setInt(1,0);
-    		    statmPeronne.setObject(2,obj.getCb());//obj.getCb() doit renvoyer un type compatible avec la taille d'une CB
-    		    statmPeronne.execute();
-    		    
-    		    res.close();
-    		    res = queryPersonne.executeQuery();
-    	    } else {
-    	    	obj.setId(res.getInt(1));
-    	    }
+    		statmPeronne.setInt(1,obj.getId());
+    		statmPeronne.setObject(2,obj.getCb());
+    		statmPeronne.execute();
+    		
     	    return true;
     	} catch(SQLException e) {
     		return false;

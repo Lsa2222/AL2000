@@ -9,16 +9,15 @@ import fc.Film;
 import fc.Guest;
 import fc.LocationBR;
 import fc.LocationQR;
-import fc.Personne;
 import fc.Tag;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
 public class FacadeBD {
-		
+	
+	private DAO<Guest> guestDAO;
 	private DAO<Abonne> aboDAO;
-	private DAO<Personne> perDAO;
 	private DAO<Enfant> enfDAO;
 	private DAO<Film> filmDAO;
 	private DAO<LocationBR> locBRDAO;
@@ -37,21 +36,22 @@ public class FacadeBD {
 		locBRDAO = new LocationBRDAO(conn,tagDAO);
 		locQRDAO = new LocationQRDAO(conn,tagDAO);
 		
-		perDAO = new PersonneDAO(conn);
-		aboDAO = new AbonneDAO(conn,perDAO);
+		aboDAO = new AbonneDAO(conn);
+		guestDAO = new GuestDAO(conn);
 		enfDAO = new EnfantDAO(conn,aboDAO);
 	}
+	
+	static int autoIncrDebug = 8;
 	
 	//PersonneDAO & AbonneDAO & EnfantDAO
 	
 	public boolean newGuest(Guest a) {
-		return newPersonne(a);
-	}
-	public boolean newPersonne(Personne a) {
 		try {
-			boolean retour = perDAO.create(a);
+			a.setId(autoIncrDebug);
+			boolean retour = guestDAO.create(a);
 			if(retour) {
 				conn.commit();
+				autoIncrDebug++;
 			}else {
 				conn.rollback();
 			}
@@ -63,13 +63,11 @@ public class FacadeBD {
 	}
 	public boolean newAbonne(Abonne a) {
 		try {
-			if(!newPersonne(a)) {
-				return false;
-			}
-			
+			a.setId(autoIncrDebug);
 			boolean retour = aboDAO.create(a);
 			if(retour) {
 				conn.commit();
+				autoIncrDebug++;
 			}else {
 				conn.rollback();
 			}
@@ -81,12 +79,11 @@ public class FacadeBD {
 	}
 	public boolean newEnfant(Enfant a) {
 		try {
-			if(!newAbonne(a)) {
-				return false;
-			}
+			a.setId(autoIncrDebug);
 			boolean retour = enfDAO.create(a);
 			if(retour) {
 				conn.commit();
+				autoIncrDebug++;
 			}else {
 				conn.rollback();
 			}

@@ -146,24 +146,17 @@ public class DataBase {
 					+ ")");
 			execStatm("create sequence id_gens");
 			
-			
 			//execStatm("drop trigger aut_enum");
-			
-			/*execStatm("create or replace trigger aut_enum "
-					+ "before insert on LesPersonnes "
-					+ "begin "
-					+ "select * from lesPersonnes "
-					+ "end;");*/
-			
-			/*execStatm("create or replace trigger aut_enum "
+			/*
+			execStatm("create or replace trigger aut_enum "
 					+ "before insert on LesPersonnes "
 					+ "for each row "
 					+ "begin "
-						+ "select id_gens.nextval "
-						+ "into new.id "
-						+ "from dual; "
-					+ "end;");*/
-			
+					+ "    select id_gens.nextval "
+					+ "    into new.id "
+					+ "    from dual; "
+					+ "end;");
+			*/
 			conn.setAutoCommit(false);
 
 		} catch (SQLException e) {
@@ -188,7 +181,7 @@ public class DataBase {
 			execStatm("insert into LesAbonnes values (2, 'Astride', 'Duchamp', 15, 'asasbor@gmail.com', '5 rue de la wesh')");
 			execStatm("insert into LesAbonnes values (3, 'KevinA', 'Duchamp', 15, 'aled@gmail.com', '5 rue de la wesh')");
 			execStatm("insert into LesAbonnes values (4, 'Kevin XV', 'Duchamp', 15, 'KevinLeDiheu@gmail.com','5 rue de la wesh')");
-			execStatm("insert into LesAbonnes values (5, 'Mario','Dupre', 15, 'eue@gmail.com', '5 rue de la wesh')");
+			execStatm("insert into LesAbonnes values (5, 'EncoreunEnfant','Dupre', 15, 'eue@gmail.com', '5 rue de la wesh')");
 			execStatm("insert into LesAbonnes values (7, 'Lucas', 'Sauvayre', 15, 'lulu@gmail.com','à la fac')");
 			
 			execStatm("insert into LesEnfants values (2,1)");

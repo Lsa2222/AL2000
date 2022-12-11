@@ -7,16 +7,11 @@ import java.sql.SQLException;
 import java.util.HashSet;
 
 import fc.Abonne;
-import fc.Personne;
-
 
 public class AbonneDAO extends DAO<Abonne> {
-	
-	DAO<Personne> perDAO;
-	
-	protected AbonneDAO(Connection conn, DAO<Personne> perDAO) {
+		
+	protected AbonneDAO(Connection conn) {
 		super(conn);
-		this.perDAO = perDAO; 
     }
 	
 	
@@ -24,15 +19,23 @@ public class AbonneDAO extends DAO<Abonne> {
     		ResultSet res = null;
     		PreparedStatement statmAbonne = null;
     		PreparedStatement queryPersonne = null;
+    		PreparedStatement statmPeronne = null;
     		try {
+    			statmPeronne = conn.prepareStatement(
+    			        "INSERT INTO LesPersonnes "+
+    			        "VALUES (?,?)");
+    			statmPeronne.setInt(1,obj.getId());
+    			statmPeronne.setObject(2,obj.getCb());
+    			statmPeronne.execute();
                 queryPersonne = conn.prepareStatement(
-                        "SELECT id FROM LesPersonnes WHERE cb = ?");
+                        "SELECT id FROM LesPersonnes "
+                        + "WHERE cb = ? "
+                        + "ORDER BY id DESC");
         	    queryPersonne.setObject(1,obj.getCb());
         	    res = queryPersonne.executeQuery();
         	    if(!res.next()) {
         	    	return false;
         	    }
-        	    
         	    obj.setId(res.getInt(1));
         	    
     			statmAbonne = conn.prepareStatement(
@@ -48,6 +51,7 @@ public class AbonneDAO extends DAO<Abonne> {
     	        
     	        return true;
     		} catch(SQLException e) {
+    			e.printStackTrace();
     			return false;
     		} finally {
     			try {
@@ -57,6 +61,9 @@ public class AbonneDAO extends DAO<Abonne> {
         				statmAbonne.close();
         			}if(queryPersonne!=null) {
         				queryPersonne.close();
+        			}
+        			if(statmPeronne!=null) {
+        				statmPeronne.close();
         			}
 				} catch (SQLException e1) {
 					e1.printStackTrace();
