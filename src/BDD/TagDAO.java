@@ -15,8 +15,9 @@ public class TagDAO extends DAO<Tag> {
     }
     
     public boolean create(Tag obj) {
-        try {
-            PreparedStatement statm1 = conn.prepareStatement(
+    	PreparedStatement statm1 = null;
+    	try {
+            statm1 = conn.prepareStatement(
                 "INSERT INTO Tags "+
                 "VALUES (?)");
             statm1.setString(1,obj.toString());
@@ -25,7 +26,14 @@ public class TagDAO extends DAO<Tag> {
         } catch (SQLException e) {
             System.out.println("Hu,Ho...");
             return false;
-        }
+        } finally {
+			try {
+            	if(statm1!=null) {
+            		statm1.close();}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
     }
 
     public Tag read (Object obj) {
@@ -37,8 +45,9 @@ public class TagDAO extends DAO<Tag> {
     }
 
     public boolean delete(Tag obj) {
-        try {
-            PreparedStatement statm1 = conn.prepareStatement(
+    	PreparedStatement statm1 = null;
+    	try {
+            statm1 = conn.prepareStatement(
                 "DELETE INTO Tags "+
                 "WHERE tag=?");
             statm1.setString(1,obj.toString());//Changer model
@@ -47,17 +56,25 @@ public class TagDAO extends DAO<Tag> {
         } catch (SQLException e) {
             System.out.println("Hu,Ho...");
             return false;
-        }
+        } finally {
+			try {
+            	if(statm1!=null) {
+            		statm1.close();}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
     }
 
 	@Override
 	public HashSet<Tag> readAll(Object obj) {
 		ResultSet res = null;
+		PreparedStatement queryFilm = null;
 		try {
 			int idFilm = (int) obj;
 			
 			HashSet<Tag> tab= new HashSet<>();
-	    	PreparedStatement queryFilm = conn.prepareStatement(""
+	    	queryFilm = conn.prepareStatement(""
 	    			+ "SELECT tag "
 	    			+ "FROM TagsFilm "
 	    			+ "WHERE noFilm = ?");
@@ -77,6 +94,15 @@ public class TagDAO extends DAO<Tag> {
 				}
 			}
 			return null;
+		} finally {
+			try {
+            	if(res!=null) {
+            		res.close();}
+            	if(queryFilm!=null) {
+            		queryFilm.close();}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 }

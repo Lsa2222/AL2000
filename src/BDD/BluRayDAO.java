@@ -13,8 +13,9 @@ public class BluRayDAO extends DAO<BluRay> {
     }
     
     public boolean create(BluRay obj) {
-        try {
-            PreparedStatement statm1 = conn.prepareStatement(
+    	PreparedStatement statm1 = null;
+    	try {
+            statm1 = conn.prepareStatement(
                 "INSERT INTO LesBlueRay "+
                 "VALUES (?,?,?)");
             statm1.setInt(1,obj.getId());
@@ -31,9 +32,15 @@ public class BluRayDAO extends DAO<BluRay> {
             statm1.execute();
             return true;
         } catch (SQLException e) {
-            System.out.println("Hu,Ho...");
             return false;
-        }
+        } finally {
+			try {
+            	if(statm1!=null) {
+            		statm1.close();}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
     }
 
     public BluRay read (Object obj) {
@@ -45,8 +52,9 @@ public class BluRayDAO extends DAO<BluRay> {
     }
 
     public boolean delete(BluRay obj) {
-        try {
-            PreparedStatement statm1 = conn.prepareStatement(
+    	PreparedStatement statm1 = null;
+    	try {
+            statm1 = conn.prepareStatement(
                 "DELETE INTO LesBlueRay "+
                 "WHERE idBR=?");
             statm1.setInt(1,obj.getId());//Changer model
@@ -55,7 +63,14 @@ public class BluRayDAO extends DAO<BluRay> {
         } catch (SQLException e) {
             System.out.println("Hu,Ho...");
             return false;
-        }
+        } finally {
+			try {
+            	if(statm1!=null) {
+            		statm1.close();}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
     }
 
 	@Override

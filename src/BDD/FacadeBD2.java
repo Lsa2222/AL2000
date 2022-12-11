@@ -1,7 +1,6 @@
 package BDD;
 
 import java.util.HashSet;
-import java.util.Iterator;
 
 import fc.Abonne;
 import fc.Enfant;
@@ -12,8 +11,6 @@ import fc.Personne;
 import fc.Tag;
 
 import java.math.BigInteger;
-import java.sql.Connection;
-import java.sql.SQLException;
 
 public class FacadeBD2 {
 	
@@ -43,14 +40,14 @@ public class FacadeBD2 {
 	public Abonne getAbonne(int num) {
 		Abonne abo = null;
 		System.out.println("acces a l'abonne "+num);
-		abo = new Abonne(num,"Personne","Commun","adr@mail.pays","1 rue de l'avenue",123,BigInteger.valueOf(1234567981));
+		abo = new Abonne("Personne","Commun","adr@mail.pays","1 rue de l'avenue",123,BigInteger.valueOf(1234567981));
 		System.out.println(abo);
 		return abo;
 	}
 	public Enfant getEnfant(int num) {
 		Enfant enf = null;
 		System.out.println("acces a l'enfant "+num);
-		enf = new Enfant(num,"Gamin","Bruillant","jeune@spam.vc","42 avenu du chemain",123,BigInteger.valueOf(3210),1,new HashSet<Tag>(),1);
+		enf = new Enfant("Gamin","Bruillant","jeune@spam.vc","42 avenu du chemain",123,BigInteger.valueOf(3210),1,new HashSet<Tag>(),1);
 		System.out.println(enf);
 		return enf;
 	}

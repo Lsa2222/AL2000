@@ -46,17 +46,22 @@ public class AbonneDAO extends DAO<Abonne> {
     	        statmAbonne.setString(6, obj.getAdrPhys());
     	        statmAbonne.execute();
     	        
-    	        res.close();//TODO try catch
     	        return true;
     		} catch(SQLException e) {
-    			if(res!=null) {
-    				try {
-						res.close();
-					} catch (SQLException e1) {
-						e1.printStackTrace();
-					}
-    			}
     			return false;
+    		} finally {
+    			try {
+    				if(res!=null) {
+    					res.close();
+        			}if(statmAbonne!=null) {
+        				statmAbonne.close();
+        			}if(queryPersonne!=null) {
+        				queryPersonne.close();
+        			}
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+    			
     		}
             
     }
@@ -64,10 +69,12 @@ public class AbonneDAO extends DAO<Abonne> {
     public Abonne read (Object obj) {
     	ResultSet res1 = null;
     	ResultSet res2 = null;
+    	PreparedStatement querryAbonne = null;
+    	PreparedStatement querryPersonne = null;
     	try {
     		int idPersonne = (int) obj;
             
-        	PreparedStatement querryAbonne = conn.prepareStatement(
+        	querryAbonne = conn.prepareStatement(
                        "SELECT prenom, nom, credit, adrMail, AdrPhy "
                        + "FROM LesAbonnes "
                        + "WHERE id = ?");
@@ -78,7 +85,7 @@ public class AbonneDAO extends DAO<Abonne> {
             	return null;
             }
                 
-            PreparedStatement querryPersonne = conn.prepareStatement(
+            querryPersonne = conn.prepareStatement(
                         "SELECT cb "
                         + "FROM LesPersonnes "
                         + "WHERE id = ?");
@@ -90,25 +97,30 @@ public class AbonneDAO extends DAO<Abonne> {
                     
             Abonne jean = new Abonne(res1.getString(1), res1.getString(2) , res1.getString(4), res1.getString(5), res1.getInt(3), res2.getBigDecimal(1).toBigInteger());
             jean.setId(idPersonne);
-            res1.close();
-            res2.close();
             return jean;
     	} catch(SQLException e) {
-            try {
+            
+    		return null;
+    	} finally {
+    		try {
             	if(res1!=null) {
             		res1.close();}
             	if(res2!=null) {
             		res2.close();}
+            	if(querryAbonne!=null) {
+            		querryAbonne.close();}
+            	if(querryPersonne!=null) {
+            		querryPersonne.close();}
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-    		return null;
     	}
     }
 
     public boolean update (Abonne obj) {
+    	PreparedStatement statmAbonne = null;
     		try {
-    			PreparedStatement statmAbonne = conn.prepareStatement(
+    			statmAbonne = conn.prepareStatement(
                         "UPDATE LesAbonnes "+
                         "SET prenom = ?, "
                         + 	"nom = ?, "
@@ -128,6 +140,13 @@ public class AbonneDAO extends DAO<Abonne> {
                 return true;
     		} catch(SQLException e) {
     			return false;
+    		} finally {
+    			try {
+                	if(statmAbonne!=null) {
+                		statmAbonne.close();}
+    			} catch (SQLException e1) {
+    				e1.printStackTrace();
+    			}
     		}
     		
     }
@@ -139,7 +158,6 @@ public class AbonneDAO extends DAO<Abonne> {
 
 	@Override
 	public HashSet<Abonne> readAll(Object obj) throws SQLException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

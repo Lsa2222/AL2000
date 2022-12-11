@@ -21,48 +21,61 @@ public class EnfantDAO extends DAO<Enfant>{
 	}
 	
 	@Override
-	public boolean create(Enfant obj) throws SQLException {
-		
-		if(!aboDAO.create(obj)) {
-			return false;
-		}
-		
-		
-		
-		PreparedStatement statmRestriction = conn.prepareStatement(
-                "INSERT INTO LesRestrictions "+
-                "VALUES (?,?)");
-		Iterator<Tag> it = obj.getRestrIterator();
-		statmRestriction.setInt(1, obj.getId());
-		
-		while(it.hasNext()) {
-			statmRestriction.setString(2, it.next().toString());
-			if(!statmRestriction.execute()) {
+	public boolean create(Enfant obj) {
+		PreparedStatement statmRestriction = null;
+		PreparedStatement statmEnfant = null;
+		try {
+			if(!aboDAO.create(obj)) {
 				return false;
+			}
+			
+			statmRestriction = conn.prepareStatement(
+	                "INSERT INTO LesRestrictions "+
+	                "VALUES (?,?)");
+			Iterator<Tag> it = obj.getRestrIterator();
+			statmRestriction.setInt(1, obj.getId());
+			
+			while(it.hasNext()) {
+				statmRestriction.setString(2, it.next().toString());
+				if(!statmRestriction.execute()) {
+					return false;
+				}
+			}
+			
+			statmEnfant = conn.prepareStatement(
+	                "INSERT INTO LesEnfants "+
+	                "VALUES (?,?)");
+			statmEnfant.setInt(1, obj.getId());
+			statmEnfant.setInt(2, obj.getParentId());
+			
+			statmEnfant.execute();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        } finally {
+			try {
+            	if(statmRestriction!=null) {
+            		statmRestriction.close();}
+            	if(statmEnfant!=null) {
+            		statmEnfant.close();}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
 			}
 		}
 		
-		PreparedStatement statmEnfant = conn.prepareStatement(
-                "INSERT INTO LesEnfants "+
-                "VALUES (?,?)");
-		statmEnfant.setInt(1, obj.getId());
-		statmEnfant.setInt(2, obj.getParentId());
 		
-		statmEnfant.execute();
-		return true;
 	}
 
 	@Override
 	public Enfant read(Object obj) {
 		
 		ResultSet res = null;
-		
-		
+		PreparedStatement querryEnfant = null;
 		try {
 			Enfant ret;
 			ret = Enfant.aboToEnfant(aboDAO.read(obj));
 			int idEnf = (int) obj;
-			PreparedStatement querryEnfant = conn.prepareStatement(""
+			querryEnfant = conn.prepareStatement(""
 					+ "SELECT idParent "
 					+ "FROM LesEnfants "
 					+ "WHERE idEnfant = ?");
@@ -73,17 +86,18 @@ public class EnfantDAO extends DAO<Enfant>{
 				return ret;
 			}
 			ret.setIdParent(res.getInt(1));// ?????
-			res.close();
 			return ret;
 		} catch (SQLException e) {
-			if(res!=null) {
-				try {
-					res.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}
 			return null;
+		} finally {
+			try {
+            	if(res!=null) {
+            		res.close();}
+            	if(querryEnfant!=null) {
+            		querryEnfant.close();}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		}
 		
 	}
@@ -104,10 +118,10 @@ public class EnfantDAO extends DAO<Enfant>{
 	public HashSet<Enfant> readAll(Object obj) {
 		
 		ResultSet res = null;
-		
+		PreparedStatement querryParent = null;
 		try {
 			int idParent = (int) obj;
-			PreparedStatement querryParent = conn.prepareStatement(""
+			querryParent = conn.prepareStatement(""
 					+ "SELECT idEnfant "
 					+ "FROM LesEnfants "
 					+ "WHERE idParent = ?");
@@ -128,6 +142,15 @@ public class EnfantDAO extends DAO<Enfant>{
 				}
 			}
 			return null;
+		} finally {
+			try {
+            	if(res!=null) {
+            		res.close();}
+            	if(querryParent!=null) {
+            		querryParent.close();}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		}
 		
 		

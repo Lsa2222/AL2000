@@ -15,11 +15,13 @@ public class PersonneDAO extends DAO<Personne> {
     }
 	
     public boolean create(Personne obj) {
+    	PreparedStatement queryPersonne = null;
+    	ResultSet res = null;
     	try {
-    		PreparedStatement queryPersonne = conn.prepareStatement(
+    		queryPersonne = conn.prepareStatement(
                     "SELECT id FROM LesPersonnes WHERE cb = ?");
     	    queryPersonne.setObject(1,obj.getCb());
-    	    ResultSet res = queryPersonne.executeQuery();
+    	    res = queryPersonne.executeQuery();
     	    if(!res.next()) {
     	    	PreparedStatement statmPeronne;
     			statmPeronne = conn.prepareStatement(
@@ -34,12 +36,19 @@ public class PersonneDAO extends DAO<Personne> {
     	    } else {
     	    	obj.setId(res.getInt(1));
     	    }
-    	    res.close();
+    	    return true;
     	} catch(SQLException e) {
     		return false;
-    	}
-    	
-	    return true;
+    	} finally {
+			try {
+            	if(res!=null) {
+            		res.close();}
+            	if(queryPersonne!=null) {
+            		queryPersonne.close();}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
     }
 
     public Personne read (Object obj) {

@@ -22,8 +22,9 @@ public class LocationQRDAO extends DAO<LocationQR> {
     }
     
     public boolean create(LocationQR obj) {
+    	PreparedStatement statm1 = null;
     	try {
-    		PreparedStatement statm1 = conn.prepareStatement(
+    		statm1 = conn.prepareStatement(
                     "INSERT INTO LesLocationsQR "+
                     "VALUES (?,?,?,?)");
                 statm1.setInt(1,obj.getPersonneId());
@@ -34,7 +35,14 @@ public class LocationQRDAO extends DAO<LocationQR> {
             return true;
     	} catch (SQLException e) {
     		return false;
-    	}
+    	} finally {
+			try {
+            	if(statm1!=null) {
+            		statm1.close();}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
             
 
     }
@@ -45,10 +53,11 @@ public class LocationQRDAO extends DAO<LocationQR> {
     
     public HashSet<LocationQR> readAll (Object obj) {
     	ResultSet res3=null;
+    	PreparedStatement querryLocationQR = null;
     	try {
     		Personne per = (Personne) obj;
         	
-        	PreparedStatement querryLocationQR = conn.prepareStatement(""
+        	querryLocationQR = conn.prepareStatement(""
             		+ "SELECT "
             		+ "f.noFilm, f.titre, f.realisateur, f.resumer, f.genre "
             		+ "FROM LesLocationsQR l, LesFilms f "//JOIN
@@ -70,18 +79,19 @@ public class LocationQRDAO extends DAO<LocationQR> {
             					res3.getString(5))
             			,per));
             }
-            res3.close();
     		return liste;
     	}catch(SQLException e) {
-    		if(res3!=null) {
-    			try {
-					res3.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-    		}
     		return null;
-    	}
+    	} finally {
+			try {
+				if(res3!=null) {
+            		res3.close();}
+            	if(querryLocationQR!=null) {
+            		querryLocationQR.close();}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
     	
     	
     }
@@ -91,9 +101,8 @@ public class LocationQRDAO extends DAO<LocationQR> {
     }
 
     public boolean delete(LocationQR obj) {
-           
+    		PreparedStatement statm1 = null;
 			try {
-				PreparedStatement statm1;
 				statm1 = conn.prepareStatement(
 				    "DELETE FROM LesLocationsQR "+
 				    "WHERE id=? AND noFilm=?");
@@ -103,6 +112,13 @@ public class LocationQRDAO extends DAO<LocationQR> {
 	            return true;
 			} catch (SQLException e) {
 				return false;
+			} finally {
+				try {
+					if(statm1!=null) {
+						statm1.close();}
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 			}
             
 

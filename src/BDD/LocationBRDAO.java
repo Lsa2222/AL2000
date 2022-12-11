@@ -21,8 +21,9 @@ public class LocationBRDAO extends DAO<LocationBR> {
     }
     
     public boolean create(LocationBR obj) {
+    	PreparedStatement statmLocation = null;
     	try {
-    		PreparedStatement statmLocation = conn.prepareStatement(
+    		statmLocation = conn.prepareStatement(
             		"INSERT INTO LesLocationsBR "+
             		"VALUES (?,?,?)");
             statmLocation.setInt(1,obj.getPersonneId());
@@ -33,7 +34,14 @@ public class LocationBRDAO extends DAO<LocationBR> {
     	} catch(SQLException e) {
     		e.printStackTrace();
     		return false;
-    	}
+    	} finally {
+			try {
+            	if(statmLocation!=null) {
+            		statmLocation.close();}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
         
     }
 
@@ -46,11 +54,12 @@ public class LocationBRDAO extends DAO<LocationBR> {
     public HashSet<LocationBR> readAll (Object obj) {
     	
     	ResultSet res3 = null;
+    	PreparedStatement querryLocationBR = null;
     	
     	try {
     		Personne per = (Personne) obj;
         	
-        	PreparedStatement querryLocationBR = conn.prepareStatement(""
+        	querryLocationBR = conn.prepareStatement(""
             		+ "SELECT "
             		+ "f.noFilm, f.titre, f.realisateur, f.resumer, f.genre, b.idBR, b.etat "
             		+ "FROM LesLocationsBR l, LesFilms f, LesBlueRay b "//JOIN
@@ -81,18 +90,19 @@ public class LocationBRDAO extends DAO<LocationBR> {
             			per
             			));
             }       
-           res3.close();
            return liste;
     	}catch(SQLException e) {
-    		if(res3!=null) {
-    			try {
-					res3.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-    		}
     		return null;
-    	}
+    	} finally {
+			try {
+				if(res3!=null) {
+            		res3.close();}
+            	if(querryLocationBR!=null) {
+            		querryLocationBR.close();}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
     	
     	
     }
@@ -101,14 +111,28 @@ public class LocationBRDAO extends DAO<LocationBR> {
         return false;
     }
 
-    public boolean delete(LocationBR obj) throws SQLException {
-            PreparedStatement statm1 = conn.prepareStatement(
-                "DELETE FROM LesLocationsBR "+
-                "WHERE id=? AND idBR=?");
+    public boolean delete(LocationBR obj) {
+    	PreparedStatement statm1 = null;
+    	try {
+    		statm1 = conn.prepareStatement(
+                    "DELETE FROM LesLocationsBR "+
+                    "WHERE id=? AND idBR=?");
             statm1.setInt(1,obj.getPersonneId());
             statm1.setInt(2,obj.getBRId());
             statm1.execute();
             return true;
+    	} catch(SQLException e) {
+    		e.printStackTrace();
+    		return false;
+    	} finally {
+			try {
+            	if(statm1!=null) {
+            		statm1.close();}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+            
     }
 
 }

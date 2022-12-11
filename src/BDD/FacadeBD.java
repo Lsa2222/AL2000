@@ -11,7 +11,6 @@ import fc.LocationBR;
 import fc.LocationQR;
 import fc.Personne;
 import fc.Tag;
-import oracle.net.aso.s;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -29,7 +28,7 @@ public class FacadeBD {
 	private Session ses;
 	protected Connection conn;
 	
-	FacadeBD(){
+	public FacadeBD(){
 		ses = new Session();
 		conn = ses.open();
 		
@@ -64,6 +63,10 @@ public class FacadeBD {
 	}
 	public boolean newAbonne(Abonne a) {
 		try {
+			if(!newPersonne(a)) {
+				return false;
+			}
+			
 			boolean retour = aboDAO.create(a);
 			if(retour) {
 				conn.commit();
@@ -78,6 +81,9 @@ public class FacadeBD {
 	}
 	public boolean newEnfant(Enfant a) {
 		try {
+			if(!newAbonne(a)) {
+				return false;
+			}
 			boolean retour = enfDAO.create(a);
 			if(retour) {
 				conn.commit();

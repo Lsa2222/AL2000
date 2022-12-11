@@ -1,5 +1,6 @@
 package BDD;
 
+import java.io.PrintStream;
 import java.math.BigInteger;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -10,12 +11,11 @@ import fc.Enfant;
 import fc.Film;
 import fc.LocationBR;
 import fc.LocationQR;
-import fc.Personne;
 import fc.Tag;
 
 public class TestBD {
 	
-	static void testAbo(FacadeBD fbd) {//echec locations
+	static void testAbo(PrintStream out) {//echec locations
 		System.out.println("Abonne = ");
 		for(int i = 1 ;i<6;i++) {
 			Abonne a = fbd.getAbonne(i);
@@ -34,7 +34,7 @@ public class TestBD {
 			}
 		}
 	}
-	static void testEnf(FacadeBD fbd) {
+	static void testEnf(PrintStream out) {
 		System.out.println("Enfant = ");
 		for(int i = 2 ;i<6;i++) {
 			Enfant a = fbd.getEnfant(i);
@@ -49,14 +49,14 @@ public class TestBD {
 			}
 		}
 	}
-	static void testCat(FacadeBD fbd) {
+	static void testCat(PrintStream out) {
 		System.out.println("Catalogue = ");
 		Iterator<Film> catalogue = fbd.getCatalogueGlobal().iterator();
 		while(catalogue.hasNext()) {
 			System.out.println(catalogue.next());
 		}
 	}
-	static void testUpdCred(FacadeBD fbd) {//echec
+	static void testUpdCred(PrintStream out) {//echec
 		System.out.println("Update credis = ");
 		Abonne a = fbd.getAbonne(3);
 		System.out.println(a.toString());
@@ -64,30 +64,22 @@ public class TestBD {
 		a = fbd.getAbonne(3);
 		System.out.println(a.toString());
 	}
-	static void testNewAbo(FacadeBD fbd) {
+	static void testNewAbo(PrintStream out) {
 		System.out.println("Add abonne = ");
 		Abonne a = new Abonne("Personne","Commun","adr@mail.pays","1 rue de l'avenue",123,BigInteger.valueOf(1234567981));
-		a.setId(11);
-		if(fbd.newPersonne(a)) {
-			System.out.println("insertion personne ok");
-		}
 		if(fbd.newAbonne(a)) {
 			System.out.println("insertion abonne ok, id="+a.getId());
 		}
 	}
-	static void testNewEnf(FacadeBD fbd) {
+	static void testNewEnf(PrintStream out) {
 		System.out.println("Add enfant = ");
 		Enfant e = new Enfant("Gamin","Bruillant","jeune@spam.vc","42 avenu du chemain",123,BigInteger.valueOf(3210),1,new HashSet<Tag>(),1);
-		e.setId(11);
 		//Enfant(int id, String prenom, String nom, String adrMail, String adrPhys, int credit, BigInteger cb,int idParent, HashSet<Tag> rest,int nbMax) {
-		if(fbd.newPersonne(e)) {
-			System.out.println("insertion personne ok");
-		}
 		if(fbd.newEnfant(e)) {
 			System.out.println("insertion enfant ok, id="+e.getId());
 		}
 	}
-	static void testLocBR(FacadeBD fbd) {
+	static void testLocBR(PrintStream out) {
 		System.out.println("Add loc br = ");
 		Abonne a = fbd.getAbonne(1);
 		
@@ -131,7 +123,7 @@ public class TestBD {
 		}
 		
 	}
-	static void testLocQR(FacadeBD fbd) {
+	static void testLocQR(PrintStream out) {
 		System.out.println("Add loc br = ");
 		Abonne a = fbd.getAbonne(1);
 		
@@ -170,30 +162,31 @@ public class TestBD {
 		}
 		
 	}
-	static void test(FacadeBD fbd) {
+	static void test() {
 		
 	}
 	
-	
+	static FacadeBD fbd;
 	
 	public static void main(String[] args) {
-		FacadeBD fbd = new FacadeBD();
+		
+		
+		PrintStream out = System.out;
+		fbd = new FacadeBD();
+		
 		DataBase db = new DataBase(fbd.conn);
 		db.resetBD();
-		//testAbo(fbd);
-		//testEnf(fbd);
-		//testCat(fbd);
-		//testUpdCred(fbd);
-		//testNewAbo(fbd);
-		//testNewEnf(fbd);
-		testLocBR(fbd);
-		testLocBR(fbd);
-		testLocBR(fbd);
-		testLocBR(fbd);
-		testLocBR(fbd);
-		//testLocBR(fbd);
-		//testLocBR(fbd);
-		//testLocQR(fbd);
+		testAbo(out);
+		testEnf(out);
+		testCat(out);
+		testUpdCred(out);
+		testNewAbo(out);
+		testNewEnf(out);
+		for(int i=0;i<10;i++) {
+			
+		}
+		testLocBR(out);
+		testLocQR(out);
 	}
 
 }

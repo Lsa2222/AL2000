@@ -19,8 +19,9 @@ public class FilmDAO extends DAO<Film> {
     }
     
     public boolean create(Film obj) {
-        try {
-            PreparedStatement statm1 = conn.prepareStatement(
+    	PreparedStatement statm1 = null;
+    	try {
+            statm1 = conn.prepareStatement(
                 "INSERT INTO LesFilms "+
                 "VALUES (?,?,?,?,?)");
             statm1.setInt(1,obj.getId() );
@@ -33,7 +34,14 @@ public class FilmDAO extends DAO<Film> {
         } catch (SQLException e) {
         	System.out.println("Hu,Ho...");
         	return false;
-        }
+        } finally {
+			try {
+            	if(statm1!=null) {
+            		statm1.close();}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
     }
 
     public Film read (Object obj) {
@@ -45,8 +53,9 @@ public class FilmDAO extends DAO<Film> {
     }
 
     public boolean delete(Film obj) {
-        try {
-            PreparedStatement statm1 = conn.prepareStatement(
+    	PreparedStatement statm1 = null;
+    	try {
+            statm1 = conn.prepareStatement(
                 "DELETE INTO LesFilms "+
                 "WHERE noFilm=?");
             statm1.setInt(1,obj.getId());//Changer model
@@ -55,14 +64,22 @@ public class FilmDAO extends DAO<Film> {
         } catch (SQLException e) {
             System.out.println("Hu,Ho...");
             return false;
-        }
+        } finally {
+			try {
+            	if(statm1!=null) {
+            		statm1.close();}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
     }
 
 	@Override
 	public HashSet<Film> readAll(Object obj) {
 		ResultSet res = null;
+		PreparedStatement queryFilm  = null;
 		try {
-			PreparedStatement queryFilm = conn.prepareStatement(""
+			queryFilm = conn.prepareStatement(""
 					+ "SELECT "
 	        		+ "noFilm, titre, realisateur, resumer, genre "
 	        		+ "FROM LesFilms ");
@@ -76,17 +93,18 @@ public class FilmDAO extends DAO<Film> {
 						tagDAO.readAll(res.getInt(1)),
 						res.getString(5)));
 			}
-			res.close();
 			return liste;
 		} catch(SQLException e){
-			if(res!=null) {
-				try {
-					res.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}
 			return null;
+		} finally {
+			try {
+            	if(res!=null) {
+            		res.close();}
+            	if(queryFilm!=null) {
+            		queryFilm.close();}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		}
 		
 		
