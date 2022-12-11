@@ -183,7 +183,7 @@ public class TestBD {
 		PrintStream out = System.out;
 		PrintStream voi = new PrintStream(new VoidOutputStream());
 		
-		fbd = new FacadeBD();
+		fbd = FacadeBD.creer();
 		
 		DataBase db = new DataBase(fbd.conn);
 		db.resetBD();

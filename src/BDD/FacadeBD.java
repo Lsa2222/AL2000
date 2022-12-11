@@ -27,7 +27,7 @@ public class FacadeBD {
 	private Session ses;
 	protected Connection conn;
 	
-	public FacadeBD(){
+	private FacadeBD(){
 		ses = new Session();
 		conn = ses.open();
 		
@@ -39,6 +39,15 @@ public class FacadeBD {
 		aboDAO = new AbonneDAO(conn);
 		guestDAO = new GuestDAO(conn);
 		enfDAO = new EnfantDAO(conn,aboDAO);
+	}
+	
+	private static FacadeBD instance = null;
+	
+	public static FacadeBD creer() {
+		if(instance==null) {
+			instance = new FacadeBD();
+		}
+		return instance;
 	}
 	
 	static int autoIncrDebug = 8;
