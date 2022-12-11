@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.util.HashSet;
 
 public class Abonne extends Personne{
-	Banque banque= Banque.creer();
+	AdaptBanque banque= AdaptBanque.creer();
 
 	
 	private String prenom;
@@ -110,8 +110,8 @@ public class Abonne extends Personne{
 		}
 	}
 	
-	public Enfant creerEnfant(String prenom, String nom, int credit, HashSet<Tag> rest, int nbMax) {
-		Enfant e = new Enfant (prenom, nom, adrMail, adrPhys, credit, cb, this, rest, nbMax);
+	public Enfant addEnfant(String prenom, String nom, int credit, HashSet<Tag> rest, int nbMax) {
+		Enfant e = new Enfant (prenom, nom, adrMail, adrPhys, credit, cb, this.id, rest, nbMax);
 		this.enfant.add(e);
 		return e;
 	}
@@ -132,6 +132,10 @@ public class Abonne extends Personne{
 	
 	public void setId(int id) {
 		this.id = id;
+	}
+	public Enfant addEnfant(Enfant e) {
+		this.enfant.add(e);
+		return e;
 	}
 	
 

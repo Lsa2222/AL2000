@@ -10,6 +10,7 @@ public abstract class AdaptAl2000 {
 	public abstract void sortirQr(Film f, Personne p);
 
 	public abstract void mail(String adrMail, String text);
+	public abstract BluRay lireBr();
 	public static Al2000 creer() {
 		if(!exist) {
 			exist = true;

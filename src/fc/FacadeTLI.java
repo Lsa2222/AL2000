@@ -5,29 +5,29 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import BDD.FacadeBD;
+import externe.Banque;
 
 public class FacadeTLI {
-	FacadeBD bd;
+	FacadeBD bd = FacadeBD.creer();
 	Abonne a;
 	int connecte=0;
 	Guest g;
-	Banque banque= Banque.creer();
+	AdaptBanque banque= AdaptBanque.creer();
 	AdaptAl2000 al=AdaptAl2000.creer();
 	CatalogueLocal c=CatalogueLocal.creer();
 	
-	//renvoi 2 si pas assez d'argent 1 si ca marche 
+	//renvoi 2 si pas assez d'argent 1 si ca marche et 5 si l'adresse mail est déja associé a un compte
 	public int creerAbonne(String prenom, String nom, String adrMail, String adrPhys, int credit, BigInteger cb) {
-		return 1;
-		/*
+		
 		if(!banque.debiter(cb, credit)) {
 			return(2); 
 		}
-		Abonne abo = new Abonne(prenom,nom,adrMail,adrPhys,credit,cb);
-		if(bd.newAbonne(abo)) {
+		Abonne abo = new Abonne(prenom,nom,adrMail,adrPhys,credit,cb); //id ?
+		if(bd.newAbonne(abo)==false) {
+			return 5;
+		}
 		this.a=abo;
 		return 1;
-		}
-		return 0;*/
 	}
 	
 	//l'abonne excite dans la bd
@@ -40,9 +40,9 @@ public class FacadeTLI {
 			//on récupére le dernier chiffre pour savoir si enfant ou abone
 			String s = Integer.toString(al.carte());
 			char type = s.charAt(s.length()-1);
-			int i=Integer.parseInt(s.substring(1, s.length() - 1));
+			int i=Integer.parseInt(s.substring(0,s.length()-1));
 			this.connecte=1;
-			if(type==0) {
+			if(Character.getNumericValue(type)==0) {
 				this.a=bd.getAbonne(i);
 				return 1;
 			}
@@ -63,7 +63,6 @@ public class FacadeTLI {
 	
 	//fournis a l'ui toute les info sur un film
 	public ArrayList<ArrayList<String>> getfilm(){
-		//TODO film dispo ?
 		ArrayList<ArrayList<String>> l = new ArrayList<ArrayList<String>>();
 		for (Film f : this.c.film) {
 			ArrayList<String> film = new ArrayList<String>();
@@ -171,16 +170,23 @@ public class FacadeTLI {
 	}
 
 	//precondition:on est abonne
+	//2 pas assez d'argent 1 ok  5 adresse mail
 	public int creerEnfant(String prenom, String nom, int credit, ArrayList<String> rest, int nbMax) {
-		/*
+		
 		if(!banque.debiter(this.a.getCb(), credit)) {
 			return(2); 
 		}
-		Enfant e=this.a.creerEnfant(prenom, nom, credit, rest, nbMax);
-		if(bd.newEnfant(e)) {
+		HashSet<Tag> tag = new HashSet<Tag>();
+		for (Tag t: Tag.values()) {
+			if (rest.contains(t.toString())) {
+				tag.add(t);
+			}
 		}
-		return 1;*/
-		return 2;//2 pas assez d'argent, 1 bon
+		Enfant e=this.a.addEnfant(prenom, nom, credit, tag, nbMax);
+		if(bd.newEnfant(e)==false) {
+			return 5;
+		}
+		return 1;
 	}
 	
 	public int creerGuest(BigInteger cb) {
@@ -193,14 +199,40 @@ public class FacadeTLI {
 		this.a=null;
 	}
 	
-	public int rendre(){
-		/*
-		//2 pas assez de crédits et 3 insérer cd et 1 c'est ok
-		int res=loc.rendre();
-		if(this.a.payer(res)) {
-			return true;
+	public ArrayList<String> listeTag() {
+		ArrayList<String> l = new ArrayList<String>();
+		for(Tag t: Tag.values()) {
+			l.add(t.toString());
 		}
-		return false;*/
-		return 2;
+		return l;
 	}
+	
+	//2 pas assez de crédits et 3 insérer cd et 1 c'est ok
+	public int rendre(){
+		BluRay br = al.lireBr();
+		if(br == null) {
+			return 3;
+		}
+		for(LocationBR l : a.getLocBr()) {
+			if(l.br == br) {
+				int res=l.rendre();
+				if(this.a.payer(res)) {
+					return 1;
+				}
+				else {
+					return 2;
+				}
+			}
+		}
+		return 0;
+	}
+
+//	demande d'ajout au cat local pour le moi prochain
+	public void demande(String s) {
+		Film f = c.stof(s);
+		c.film_demande.add(f);
+	}
+
+
+
 }

@@ -6,22 +6,21 @@ import java.util.Iterator;
 public class Enfant extends Abonne {
 	private HashSet<Tag> rest = new HashSet<>();
 	int nbMax;
-	Abonne parent;
 	private int idParent;
 	
 		public String toString() {
 		return super.toString();
 	}
 	
-	public Enfant(String prenom, String nom, String adrMail, String adrPhys, int credit, BigInteger cb,Abonne parent, HashSet<Tag> rest,int nbMax) {
+	public Enfant(String prenom, String nom, String adrMail, String adrPhys, int credit, BigInteger cb,int idParent,HashSet<Tag> rest,int nbMax) {
 		super(prenom, nom, adrMail, adrPhys, credit, cb);
 		this.rest=rest;
 		this.nbMax=nbMax;
-		this.parent=parent;
+		this.idParent=idParent;
 	}
 	
 		public static Enfant aboToEnfant(Abonne a) {
-		Enfant ret = new Enfant(a.getPrenom(),a.getNom(),a.getAdrMail(),a.getAdrPhys(),a.getCredit(),a.getCb(),null,null,168);
+		Enfant ret = new Enfant(a.getPrenom(),a.getNom(),a.getAdrMail(),a.getAdrPhys(),a.getCredit(),a.getCb(),0,null,168);
 		ret.rest=new HashSet<>();
 		return ret;
 	}
@@ -54,12 +53,16 @@ public class Enfant extends Abonne {
 
 	
 
-	public int getParentId() {
-		return idParent;
+	public int getIdParent() {
+		return id;
 	}
 
 	public void setIdParent(int i) {
 		idParent = i;
+	}
+
+	public int getParentId() {
+		return this.idParent;
 	}
 
 }

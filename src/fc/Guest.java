@@ -5,7 +5,7 @@ import java.util.HashSet;
 public class Guest extends Personne {
 	private LocationBR locBr;
 	private HashSet<LocationQR> locQr;
-	Banque banque= Banque.creer();
+	AdaptBanque banque= AdaptBanque.creer();
 	
 	public Guest(BigInteger cb) {
 		super(cb);
@@ -36,6 +36,8 @@ public class Guest extends Personne {
 	public boolean payer(int argent) {
 		return(banque.debiter(this.cb, argent));	
 	}
+	
+	
 
 }
 
