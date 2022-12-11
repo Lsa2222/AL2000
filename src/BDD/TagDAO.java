@@ -51,20 +51,32 @@ public class TagDAO extends DAO<Tag> {
     }
 
 	@Override
-	public HashSet<Tag> readAll(Object obj) throws SQLException {
-		
-		int idFilm = (int) obj;
-		
-		HashSet<Tag> tab= new HashSet<>();
-    	PreparedStatement queryFilm = conn.prepareStatement(""
-    			+ "SELECT tag "
-    			+ "FROM TagsFilm "
-    			+ "WHERE noFilm = ?");
-    	queryFilm.setInt(1,idFilm);
-    	ResultSet res = queryFilm.executeQuery();
-    	while(res.next()) {
-    		tab.add(Tag.valueOf(res.getString(1)));
-    	}
-    	return tab;
+	public HashSet<Tag> readAll(Object obj) {
+		ResultSet res = null;
+		try {
+			int idFilm = (int) obj;
+			
+			HashSet<Tag> tab= new HashSet<>();
+	    	PreparedStatement queryFilm = conn.prepareStatement(""
+	    			+ "SELECT tag "
+	    			+ "FROM TagsFilm "
+	    			+ "WHERE noFilm = ?");
+	    	queryFilm.setInt(1,idFilm);
+	    	res = queryFilm.executeQuery();
+	    	while(res.next()) {
+	    		tab.add(Tag.valueOf(res.getString(1)));
+	    	}
+	    	res.close();
+	    	return tab;
+		} catch(SQLException e) {
+			if(res!=null) {
+				try {
+					res.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+			return null;
+		}
 	}
 }

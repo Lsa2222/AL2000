@@ -20,7 +20,7 @@ public class LocationBRDAO extends DAO<LocationBR> {
         this.tagDAO=tagDAO;
     }
     
-    public boolean create(LocationBR obj) throws SQLException {
+    public boolean create(LocationBR obj) {
     	try {
     		PreparedStatement statmLocation = conn.prepareStatement(
             		"INSERT INTO LesLocationsBR "+
@@ -37,52 +37,67 @@ public class LocationBRDAO extends DAO<LocationBR> {
         
     }
 
-    public LocationBR read (Object obj) throws SQLException {
+    public LocationBR read (Object obj) {
         return null;
     }
     
     
     
-    public HashSet<LocationBR> readAll (Object obj) throws SQLException {
+    public HashSet<LocationBR> readAll (Object obj) {
     	
-    	Personne per = (Personne) obj;
+    	ResultSet res3 = null;
     	
-    	PreparedStatement querryLocationBR = conn.prepareStatement(""
-        		+ "SELECT "
-        		+ "f.noFilm, f.titre, f.realisateur, f.resumer, f.genre, b.idBR, b.etat "
-        		+ "FROM LesLocationsBR l, LesFilms f, LesBlueRay b "//JOIN
-        		+ "WHERE l.id = ? AND "
-        		+ "b.idBr = l.idBr AND "
-        		+ "f.noFilm = b.noFilm");
-    	querryLocationBR.setInt(1, per.getId());
-        ResultSet res3 = querryLocationBR.executeQuery();
-        
-        HashSet<LocationBR> liste = new HashSet<>();
-        
-        while(res3.next()) {
-        	Boolean etatBool = false;
-        	if(res3.getString(7).equals("good")) {
-        		etatBool = true;
-			}
-        	liste.add(new LocationBR(
-        			new BluRay(
-        					res3.getInt(6),
-        					new Film(res3.getInt(1),
-                					res3.getString(2),
-                					res3.getString(3),
-                					res3.getString(4),
-                					tagDAO.readAll(res3.getInt(1)),
-                					res3.getString(5)),//?
-        					etatBool
-        					),
-        			per
-        			));
-        }       
-       
-		return liste;
+    	try {
+    		Personne per = (Personne) obj;
+        	
+        	PreparedStatement querryLocationBR = conn.prepareStatement(""
+            		+ "SELECT "
+            		+ "f.noFilm, f.titre, f.realisateur, f.resumer, f.genre, b.idBR, b.etat "
+            		+ "FROM LesLocationsBR l, LesFilms f, LesBlueRay b "//JOIN
+            		+ "WHERE l.id = ? AND "
+            		+ "b.idBr = l.idBr AND "
+            		+ "f.noFilm = b.noFilm");
+        	querryLocationBR.setInt(1, per.getId());
+            res3 = querryLocationBR.executeQuery();
+            
+            HashSet<LocationBR> liste = new HashSet<>();
+            
+            while(res3.next()) {
+            	Boolean etatBool = false;
+            	if(res3.getString(7).equals("good")) {
+            		etatBool = true;
+    			}
+            	liste.add(new LocationBR(
+            			new BluRay(
+            					res3.getInt(6),
+            					new Film(res3.getInt(1),
+                    					res3.getString(2),
+                    					res3.getString(3),
+                    					res3.getString(4),
+                    					tagDAO.readAll(res3.getInt(1)),
+                    					res3.getString(5)),//?
+            					etatBool
+            					),
+            			per
+            			));
+            }       
+           res3.close();
+           return liste;
+    	}catch(SQLException e) {
+    		if(res3!=null) {
+    			try {
+					res3.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+    		}
+    		return null;
+    	}
+    	
+    	
     }
 
-    public boolean update (LocationBR obj) throws SQLException {
+    public boolean update (LocationBR obj) {
         return false;
     }
 

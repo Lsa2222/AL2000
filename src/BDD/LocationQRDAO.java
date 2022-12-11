@@ -43,47 +43,68 @@ public class LocationQRDAO extends DAO<LocationQR> {
         return null;
     }
     
-    public HashSet<LocationQR> readAll (Object obj) throws SQLException {
+    public HashSet<LocationQR> readAll (Object obj) {
+    	ResultSet res3=null;
+    	try {
+    		Personne per = (Personne) obj;
+        	
+        	PreparedStatement querryLocationQR = conn.prepareStatement(""
+            		+ "SELECT "
+            		+ "f.noFilm, f.titre, f.realisateur, f.resumer, f.genre "
+            		+ "FROM LesLocationsQR l, LesFilms f "//JOIN
+            		+ "WHERE l.id = ? AND "
+            		+ "f.noFilm = l.noFilm");
+        	
+        	querryLocationQR.setInt(1, per.getId());
+            res3 = querryLocationQR.executeQuery();
+            
+            HashSet<LocationQR> liste = new HashSet<>();
+                    
+            while(res3.next()) {
+            	liste.add(new LocationQR(
+            			new Film(res3.getInt(1),
+            					res3.getString(2),
+            					res3.getString(3),
+            					res3.getString(4),
+            					tagDAO.readAll(res3.getInt(1)),
+            					res3.getString(5))
+            			,per));
+            }
+            res3.close();
+    		return liste;
+    	}catch(SQLException e) {
+    		if(res3!=null) {
+    			try {
+					res3.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+    		}
+    		return null;
+    	}
     	
-    	Personne per = (Personne) obj;
     	
-    	PreparedStatement querryLocationQR = conn.prepareStatement(""
-        		+ "SELECT "
-        		+ "f.noFilm, f.titre, f.realisateur, f.resumer, f.genre "
-        		+ "FROM LesLocationsQR l, LesFilms f "//JOIN
-        		+ "WHERE l.id = ? AND "
-        		+ "f.noFilm = l.noFilm");
-    	
-    	querryLocationQR.setInt(1, per.getId());
-        ResultSet res3 = querryLocationQR.executeQuery();
-        
-        HashSet<LocationQR> liste = new HashSet<>();
-                
-        while(res3.next()) {
-        	liste.add(new LocationQR(
-        			new Film(res3.getInt(1),
-        					res3.getString(2),
-        					res3.getString(3),
-        					res3.getString(4),
-        					tagDAO.readAll(res3.getInt(1)),
-        					res3.getString(5))
-        			,per));
-        }
-		return liste;
     }
 
     public boolean update (LocationQR obj) {
         return false;
     }
 
-    public boolean delete(LocationQR obj) throws SQLException {
-            PreparedStatement statm1 = conn.prepareStatement(
-                "DELETE FROM LesLocationsQR "+
-                "WHERE id=? AND noFilm=?");
-            statm1.setInt(1,obj.getPersonneId());//Changer model
-            statm1.setInt(2,obj.getFilmId());
-            statm1.execute();
-            return true;
+    public boolean delete(LocationQR obj) {
+           
+			try {
+				PreparedStatement statm1;
+				statm1 = conn.prepareStatement(
+				    "DELETE FROM LesLocationsQR "+
+				    "WHERE id=? AND noFilm=?");
+				statm1.setInt(1,obj.getPersonneId());//Changer model
+	            statm1.setInt(2,obj.getFilmId());
+	            statm1.execute();
+	            return true;
+			} catch (SQLException e) {
+				return false;
+			}
+            
 
     }
     

@@ -22,11 +22,15 @@ public class TestBD {
 			System.out.println(a.toString());
 			Iterator<LocationBR> locBr = a.getLocBr().iterator();
 			Iterator<LocationQR> locQr = a.getLocQr().iterator();
+			Iterator<Enfant> enfs = a.getEnfants().iterator();
+			while(enfs.hasNext()) {
+				System.out.println("enf : "  + enfs.next().toString());
+			}
 			while(locBr.hasNext()) {
-				System.out.println("    "  + locBr.next().toString());
+				System.out.println("BR  : "  + locBr.next().toString());
 			}
 			while(locQr.hasNext()) {
-				System.out.println("    "  + locQr.next().toString());
+				System.out.println("QR  : "  + locQr.next().toString());
 			}
 		}
 	}
@@ -62,8 +66,8 @@ public class TestBD {
 	}
 	static void testNewAbo(FacadeBD fbd) {
 		System.out.println("Add abonne = ");
-		Abonne a = new Abonne(10,"Personne","Commun","adr@mail.pays","1 rue de l'avenue",123,BigInteger.valueOf(1234567981));
-		
+		Abonne a = new Abonne("Personne","Commun","adr@mail.pays","1 rue de l'avenue",123,BigInteger.valueOf(1234567981));
+		a.setId(11);
 		if(fbd.newPersonne(a)) {
 			System.out.println("insertion personne ok");
 		}
@@ -73,7 +77,8 @@ public class TestBD {
 	}
 	static void testNewEnf(FacadeBD fbd) {
 		System.out.println("Add enfant = ");
-		Enfant e = new Enfant(11,"Gamin","Bruillant","jeune@spam.vc","42 avenu du chemain",123,BigInteger.valueOf(3210),1,new HashSet<Tag>(),1);
+		Enfant e = new Enfant("Gamin","Bruillant","jeune@spam.vc","42 avenu du chemain",123,BigInteger.valueOf(3210),1,new HashSet<Tag>(),1);
+		e.setId(11);
 		//Enfant(int id, String prenom, String nom, String adrMail, String adrPhys, int credit, BigInteger cb,int idParent, HashSet<Tag> rest,int nbMax) {
 		if(fbd.newPersonne(e)) {
 			System.out.println("insertion personne ok");
@@ -111,7 +116,12 @@ public class TestBD {
 			System.out.println("    "  + locBr.next().toString());
 		}
 		
-		fbd.delLocation(l);
+		if(fbd.delLocation(l)) {
+			System.out.println("Suppression reussie !");
+		} else {
+			System.out.println("echec");
+			return;
+		}
 		a = fbd.getAbonne(1);
 		
 		System.out.println(a.toString());
@@ -170,15 +180,20 @@ public class TestBD {
 		FacadeBD fbd = new FacadeBD();
 		DataBase db = new DataBase(fbd.conn);
 		db.resetBD();
-		testAbo(fbd);
-		testEnf(fbd);
-		testCat(fbd);
-		testUpdCred(fbd);
-		testNewAbo(fbd);
-		testNewEnf(fbd);
+		//testAbo(fbd);
+		//testEnf(fbd);
+		//testCat(fbd);
+		//testUpdCred(fbd);
+		//testNewAbo(fbd);
+		//testNewEnf(fbd);
 		testLocBR(fbd);
-		testLocQR(fbd);
-		testLocQR(fbd);
+		testLocBR(fbd);
+		testLocBR(fbd);
+		testLocBR(fbd);
+		testLocBR(fbd);
+		//testLocBR(fbd);
+		//testLocBR(fbd);
+		//testLocQR(fbd);
 	}
 
 }

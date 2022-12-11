@@ -53,21 +53,39 @@ public class EnfantDAO extends DAO<Enfant>{
 	}
 
 	@Override
-	public Enfant read(Object obj) throws SQLException {
-		Enfant ret = Enfant.aboToEnfant(aboDAO.read(obj));
-		int idEnf = (int) obj;
-		PreparedStatement querryEnfant = conn.prepareStatement(""
-				+ "SELECT idParent "
-				+ "FROM LesEnfants "
-				+ "WHERE idEnfant = ?");
-		querryEnfant.setInt(1, idEnf);
-		ResultSet res = querryEnfant.executeQuery();
-		if(!res.next()) {
-			ret.setIdParent(-1);// ?????
+	public Enfant read(Object obj) {
+		
+		ResultSet res = null;
+		
+		
+		try {
+			Enfant ret;
+			ret = Enfant.aboToEnfant(aboDAO.read(obj));
+			int idEnf = (int) obj;
+			PreparedStatement querryEnfant = conn.prepareStatement(""
+					+ "SELECT idParent "
+					+ "FROM LesEnfants "
+					+ "WHERE idEnfant = ?");
+			querryEnfant.setInt(1, idEnf);
+			res = querryEnfant.executeQuery();
+			if(!res.next()) {
+				ret.setIdParent(-1);// ?????
+				return ret;
+			}
+			ret.setIdParent(res.getInt(1));// ?????
+			res.close();
 			return ret;
+		} catch (SQLException e) {
+			if(res!=null) {
+				try {
+					res.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+			return null;
 		}
-		ret.setIdParent(res.getInt(1));// ?????
-		return ret;
+		
 	}
 
 	@Override
@@ -83,9 +101,36 @@ public class EnfantDAO extends DAO<Enfant>{
 	}
 
 	@Override
-	public HashSet<Enfant> readAll(Object obj) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public HashSet<Enfant> readAll(Object obj) {
+		
+		ResultSet res = null;
+		
+		try {
+			int idParent = (int) obj;
+			PreparedStatement querryParent = conn.prepareStatement(""
+					+ "SELECT idEnfant "
+					+ "FROM LesEnfants "
+					+ "WHERE idParent = ?");
+			querryParent.setInt(1, idParent);
+			res = querryParent.executeQuery();
+			HashSet<Enfant> enfants = new HashSet<Enfant>();
+			while(res.next()) {
+				enfants.add(read(res.getInt(1)));
+			}
+			res.close();
+			return enfants;
+		} catch(SQLException e) {
+			if(res!=null) {
+				try {
+					res.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+			return null;
+		}
+		
+		
 	}
 
 }

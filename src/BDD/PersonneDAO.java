@@ -29,10 +29,12 @@ public class PersonneDAO extends DAO<Personne> {
     		    statmPeronne.setObject(2,obj.getCb());//obj.getCb() doit renvoyer un type compatible avec la taille d'une CB
     		    statmPeronne.execute();
     		    
+    		    res.close();
     		    res = queryPersonne.executeQuery();
     	    } else {
     	    	obj.setId(res.getInt(1));
     	    }
+    	    res.close();
     	} catch(SQLException e) {
     		return false;
     	}

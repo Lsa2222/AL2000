@@ -33,7 +33,6 @@ public class FilmDAO extends DAO<Film> {
         } catch (SQLException e) {
         	System.out.println("Hu,Ho...");
         	return false;
-            
         }
     }
 
@@ -60,21 +59,36 @@ public class FilmDAO extends DAO<Film> {
     }
 
 	@Override
-	public HashSet<Film> readAll(Object obj) throws SQLException {
-		PreparedStatement queryFilm = conn.prepareStatement(""
-				+ "SELECT "
-        		+ "noFilm, titre, realisateur, resumer, genre "
-        		+ "FROM LesFilms ");
-		HashSet<Film> liste = new HashSet<>();
-		ResultSet res = queryFilm.executeQuery();
-		while(res.next()) {
-			liste.add(new Film(res.getInt(1),
-					res.getString(2),
-					res.getString(3),
-					res.getString(4),
-					tagDAO.readAll(res.getInt(1)),
-					res.getString(5)));
+	public HashSet<Film> readAll(Object obj) {
+		ResultSet res = null;
+		try {
+			PreparedStatement queryFilm = conn.prepareStatement(""
+					+ "SELECT "
+	        		+ "noFilm, titre, realisateur, resumer, genre "
+	        		+ "FROM LesFilms ");
+			HashSet<Film> liste = new HashSet<>();
+			res = queryFilm.executeQuery();
+			while(res.next()) {
+				liste.add(new Film(res.getInt(1),
+						res.getString(2),
+						res.getString(3),
+						res.getString(4),
+						tagDAO.readAll(res.getInt(1)),
+						res.getString(5)));
+			}
+			res.close();
+			return liste;
+		} catch(SQLException e){
+			if(res!=null) {
+				try {
+					res.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+			return null;
 		}
-		return liste;
+		
+		
 	}
 }

@@ -6,10 +6,12 @@ import java.util.Iterator;
 import fc.Abonne;
 import fc.Enfant;
 import fc.Film;
+import fc.Guest;
 import fc.LocationBR;
 import fc.LocationQR;
 import fc.Personne;
 import fc.Tag;
+import oracle.net.aso.s;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -43,6 +45,9 @@ public class FacadeBD {
 	
 	//PersonneDAO & AbonneDAO & EnfantDAO
 	
+	public boolean newGuest(Guest a) {
+		return newPersonne(a);
+	}
 	public boolean newPersonne(Personne a) {
 		try {
 			boolean retour = perDAO.create(a);
@@ -92,12 +97,18 @@ public class FacadeBD {
 			Abonne jean = aboDAO.read(num);
 			Iterator<LocationBR> locBR = locBRDAO.readAll(jean).iterator();
 			Iterator<LocationQR> locQR = locQRDAO.readAll(jean).iterator();
+			Iterator<Enfant> enfs = enfDAO.readAll(jean.getId()).iterator();
+			
             while(locQR.hasNext()) {
             	jean.addLocationAdmin(locQR.next());
             }
             while(locBR.hasNext()) {
             	jean.addLocationAdmin(locBR.next());
             }
+            while(enfs.hasNext()) {
+            	jean.addEnfant(enfs.next());
+            }
+            
 			return jean;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -156,20 +167,23 @@ public class FacadeBD {
 	// LocationDAO
 	
 	public boolean newLocation(LocationBR br) {
-		try {
-			if(locBRDAO.create(br)) {
-				conn.commit();
-				return true;
-			} else {
-				conn.rollback();
+			try {
+				if(locBRDAO.create(br)) {
+					conn.commit();
+					return true;
+				} else {
+					conn.rollback();
+					return false;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 				return false;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
+		
+		
 	}
 	public boolean newLocation(LocationQR qr) {
+		
 		try {
 			if(locQRDAO.create(qr)) {
 				conn.commit();
@@ -184,6 +198,7 @@ public class FacadeBD {
 		}
 	}
 	public boolean delLocation(LocationBR br) {
+		
 		try {
 			if(locBRDAO.delete(br)) {
 				conn.commit();
