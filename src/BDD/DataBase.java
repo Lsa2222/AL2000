@@ -14,7 +14,6 @@ public class DataBase {
 	void resetBD() {
 		drop();
 		create();
-		trigger();
 		data();
 	}
 	
@@ -88,7 +87,7 @@ public class DataBase {
 					+ "    noFilm integer not null,"
 					+ "    titre varchar2(100),"
 					+ "    realisateur varchar2(20),"
-					+ "    genre varchar2(200),"
+					+ "    image varchar2(200),"
 					+ "    resumer varchar2(500),"
 					+ "    constraint LesFilms_key primary key (noFilm)"
 					+ ")");
@@ -182,7 +181,7 @@ public class DataBase {
 			execStatm("insert into LesAbonnes values (2, 'Astride', 'Duchamp', 15, 'asasbor@gmail.com', '5 rue de la wesh')");
 			execStatm("insert into LesAbonnes values (3, 'KevinA', 'Duchamp', 15, 'aled@gmail.com', '5 rue de la wesh')");
 			execStatm("insert into LesAbonnes values (4, 'Kevin XV', 'Duchamp', 15, 'KevinLeDiheu@gmail.com','5 rue de la wesh')");
-			execStatm("insert into LesAbonnes values (5, 'EncoreunEnfant','Dupre', 15, 'eue@gmail.com', '5 rue de la wesh')");
+			execStatm("insert into LesAbonnes values (5, 'Mario','Dupre', 15, 'eue@gmail.com', '5 rue de la wesh')");
 			execStatm("insert into LesAbonnes values (7, 'Lucas', 'Sauvayre', 15, 'lulu@gmail.com','à la fac')");
 			
 			execStatm("insert into LesEnfants values (2,1)");
@@ -190,18 +189,46 @@ public class DataBase {
 			execStatm("insert into LesEnfants values (4,1)");
 			execStatm("insert into LesEnfants values (5,1)");
 			
-			execStatm("insert into LesFilms values (1, 'Le retour des moineaux', 'Inconnu', 'Space Opera', 'Il était une fois...')");
+			execStatm("insert into LesFilms values (1, 'Le retour des moineaux', 'Francis Ford Coppola', 'Space Opera', 'Il était une fois...')");
 			execStatm("insert into LesFilms values (2, 'Jenaipas', 'Timothee', 'documentaire', 'Ba, il savait pas')");
 			execStatm("insert into LesFilms values (3, 'jeregardepasbeaucoupdefilm', 'Lucas', 'comedie', 'Comme resume ? un film un peu vide')");
-			execStatm("insert into LesFilms values (4, 'aucuneidee', 'Joan', 'baaucuneideeaussi', 'aucune idee, ça va être génial pour la réu')");
+			execStatm("insert into LesFilms values (4, 'Le Parrain', 'Francis Ford Coppola', 'data/leparrain.jpg', 'y a un parin et des mafias')");
+			execStatm("insert into LesFilms values (5, 'Les Évadés', 'Frank Darabont', 'data/lesevades.jpg', 'En 1947, Andy Dufresne, un jeune banquier, est condamné à la prison à vie pour le meurtre de sa femme et de son amant.')");
+			execStatm("insert into LesFilms values (6, 'La Liste de Schindler', 'Steven Spielberg', 'data/lalistedeschindler.jpg', 'Évocation des années de guerre d’Oskar Schindler, fils d’industriel d’origine autrichienne rentré à Cracovie en 1939 avec les troupes allemandes.')");
+			execStatm("insert into LesFilms values (7, 'Parasite', 'Bong Joon-ho', 'data/parasite.jpg', 'Toute la famille de Ki-taek est au chômage. Elle s’intéresse particulièrement au train de vie de la richissime famille Park.')");
+			execStatm("insert into LesFilms values (8, 'Pulp Fiction', 'Quentin Tarantino', 'data/pulpfiction.jpg', 'L’odyssée sanglante et burlesque de petits malfrats dans la jungle d’Hollywood.')");
+			execStatm("insert into LesFilms values (9, 'The Dark Knight', 'Christopher Nolan', 'data/inception', 'Avec l aide du Lieutenant de Police Jim Gordon et du Procureur Harvey Dent, Batman entreprend de démanteler définitivement les organisations criminelles de Gotham.')");
+			execStatm("insert into LesFilms values (10, 'Inception', 'Christopher Nolan', 'data/thedarkknight.jpg', 'Dom Cobb est un voleur expérimenté, le meilleur dans l art dangereux de l extraction.')");
+			execStatm("insert into LesFilms values (11, 'La Ligne verte', 'Frank Darabont', 'data/laligneverte.jpg', 'Paul Edgecomb, pensionnaire centenaire d une maison de retraite, est hanté par ses souvenirs.')");
+			execStatm("insert into LesFilms values (12, 'Le Seigneur des anneaux : Le Retour du roi', 'Peter Jackson', 'data/leseigneurdesanneaux:leretourduroi.jpg', 'Les armées de Sauron ont attaqué Minas Tirith, la capitale de Gondor.')");
+			execStatm("insert into LesFilms values (13, 'Forrest Gump', 'Robert Zemeckis', 'data/forrestgump.jpg', 'Forrest Gump est le symbole d une époque, un candide dans une Amérique qui a perdu son innocence.')");
 			
 			execStatm("insert into Tags values ('PEGI18')");
 			execStatm("insert into Tags values ('PEGI12')");
 			execStatm("insert into Tags values ('PEGI16')");
+			execStatm("insert into Tags values ('ACTION')");
+			execStatm("insert into Tags values ('POLICIER')");
+			execStatm("insert into Tags values ('FANTASY')");
+			execStatm("insert into Tags values ('WORLDWAR')");
 			
 			execStatm("insert into TagsFilm values ('PEGI18', 1)");
 			execStatm("insert into TagsFilm values ('PEGI12', 3)");
 			execStatm("insert into TagsFilm values ('PEGI12', 4)");
+			execStatm("insert into TagsFilm values ('POLICIER', 4)");
+			execStatm("insert into TagsFilm values ('POLICIER', 5)");
+			execStatm("insert into TagsFilm values ('PEGI16', 6)");
+			execStatm("insert into TagsFilm values ('WORLDWAR', 6)");
+			execStatm("insert into TagsFilm values ('PEGI16', 7)");
+			execStatm("insert into TagsFilm values ('PEGI18', 8)");
+			execStatm("insert into TagsFilm values ('ACTION', 8)");
+			execStatm("insert into TagsFilm values ('ACTION', 9)");
+			execStatm("insert into TagsFilm values ('ACTION', 10)");
+			execStatm("insert into TagsFilm values ('POLICIER',11)");
+			execStatm("insert into TagsFilm values ('FANTASY', 12)");
+
+
+
+			
 			
 			execStatm("insert into LesRestrictions values (3, 'PEGI18')");
 			execStatm("insert into LesRestrictions values (4, 'PEGI12')");
@@ -224,25 +251,14 @@ public class DataBase {
 			execStatm("insert into LesLocationsBR values (1, 5, sysdate)");
 			execStatm("insert into LesLocationsBR values (2, 5, sysdate)");
 			
-			//execStatm("delete from LesLocationsQR q where q.id=1 and q.nofilm=1");
-			//execStatm("delete from LesLocationsBR b where b.id=1 and b.idbr=1");
-			
 			conn.setAutoCommit(false);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-	
-	void trigger() {
-		try {
-			conn.setAutoCommit(true);
-			System.out.println("trigger");
-			System.out.println("echec");
-			conn.setAutoCommit(false);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		
+		
+		
 	}
 }
