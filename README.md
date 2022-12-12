@@ -12,7 +12,7 @@ tant qu’abonné, soit en tant que visiteur.
 
 ## Executer le programme principale
 
-L'exécutable jar fourni lance le programme principal en simulant que la carte d’abonné de XXXXX est inséré dans l’AL2000. **Attention** cette exécutable ne réinitialise pas la base de données.
+L'exécutable jar fourni lance le programme principal en simulant que la carte du abonné par défaut est inséré dans l’AL2000. **Attention** cette exécutable ne réinitialise pas la base de données.
 
 ### Exécution des tests
 
