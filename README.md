@@ -14,9 +14,10 @@ tant qu’abonné, soit en tant que visiteur.
 
 L'exécutable jar fourni lance le programme principal en simulant que la carte du abonné par défaut est inséré dans l’AL2000. **Attention** cette exécutable ne réinitialise pas la base de données.
 
-### Exécution des tests
+### Exécution avancée
 
-Pour lancer les tests unitaires, nous passons par une IDE. **Attention** le driver *ojdbc8.jar* doit être dans le Build Path. Lancer *TestBD* permet de réinitialiser la base de données. Des tests plus poussés demandent de modifier directement la *Main*.
+* Afin d'afficher les images dans l'interface, veuillez enregistrer le fichier d'image en local et indiquer le path du fichier dans l'attribut *chemin* au début de la classe (il faut remplacer le chemin mis par défaut)
+* Pour lancer les tests unitaires, nous passons par une IDE. **Attention** le driver *ojdbc8.jar* doit être dans le Build Path. Lancer *TestBD* permet de réinitialiser la base de données. Des tests plus poussés demandent de modifier directement la *Main*.
 
 ## Fabriqué avec
 
