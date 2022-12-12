@@ -136,6 +136,10 @@ public class Abonne extends Personne{
 		return e;
 	}
 	
+	public HashSet<Enfant> getEnfants() {
+		return this.enfant;
+	}
+	
 
 	
 	
