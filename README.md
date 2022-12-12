@@ -22,6 +22,7 @@ Pour lancer les tests unitaires, nous passons par une IDE. **Attention** le driv
 
 * [VisualStudioCode](https://code.visualstudio.com/) - SQL (BDD) et éditeur de texte
 * [Eclips](https://www.eclipse.org/) - Java (Front-end and Back-end)
+* [Oracle](https://www.oracle.com/fr/) - Serveur SQL (BDD)
 
 ## Auteurs
 * **Joan Besante** _alias_ [besantej](https://github.com/besantej)
