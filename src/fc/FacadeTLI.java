@@ -18,13 +18,14 @@ public class FacadeTLI {
 	
 
 	
-	//l'abonne excite dans la bd
+	
 	//0 echec 1 adulte 2 enfant
 	public int connection() {
 		if(al.carte()==0) {
 			return 0; //carte pas inserer
 		}
 		else {
+			//on regarde la carte inséré dans la machine
 			//on récupére le dernier chiffre pour savoir si enfant ou abone
 			String s = Integer.toString(al.carte());
 			char type = s.charAt(s.length()-1);
@@ -41,20 +42,13 @@ public class FacadeTLI {
 		}
 	}
 	
+	
 	public void deconecte() {
-		//bd update abonne
 		this.a=null;
+		this.connecte=0;
 	}
-	
-	public HashSet<String> getnomfilm(){
-		HashSet<String> res = new HashSet<String>();
-		for (Film f : this.c.film) {
-			res.add(f.titre);
-		}
-		return res;
-	}
-	
-	//fournis a l'ui toute les info sur un film
+		
+	//fournis a l'ui une liste contenant toute les info de tout les film du catalogue local
 	public ArrayList<ArrayList<String>> getfilm(){
 		ArrayList<ArrayList<String>> l = new ArrayList<ArrayList<String>>();
 		for (Film f : this.c.film) {
@@ -74,11 +68,13 @@ public class FacadeTLI {
 		return l;
 	}
 
+	//test si le film correspondant au titre f a au moins un BluRay dans le catalogue local
 	public boolean	film_dispo(String f) {
 		return c.dispo(f);
 	}
 	
 	//preconditon: le film est dispo
+	//loue le BluRay associé au film de titre s pour l'abonné ou le guest actuelement connecte
 	//return: 1 bon   3 louer trop de film   4 tag interdit   
 	public int louer_Br(String s) {
 		Personne p;
@@ -123,7 +119,7 @@ public class FacadeTLI {
 		c.reserve(s, a);
 	}
 
-	//return 5 si a n'a pas de reservation, erreur de loc sinon
+	//return 5 si a n'a pas de reservation, 1 si c'est bon, erreur de location sinon
 	public int retirerReseravtion() {
 		
 		BluRay b = c.getreserve(a);
@@ -138,6 +134,7 @@ public class FacadeTLI {
 		return res;
 	}
 
+	//fournis a l'ui une liste contenant toute les info de tout les film du catalogue local
 	public ArrayList<ArrayList<String>> catalogueGlobal() {
 		HashSet<Film> c = bd.getCatalogueGlobal();
 		ArrayList<ArrayList<String>> l = new ArrayList<ArrayList<String>>();
@@ -158,16 +155,11 @@ public class FacadeTLI {
 		return l;
 	}
 	
+	//ajoute c credit a l'abonne a
 	public boolean recharger(int c) {
 		return this.a.addCredit(c) ;
 	}
 
-	public void guest(BigInteger cb) {
-		Guest g = new Guest(cb);
-		this.g=g;
-	}
-
-		
 	//renvoi 2 si pas assez d'argent 1 si ca marche et 5 si l'adresse mail est déja associé a un compte
 	public int creerAbonne(String prenom, String nom, String adrMail, String adrPhys, int credit, BigInteger cb) {
 		
@@ -181,7 +173,7 @@ public class FacadeTLI {
 	}
 	
 	//precondition:on est abonne
-	//2 pas assez d'argent 1 ok  5 adresse mail
+	//2 pas assez d'argent 1 ok  5 adresse mail déja existante
 	public int creerEnfant(String prenom, String nom, int credit, ArrayList<String> rest, int nbMax) {
 		
 		if(!banque.debiter(this.a.getCb(), credit)) {
@@ -198,12 +190,13 @@ public class FacadeTLI {
 		return 1;
 	}
 	
+	//creer un gest et enregistre sa carte banquaire
 	public int creerGuest(BigInteger cb) {
 		g = new Guest(cb);
 		return 0;
 	}
-	
-	
+
+	//fournit une liste de TOUT les tag disponibles
 	public ArrayList<String> listeTag() {
 		ArrayList<String> l = new ArrayList<String>();
 		for(Tag t: Tag.values()) {
@@ -212,6 +205,7 @@ public class FacadeTLI {
 		return l;
 	}
 	
+	//rend le disque insere dans la machine
 	//2 pas assez de crédits et 3 insérer cd et 1 c'est ok
 	public int rendre(){
 		BluRay br = al.lireBr();
@@ -234,12 +228,14 @@ public class FacadeTLI {
 		return 0;
 	}
 
-//	demande d'ajout au cat local pour le moi prochain
+//	demande d'ajout au catalogue local pour le mois prochain
 	public void demande(String s) {
 		Film f = c.stof(s);
 		c.film_demande.add(f);
 	}
 	
+	//precondition: un abonne est connecte
+	//donne toute les info sur l'abonne actuelement connecte
 	//prenom nom mail adr credit cb 
 	public ArrayList<String> info() {
 		ArrayList<String> info = new ArrayList<String>();
@@ -252,7 +248,7 @@ public class FacadeTLI {
 		return info;
 	}
 	
-	//return une liste de location sous la forme film + date
+	//return une liste de location de l'abonne a sous la forme film + date
 	public ArrayList<String> LocationEnCour() {
 		ArrayList<String> info = new ArrayList<String>();
 		for(LocationBR loc : a.getLocBr()) {
@@ -261,6 +257,7 @@ public class FacadeTLI {
 		return info;
 	}
 	
+	//donne toute les réstriction de l'abonné actuel
 	public ArrayList<String> TagAbonne() {
 		ArrayList<String> tag = new ArrayList<String>();
 		Iterator<Tag> it = a.getRestrIterator();

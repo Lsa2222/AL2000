@@ -46,7 +46,7 @@ public class Enfant extends Abonne {
 		return super.addLocation(loc);
 	}
 	
-
+	@Override
 	public Iterator<Tag> getRestrIterator() {
 		return rest.iterator();
 	}

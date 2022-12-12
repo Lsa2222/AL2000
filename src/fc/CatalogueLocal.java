@@ -23,6 +23,7 @@ public static CatalogueLocal creer(){
 public HashSet<Film> getf() {
 	return c.film;
 }	
+
 public void setf(HashSet<Film> f) {
 	this.film=f;
 }	
@@ -30,9 +31,11 @@ public void setf(HashSet<Film> f) {
 public void add(Film f) {
 	c.film.add(f);
 }
+
 public void del(Film f) {
 	c.film.remove(f);
 }
+
 public boolean dispo(String s) {
 	for (BluRay b : this.br) {
 		if(b.film.titre==s && b.estBon) {
@@ -42,6 +45,7 @@ public boolean dispo(String s) {
 	return false;
 }
 
+//renvoi le Br associé au film
 public BluRay getBr(Film f) {
 	for (BluRay b : this.br) {
 		if(b.film==f  && b.estBon) {
@@ -51,6 +55,7 @@ public BluRay getBr(Film f) {
 	return null;
 }
 
+//renvoi le Br associé au film de nom f
 public BluRay getBr(String f) {
 	for (BluRay b : this.br) {
 		if(b.film.titre==f && b.estBon) {
@@ -70,10 +75,12 @@ public Film stof(String s) {
 	return null;
 }
 
+//retire le br des br dispo
 public void out(BluRay b) {
 	this.br.remove(b);
 }
 
+//ajoute le br aux br dispo
 public void setBr(BluRay b) {
 	//on regarde si une personne a reservé le film
 	for (Reservation r : this.reservation) {

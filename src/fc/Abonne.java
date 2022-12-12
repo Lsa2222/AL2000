@@ -4,6 +4,8 @@ import java.math.BigInteger;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import BDD.FacadeBD;
+
 public class Abonne extends Personne{
 	AdaptBanque banque= AdaptBanque.creer();
 
@@ -54,7 +56,9 @@ public class Abonne extends Personne{
 	public boolean addCredit(int c) {
 		boolean res=banque.debiter(this.cb, c);
 		if(res) {
-			//mettre a jour BD avec this.credit +c
+			FacadeBD bd = FacadeBD.creer();
+			this.credit+=c;
+			bd.updCredit(this,this.credit);
 			return true;
 		}
 		return false;
@@ -98,11 +102,12 @@ public class Abonne extends Personne{
 	public HashSet<LocationQR> getLocQr() {
 		return locQr;
 	}
-
+	
+	//credite du compte d'abonne le nombre de credit 
 	@Override
-	public boolean payer(int argent) {
-		if(this.credit>=argent) {
-			this.credit-=argent;
+	public boolean payer(int c) {
+		if(this.credit>=c) {
+			this.credit-=c;
 			return true;
 		}
 		else {
