@@ -40,11 +40,6 @@ public class FacadeBD {
 		guestDAO = new GuestDAO(conn);
 		enfDAO = new EnfantDAO(conn,aboDAO);
 		
-		try {
-			conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	private static FacadeBD instance = null;
