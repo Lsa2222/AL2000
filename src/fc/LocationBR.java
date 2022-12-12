@@ -29,6 +29,7 @@ public class LocationBR extends Location {
 	}
 	
 	int rendre() {
+		System.out.println("rendre :" +br.id+br.estBon);
 		if(this.br.estBon==false/*il faudrais demandé si on arrive a le lire*/) {
 			System.out.print("c'est gratuit\n");
 			return 0;

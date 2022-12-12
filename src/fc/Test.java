@@ -85,35 +85,29 @@ public class Test {
 
 		   //si on relou une 4eme fois, on n'a pas le droit
 		   asert(t.louer_Br(film4.titre) == 3,"2 2");
-		   for(LocationBR lo:t.a.getLocBr()) {
-			   System.out.println("debut "+lo.film.titre);
-		   }
-//		   t.deconecte();
+		   t.deconecte();
 
-//		   //un autre abboné tente de louer un film qui n'est plus disponible en br.
-//		   al.setCarte(idb);
-//		   t.connection();
-//		   t.reserve(film1.titre);
-//		   t.deconecte();
-//		   
-		   //le 1er abo se connecte et rend le 1er br
-//		   al.setCarte(ida);
-//		   al.setLireBr(br1);
-//		   t.connection();
-////		   pb lors de la recup
-//		   for(LocationBR lo:t.a.getLocBr()) {
-//			   System.out.println("fin "+lo.film.titre);
-//		   }
+		   //un autre abboné tente de louer un film qui n'est plus disponible en br.
+		   al.setCarte(idb);
+		   t.connection();
+		   t.reserve(film1.titre);
+		   t.deconecte();
 		   
+		   
+		   //le 1er abo se connecte et rend le 1er br
+		   al.setCarte(ida);
+		   al.setLireBr(br1);
+		   t.connection();
+		   asert(t.rendre()==1,"2 3");
 		   
 		   //le 1er abo loue qr
-//		   asert(t.louer_Qr(film1.titre)==1,"2 4");
-//		   LocationQR qr = (LocationQR)t.a.getLocQr().toArray()[0];
-//		   asert(qr.film.titre == film1.titre,"2 5");
-//		   qr.activer(); //le timer sonne 3 seconde après pour signaler la suppresion de la location
-//		   //dans la version final, il faudras porter ce temps a 24h
-//		   Thread.sleep(3100);
-//		   
+		   asert(t.louer_Qr(film1.titre)==1,"2 4");
+		   LocationQR qr = (LocationQR)t.a.getLocQr().toArray()[0];
+		   asert(qr.film.titre == film1.titre,"2 5");
+		   qr.activer(); //le timer sonne 3 seconde après pour signaler la suppresion de la location
+		   //dans la version final, il faudras porter ce temps a 24h
+		   Thread.sleep(3100);
+		   
 		   
 		   
 		   System.out.println("------test 2 ok------");

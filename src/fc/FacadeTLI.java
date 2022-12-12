@@ -161,6 +161,12 @@ public class FacadeTLI {
 		return this.a.addCredit(c) ;
 	}
 
+	public void guest(BigInteger cb) {
+		Guest g = new Guest(cb);
+		this.g=g;
+	}
+
+		
 	//renvoi 2 si pas assez d'argent 1 si ca marche et 5 si l'adresse mail est déja associé a un compte
 	public int creerAbonne(String prenom, String nom, String adrMail, String adrPhys, int credit, BigInteger cb) {
 		
@@ -212,7 +218,7 @@ public class FacadeTLI {
 			return 3;
 		}
 		for(LocationBR l : a.getLocBr()) {
-			if(l.br == br) {
+			if(l.br.id == br.id) {
 				int res=l.rendre();
 				if(this.a.payer(res)) {
 					c.setBr(br);

@@ -30,31 +30,30 @@ public Technicien() {
 	HashSet<Tag> t9 = new HashSet<>();	t9.add(Tag.FANTASY);
 	HashSet<Tag> t10 = new HashSet<>();
 	
-	Film f1= new Film(1,"Le Parrain","Francis Ford Coppola",d1,t1,"data/leparrain.jpg");
-	Film f2= new Film(1,"Les Évadés","Frank Darabont",d2,t2,"data/lesevades.jpg");
-	Film f3= new Film(1,"La Liste de Schindler","Steven Spielberg",d3,t3,"data/lalistedeschindler.jpg");
-	Film f4= new Film(1,"Parasite","Bong Joon-ho",d4,t4,"data/parasite.jpg");
-	Film f5= new Film(1,"Pulp Fiction","Quentin Tarantino",d5,t5,"data/.jpg");
-	Film f6= new Film(1,"The Dark Knight : Le Chevalier noir","Christopher Nolan",d6,t6,"data/.jpg");
-	Film f7= new Film(1,"Inception","Christopher Nolan",d7,t7,"data/inception.jpg");
-	Film f8= new Film(1,"La Ligne verte","Frank Darabont",d8,t8,"data/laligneverte.jpg");
-	Film f9= new Film(1,"Le Seigneur des anneaux : Le Retour du roi","Peter Jackson",d9,t9,"data/leseigneurdesanneaux:leretourduroi.jpg");
-	Film f10= new Film(1,"Forrest Gump","Robert Zemeckis",d10,t10,"data/forrestgump.jpg");
+	Film f1= new Film(4,"Le Parrain","Francis Ford Coppola",d1,t1,"data/leparrain.jpg");
+	Film f2= new Film(5,"Les Évadés","Frank Darabont",d2,t2,"data/lesevades.jpg");
+	Film f3= new Film(6,"La Liste de Schindler","Steven Spielberg",d3,t3,"data/lalistedeschindler.jpg");
+	Film f4= new Film(7,"Parasite","Bong Joon-ho",d4,t4,"data/parasite.jpg");
+	Film f5= new Film(8,"Pulp Fiction","Quentin Tarantino",d5,t5,"data/.jpg");
+	Film f6= new Film(9,"The Dark Knight : Le Chevalier noir","Christopher Nolan",d6,t6,"data/.jpg");
+	Film f7= new Film(10,"Inception","Christopher Nolan",d7,t7,"data/inception.jpg");
+	Film f8= new Film(11,"La Ligne verte","Frank Darabont",d8,t8,"data/laligneverte.jpg");
+	Film f9= new Film(12,"Le Seigneur des anneaux : Le Retour du roi","Peter Jackson",d9,t9,"data/leseigneurdesanneaux:leretourduroi.jpg");
+	Film f10= new Film(13,"Forrest Gump","Robert Zemeckis",d10,t10,"data/forrestgump.jpg");
 	
-	this.l1 = new HashSet<Film>(Arrays.asList(f1,f2,f3,f4,f5,f6,f7,f8,f9,f10));
+	this.l1 = new HashSet<Film>(Arrays.asList(f1,f2,f3,f4,f5,f6,f7,f8,f9));
 	
 	BluRay b1 = new BluRay(1,f1,true);
 	BluRay b2 = new BluRay(2,f1,true);
 	BluRay b3 = new BluRay(3,f2,true);
 	BluRay b4 = new BluRay(4,f2,true);
 	BluRay b5 = new BluRay(5,f3,true);
-	BluRay b6 = new BluRay(6,f4,true);
-	BluRay b7 = new BluRay(7,f5,true);
-	BluRay b8 = new BluRay(8,f6,true);
-	BluRay b9 = new BluRay(9,f7,true);
-	BluRay b10 = new BluRay(10,f1,true);
-	
-	this.lb1 = new HashSet<BluRay>(Arrays.asList(b1,b2,b3,b4,b5,b6,b7,b8,b9,b10));
+	BluRay b6 = new BluRay(7,f4,true);
+	BluRay b7 = new BluRay(8,f5,true);
+	BluRay b8 = new BluRay(9,f6,true);
+	BluRay b9 = new BluRay(10,f7,true);
+		
+	this.lb1 = new HashSet<BluRay>(Arrays.asList(b1,b2,b3,b4,b5,b6,b7,b8,b9));
 }
 	
 public void update_Catalogue_1(CatalogueLocal c) {
