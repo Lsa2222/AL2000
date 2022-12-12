@@ -75,8 +75,11 @@ public void out(BluRay b) {
 }
 
 public void setBr(BluRay b) {
+	//on regarde si une personne a reservé le film
 	for (Reservation r : this.reservation) {
 		if(r.f==b.film) {
+			AdaptAl2000 al=AdaptAl2000.creer();
+			al.mail(r.a.getAdrMail(),"votre film "+r.f.titre+" est disponible");
 			r.dispo(b);
 			return;
 		}

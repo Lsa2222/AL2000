@@ -23,8 +23,6 @@ public class LocationQR extends Location{
 			//envoyer a la bd
 			this.lienUrl="";
 			this.date=new Date();
-			System.out.print(this.date.toString()+"locqr enregistrer\n");
-
 			return 1;
 		}
 		return v;

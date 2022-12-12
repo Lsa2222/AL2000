@@ -15,17 +15,7 @@ public class FacadeTLI {
 	AdaptAl2000 al=AdaptAl2000.creer();
 	CatalogueLocal c=CatalogueLocal.creer();
 	
-	//renvoi 2 si pas assez d'argent 1 si ca marche et 5 si l'adresse mail est déja associé a un compte
-	public int creerAbonne(String prenom, String nom, String adrMail, String adrPhys, int credit, BigInteger cb) {
-		
-		if(!banque.debiter(cb, credit)) {
-			return(2); 
-		}
-		Abonne abo = new Abonne(prenom,nom,adrMail,adrPhys,credit,cb); //id ?
-		bd.newAbonne(abo);
-		this.a=abo;
-		return 1;
-	}
+
 	
 	//l'abonne excite dans la bd
 	//0 echec 1 adulte 2 enfant
@@ -48,6 +38,11 @@ public class FacadeTLI {
 				return 2;
 			}
 		}
+	}
+	
+	public void deconecte() {
+		//bd update abonne
+		this.a=null;
 	}
 	
 	public HashSet<String> getnomfilm(){
@@ -166,6 +161,18 @@ public class FacadeTLI {
 		return this.a.addCredit(c) ;
 	}
 
+	//renvoi 2 si pas assez d'argent 1 si ca marche et 5 si l'adresse mail est déja associé a un compte
+	public int creerAbonne(String prenom, String nom, String adrMail, String adrPhys, int credit, BigInteger cb) {
+		
+		if(!banque.debiter(cb, credit)) {
+			return(2); 
+		}
+		Abonne abo = new Abonne(prenom,nom,adrMail,adrPhys,credit,cb); //id ?
+		bd.newAbonne(abo);
+		this.a=abo;
+		return 1;
+	}
+	
 	//precondition:on est abonne
 	//2 pas assez d'argent 1 ok  5 adresse mail
 	public int creerEnfant(String prenom, String nom, int credit, ArrayList<String> rest, int nbMax) {
@@ -189,10 +196,6 @@ public class FacadeTLI {
 		return 0;
 	}
 	
-	public void deconecte() {
-		//bd update abonne
-		this.a=null;
-	}
 	
 	public ArrayList<String> listeTag() {
 		ArrayList<String> l = new ArrayList<String>();
@@ -229,7 +232,25 @@ public class FacadeTLI {
 		Film f = c.stof(s);
 		c.film_demande.add(f);
 	}
-
-
-
+	
+	//prenom nom mail adr credit cb 
+	public ArrayList<String> info() {
+		ArrayList<String> info = new ArrayList<String>();
+		info.add(a.getPrenom());
+		info.add(a.getNom());
+		info.add(a.getAdrMail());
+		info.add(a.getAdrPhys());
+		info.add(Integer.toString(a.getCredit()));
+		info.add(a.getCb().toString());
+		return info;
+	}
+	
+	//return une liste de location sous la forme film + date
+	public ArrayList<String> LocationEnCour() {
+		ArrayList<String> info = new ArrayList<String>();
+		for(LocationBR loc : a.getLocBr()) {
+			info.add(loc.film.titre + loc.date.toString());
+		}
+		return info;
+	}
 }

@@ -3,12 +3,15 @@ package fc;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import BDD.FacadeBD;
+
 public class LocationBR extends Location {
 	final static int PRIXBR=5;
 	
 	public LocationBR(BluRay br, Personne p) {
 		super(br.film, p);
 		this.br=br;
+		
 	}
 	BluRay br;
 	
@@ -18,7 +21,8 @@ public class LocationBR extends Location {
 	int enregistrer(){
 		int v = this.p.addLocation(this);
 		if(v==1) {
-			//envoyer a la bd
+			FacadeBD bd = FacadeBD.creer();
+			bd.newLocation(this);
 			return 1;
 		}
 		return v;
