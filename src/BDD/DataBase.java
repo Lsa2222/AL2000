@@ -197,10 +197,10 @@ public class DataBase {
 			execStatm("insert into LesFilms values (6, 'La Liste de Schindler', 'Steven Spielberg', 'data/lalistedeschindler.jpg', 'Évocation des années de guerre d’Oskar Schindler, fils d’industriel d’origine autrichienne rentré à Cracovie en 1939 avec les troupes allemandes.')");
 			execStatm("insert into LesFilms values (7, 'Parasite', 'Bong Joon-ho', 'data/parasite.jpg', 'Toute la famille de Ki-taek est au chômage. Elle s’intéresse particulièrement au train de vie de la richissime famille Park.')");
 			execStatm("insert into LesFilms values (8, 'Pulp Fiction', 'Quentin Tarantino', 'data/pulpfiction.jpg', 'L’odyssée sanglante et burlesque de petits malfrats dans la jungle d’Hollywood.')");
-			execStatm("insert into LesFilms values (9, 'The Dark Knight', 'Christopher Nolan', 'data/inception', 'Avec l aide du Lieutenant de Police Jim Gordon et du Procureur Harvey Dent, Batman entreprend de démanteler définitivement les organisations criminelles de Gotham.')");
-			execStatm("insert into LesFilms values (10, 'Inception', 'Christopher Nolan', 'data/thedarkknight.jpg', 'Dom Cobb est un voleur expérimenté, le meilleur dans l art dangereux de l extraction.')");
+			execStatm("insert into LesFilms values (9, 'The Dark Knight', 'Christopher Nolan', 'data/thedarkknight.jpg', 'Avec l aide du Lieutenant de Police Jim Gordon et du Procureur Harvey Dent, Batman entreprend de démanteler définitivement les organisations criminelles de Gotham.')");
+			execStatm("insert into LesFilms values (10, 'Inception', 'Christopher Nolan', 'data/inception.jpg', 'Dom Cobb est un voleur expérimenté, le meilleur dans l art dangereux de l extraction.')");
 			execStatm("insert into LesFilms values (11, 'La Ligne verte', 'Frank Darabont', 'data/laligneverte.jpg', 'Paul Edgecomb, pensionnaire centenaire d une maison de retraite, est hanté par ses souvenirs.')");
-			execStatm("insert into LesFilms values (12, 'Le Seigneur des anneaux : Le Retour du roi', 'Peter Jackson', 'data/leseigneurdesanneaux:leretourduroi.jpg', 'Les armées de Sauron ont attaqué Minas Tirith, la capitale de Gondor.')");
+			execStatm("insert into LesFilms values (12, 'Le Seigneur des anneaux : Le Retour du roi', 'Peter Jackson', 'data/leseigneurdesanneauxleretourduroi.jpg', 'Les armées de Sauron ont attaqué Minas Tirith, la capitale de Gondor.')");
 			execStatm("insert into LesFilms values (13, 'Forrest Gump', 'Robert Zemeckis', 'data/forrestgump.jpg', 'Forrest Gump est le symbole d une époque, un candide dans une Amérique qui a perdu son innocence.')");
 			
 			execStatm("insert into Tags values ('PEGI18')");
@@ -225,21 +225,22 @@ public class DataBase {
 			execStatm("insert into TagsFilm values ('ACTION', 10)");
 			execStatm("insert into TagsFilm values ('POLICIER',11)");
 			execStatm("insert into TagsFilm values ('FANTASY', 12)");
-
-
-
-			
 			
 			execStatm("insert into LesRestrictions values (3, 'PEGI18')");
 			execStatm("insert into LesRestrictions values (4, 'PEGI12')");
 			execStatm("insert into LesRestrictions values (4, 'PEGI18')");
 			
-			execStatm("insert into LesBlueRay values (1, 1, 'good')");
-			execStatm("insert into LesBlueRay values (2, 1, 'raye')");
-			execStatm("insert into LesBlueRay values (3, 2, 'good')");
-			execStatm("insert into LesBlueRay values (4, 2, 'good')");
-			execStatm("insert into LesBlueRay values (5, 2, 'good')");
-			execStatm("insert into LesBlueRay values (6, 3, 'raye')");
+			execStatm("insert into LesBlueRay values (6, 3, 'good')");
+			
+			execStatm("insert into LesBlueRay values (1, 4, 'raye')");
+			execStatm("insert into LesBlueRay values (2, 4, 'good')");
+			execStatm("insert into LesBlueRay values (3, 5, 'good')");
+			execStatm("insert into LesBlueRay values (4, 5, 'good')");
+			execStatm("insert into LesBlueRay values (5, 6, 'good')");
+			execStatm("insert into LesBlueRay values (7, 7, 'good')");
+			execStatm("insert into LesBlueRay values (8, 8, 'good')");
+			execStatm("insert into LesBlueRay values (9, 9, 'good')");
+			execStatm("insert into LesBlueRay values (10, 10, 'good')");
 			
 			execStatm("insert into LesLocationsQR values (1,1,sysdate,sysdate)");
 			execStatm("insert into LesLocationsQR values (2,1,sysdate,sysdate)");
