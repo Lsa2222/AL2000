@@ -19,7 +19,7 @@ public class Enfant extends Abonne {
 		this.idParent=idParent;
 	}
 	
-		public static Enfant aboToEnfant(Abonne a) {
+	public static Enfant aboToEnfant(Abonne a) {
 		Enfant ret = new Enfant(a.getPrenom(),a.getNom(),a.getAdrMail(),a.getAdrPhys(),a.getCredit(),a.getCb(),0,null,168);
 		ret.rest=new HashSet<>();
 		return ret;
@@ -50,8 +50,6 @@ public class Enfant extends Abonne {
 	public Iterator<Tag> getRestrIterator() {
 		return rest.iterator();
 	}
-
-	
 
 	public int getIdParent() {
 		return id;

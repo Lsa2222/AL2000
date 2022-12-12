@@ -18,6 +18,7 @@ public class LocationBR extends Location {
 		public String toString() {
 		return super.toString() + " " + br;
 	}
+	//valide la location en faisant les vérif et en l'envoyant a la bd
 	int enregistrer(){
 		int v = this.p.addLocation(this);
 		if(v==1) {
@@ -28,9 +29,10 @@ public class LocationBR extends Location {
 		return v;
 	}
 	
+	//renvoi le prix a payer pour clore la location
 	int rendre() {
 		System.out.println("rendre :" +br.id+br.estBon);
-		if(this.br.estBon==false/*il faudrais demandé si on arrive a le lire*/) {
+		if(this.br.estBon==false/*on arrive a le lire ?*/) {
 			System.out.print("c'est gratuit\n");
 			return 0;
 		}

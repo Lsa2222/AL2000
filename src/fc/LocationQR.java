@@ -15,6 +15,7 @@ public class LocationQR extends Location{
 		return super.toString() + " " + activation + " " + lienUrl;
 	}
 
+	//valide la location en faisant les vérif et en l'envoyant a la bd
 	int enregistrer(){
 		int v = this.p.addLocation(this);
 		if(v==1) {
@@ -28,10 +29,11 @@ public class LocationQR extends Location{
 		return v;
 	}
 	
+	//fonction appeller lorsque l'utilisateur lis le qrcode
 	void activer() {
 		this.activation=new Date();
 	    Timer timer = new Timer();
-	    long delay = 3000;
+	    long delay = 3000;//3sec pour debug
 	    timer.schedule(new MaTask(this),delay);
 	}
 	

@@ -13,6 +13,7 @@ public class Guest extends Personne {
 		this.locQr = new HashSet<>();
 	}
 	
+	//return 3 si le guest a deja louer un film
 	public int addLocation(LocationBR loc) {
 		if (this.locBr != null) {
 			System.out.print("vous avez deja loue un film");
@@ -22,6 +23,7 @@ public class Guest extends Personne {
 		return 1;
 	}
 	
+	//return 3 si le guest a deja louer un film
 	public int addLocation(LocationQR loc) {
 		if (banque.debiter(this.cb, this.PRIXQR)) {
 
