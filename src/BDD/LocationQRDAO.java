@@ -74,7 +74,7 @@ public class LocationQRDAO extends DAO<LocationQR> {
         	
         	querryLocationQR = conn.prepareStatement(""
             		+ "SELECT "
-            		+ "f.noFilm, f.titre, f.realisateur, f.resumer, f.genre "
+            		+ "f.noFilm, f.titre, f.realisateur, f.resumer, f.image "
             		+ "FROM LesLocationsQR l, LesFilms f "//JOIN
             		+ "WHERE l.id = ? AND "
             		+ "f.noFilm = l.noFilm");

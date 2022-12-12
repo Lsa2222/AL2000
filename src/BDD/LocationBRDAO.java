@@ -75,7 +75,7 @@ public class LocationBRDAO extends DAO<LocationBR> {
         	
         	querryLocationBR = conn.prepareStatement(""
             		+ "SELECT "
-            		+ "f.noFilm, f.titre, f.realisateur, f.resumer, f.genre, b.idBR, b.etat "
+            		+ "f.noFilm, f.titre, f.realisateur, f.resumer, f.image, b.idBR, b.etat "
             		+ "FROM LesLocationsBR l, LesFilms f, LesBlueRay b "//JOIN
             		+ "WHERE l.id = ? AND "
             		+ "b.idBr = l.idBr AND "
