@@ -2,6 +2,7 @@ package fc;
 
 import java.math.BigInteger;
 import java.util.HashSet;
+import java.util.Iterator;
 
 public class Abonne extends Personne{
 	AdaptBanque banque= AdaptBanque.creer();
@@ -59,6 +60,8 @@ public class Abonne extends Personne{
 		return false;
 	}
 
+
+	
 	public void del(LocationBR loc) {
 		this.locBr.remove(loc);
 	}
@@ -138,6 +141,11 @@ public class Abonne extends Personne{
 	
 	public HashSet<Enfant> getEnfants() {
 		return this.enfant;
+	}
+	public Iterator<Tag> getRestrIterator() {
+		// TODO Auto-generated method stub
+		HashSet<Tag> tab = new HashSet<Tag>();
+		return tab.iterator();
 	}
 	
 

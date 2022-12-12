@@ -99,6 +99,8 @@ public class Test {
 		   al.setLireBr(br1);
 		   t.connection();
 		   asert(t.rendre()==1,"2 3");
+		   //on verifie qu'un mail est envoyé a l'abo de pour dire que son film est dispo
+		   
 		   
 		   //le 1er abo loue qr
 		   asert(t.louer_Qr(film1.titre)==1,"2 4");
@@ -107,6 +109,8 @@ public class Test {
 		   qr.activer(); //le timer sonne 3 seconde après pour signaler la suppresion de la location
 		   //dans la version final, il faudras porter ce temps a 24h
 		   Thread.sleep(3100);
+		   
+		   
 		   
 		   
 		   

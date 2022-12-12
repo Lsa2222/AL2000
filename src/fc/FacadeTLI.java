@@ -3,6 +3,7 @@ package fc;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 
 import BDD.FacadeBD;
 
@@ -258,5 +259,15 @@ public class FacadeTLI {
 			info.add(loc.film.titre + loc.date.toString());
 		}
 		return info;
+	}
+	
+	public ArrayList<String> TagAbonne() {
+		ArrayList<String> tag = new ArrayList<String>();
+		Iterator<Tag> it = a.getRestrIterator();
+		while(it.hasNext()) {
+			Tag t = it.next();
+			tag.add(t.toString());
+		}
+		return tag;
 	}
 }
