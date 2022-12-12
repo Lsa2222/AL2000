@@ -12,11 +12,11 @@ tant qu’abonné, soit en tant que visiteur.
 
 ## Executer le programme principale
 
-L'exécutable jar fournie lance le programme principale en simulant que la carte d’abonné de XXXXX est inséré dans l’AL2000. **Attention** cette executable ne réinitialise pas la base de donnée.
+L'exécutable jar fourni lance le programme principal en simulant que la carte d’abonné de XXXXX est inséré dans l’AL2000. **Attention** cette exécutable ne réinitialise pas la base de données.
 
-### Execution des tests
+### Exécution des tests
 
-Pour lancer les tests unitaire, nous passons par une IDE. **Attention** le driver ojdbc8.jar doit être dans le BuildPath. Lancer *TestBD* permet de réinitialiser la base de donnée. Des tests plus poussés demandent de modifier directement le *Main*.
+Pour lancer les tests unitaires, nous passons par une IDE. **Attention** le driver *ojdbc8.jar* doit être dans le Build Path. Lancer *TestBD* permet de réinitialiser la base de données. Des tests plus poussés demandent de modifier directement la *Main*.
 
 ## Fabriqué avec
 
