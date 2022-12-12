@@ -20,6 +20,12 @@ public class LocationBRDAO extends DAO<LocationBR> {
         this.tagDAO=tagDAO;
     }
     
+    /**
+	Ajoute la location BR obj a la BD.
+	Supose que l'abonne et le blueRay existe dans la bd
+	@param obj	la location a ajouter a la BD. Ne doit pas dejat etre dans la BD
+	@return vrais si l'ajout est reussi
+	 **/
     public boolean create(LocationBR obj) {
     	PreparedStatement statmLocation = null;
     	try {
@@ -45,12 +51,20 @@ public class LocationBRDAO extends DAO<LocationBR> {
         
     }
 
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
     public LocationBR read (Object obj) {
         return null;
     }
     
     
-    
+    /**
+     * Lit toutes les locationsBR d'une personne
+     * @param obj	(Personne)
+     * @return La liste des location BR de obj
+	 **/
     public HashSet<LocationBR> readAll (Object obj) {
     	
     	ResultSet res3 = null;
@@ -107,10 +121,19 @@ public class LocationBRDAO extends DAO<LocationBR> {
     	
     }
 
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
     public boolean update (LocationBR obj) {
         return false;
     }
 
+    /**
+     * supprime la location obj de la bd
+     * @param obj	la location a supprimer
+	@return vrais si la suppresion est reussi
+	 **/
     public boolean delete(LocationBR obj) {
     	PreparedStatement statm1 = null;
     	try {

@@ -13,6 +13,10 @@ public class EntreeHistoriqueDAO extends DAO<EntreeHistorique> {
         super(conn);
     }
     
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
     public boolean create(EntreeHistorique obj) {
         try {
             PreparedStatement statm1 = conn.prepareStatement(
@@ -31,14 +35,26 @@ public class EntreeHistoriqueDAO extends DAO<EntreeHistorique> {
         }
     }
 
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
     public EntreeHistorique read (Object obj) {
         return null;
     }
 
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
     public boolean update (EntreeHistorique obj) {
         return false;
     }
 
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
     public boolean delete(EntreeHistorique obj) {
         try {
             PreparedStatement statm1 = conn.prepareStatement(
@@ -55,6 +71,10 @@ public class EntreeHistoriqueDAO extends DAO<EntreeHistorique> {
         }
     }
 
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
 	@Override
 	public HashSet<EntreeHistorique> readAll(Object obj) throws SQLException {
 		// TODO Auto-generated method stub

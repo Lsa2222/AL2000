@@ -21,6 +21,12 @@ public class LocationQRDAO extends DAO<LocationQR> {
         this.tagDAO=tagDAO;
     }
     
+    /**
+	Ajoute la location QR obj a la BD.
+	Supose que l'abonne et le blueRay existe dans la bd
+	@param obj	la location a ajouter a la BD. Ne doit pas dejat etre dans la BD
+	@return vrais si l'ajout est reussi
+	 **/
     public boolean create(LocationQR obj) {
     	PreparedStatement statm1 = null;
     	try {
@@ -47,10 +53,19 @@ public class LocationQRDAO extends DAO<LocationQR> {
 
     }
 
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
     public LocationQR read (Object obj) {
         return null;
     }
     
+    /**
+     * Lit toutes les locations QR d'une personne
+     * @param obj	(Personne)
+     * @return La liste des location QR de obj
+	 **/
     public HashSet<LocationQR> readAll (Object obj) {
     	ResultSet res3=null;
     	PreparedStatement querryLocationQR = null;
@@ -96,10 +111,19 @@ public class LocationQRDAO extends DAO<LocationQR> {
     	
     }
 
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
     public boolean update (LocationQR obj) {
         return false;
     }
 
+    /**
+     * supprime la location obj de la bd
+     * @param obj	la location a supprimer
+	@return vrais si la suppresion est reussi
+	 **/
     public boolean delete(LocationQR obj) {
     		PreparedStatement statm1 = null;
 			try {

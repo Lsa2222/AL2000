@@ -20,6 +20,13 @@ public class EnfantDAO extends DAO<Enfant>{
 		this.aboDAO = aboDAO;
 	}
 	
+	/**
+	Ajoute l'enfant obj a la BD.
+	N'ajoute pas les location de obj.
+	Mes a jour son identifiant.
+	@param obj	l'enfant a ajouter a la BD. Ne doit pas dejat etre dans la BD
+	@return vrais si l'ajout est reussi
+	 **/
 	@Override
 	public boolean create(Enfant obj) {
 		PreparedStatement statmRestriction = null;
@@ -66,6 +73,12 @@ public class EnfantDAO extends DAO<Enfant>{
 		
 	}
 
+	/**
+	Creer l'enfant obj a partir de son id.
+	Ne remplie pas les listes contenue dans obj
+	@param obj	(integer) l'id de l'enfant
+	@return l'enfant ou null en cas d'echec
+	 **/
 	@Override
 	public Enfant read(Object obj) {
 		
@@ -102,12 +115,20 @@ public class EnfantDAO extends DAO<Enfant>{
 		
 	}
 
+	/**
+     * Non utilisee
+	@deprecated
+	 **/
 	@Override
 	public boolean update(Enfant obj) throws SQLException {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/**
+     * Non utilisee
+	@deprecated
+	 **/
 	@Override
 	public boolean delete(Enfant obj) throws SQLException {
 		// TODO Auto-generated method stub

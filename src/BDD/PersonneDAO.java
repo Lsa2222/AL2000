@@ -8,6 +8,11 @@ import java.util.HashSet;
 
 import fc.Personne;
 
+/**
+ * 
+ * @deprecated
+ *
+ */
 public abstract class PersonneDAO extends DAO<Personne> {
 	
 	protected PersonneDAO(Connection conn) {
@@ -56,7 +61,6 @@ public abstract class PersonneDAO extends DAO<Personne> {
 
 	@Override
 	public HashSet<Personne> readAll(Object obj) throws SQLException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

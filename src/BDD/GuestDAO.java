@@ -14,6 +14,13 @@ public class GuestDAO extends DAO<Guest> {
 		super(conn);
     }
 	
+	/**
+	Ajoute le guest a la BD.
+	Ne le rajoute pas si il est deja present. 
+	Met a jour son identifiant.
+	@param obj	le guest a ajouter a la BD
+	@return vrais si l'ajout est reussi
+	 **/
     public boolean create(Guest obj) {
     	PreparedStatement queryPersonne = null;
     	PreparedStatement statmPeronne = null;
@@ -54,19 +61,35 @@ public class GuestDAO extends DAO<Guest> {
 
     }
 
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
     public Guest read (Object obj) {
         return null;
     }
 
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
     public boolean update (Guest obj) {
         return false;
     }
 
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
     public boolean delete(Guest obj) {
         return false;
 
     }
 
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
 	@Override
 	public HashSet<Guest> readAll(Object obj) throws SQLException {
 		// TODO Auto-generated method stub

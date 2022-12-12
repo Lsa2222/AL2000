@@ -14,6 +14,10 @@ public class TagDAO extends DAO<Tag> {
         super(conn);
     }
     
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
     public boolean create(Tag obj) {
     	PreparedStatement statm1 = null;
     	try {
@@ -36,14 +40,26 @@ public class TagDAO extends DAO<Tag> {
 		}
     }
 
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
     public Tag read (Object obj) {
         return null;
     }
 
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
     public boolean update (Tag obj) {
         return false;
     }
 
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
     public boolean delete(Tag obj) {
     	PreparedStatement statm1 = null;
     	try {
@@ -66,6 +82,11 @@ public class TagDAO extends DAO<Tag> {
 		}
     }
 
+    /**
+	Renvois tous les tags de la personne obj
+	@param obj	la personne
+	@return la liste des tags
+	 **/
 	@Override
 	public HashSet<Tag> readAll(Object obj) {
 		ResultSet res = null;

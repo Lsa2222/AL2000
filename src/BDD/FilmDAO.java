@@ -18,6 +18,10 @@ public class FilmDAO extends DAO<Film> {
         this.tagDAO = tagDAO;
     }
     
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
     public boolean create(Film obj) {
     	PreparedStatement statm1 = null;
     	try {
@@ -44,14 +48,26 @@ public class FilmDAO extends DAO<Film> {
 		}
     }
 
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
     public Film read (Object obj) {
         return null;
     }
 
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
     public boolean update (Film obj) {
         return false;
     }
 
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
     public boolean delete(Film obj) {
     	PreparedStatement statm1 = null;
     	try {
@@ -74,6 +90,11 @@ public class FilmDAO extends DAO<Film> {
 		}
     }
 
+    /**
+     * Renvoi l'ensemble des films
+     * @param obj	ignorer
+     * @return l'enseble des films de la bd
+	 **/
 	@Override
 	public HashSet<Film> readAll(Object obj) {
 		ResultSet res = null;

@@ -15,9 +15,9 @@ public class AbonneDAO extends DAO<Abonne> {
     }
 	
 	/**
-	Ajoute l'objet obj a la BD.
-	N'ajoute pas les enfants et location de obj.
-	Suppose que obj n'est pas dans la BD.
+	Ajoute l'abonne obj a la BD.
+	N'ajoute pas les enfants ou locations de obj.
+	Mes a jour son identifiant.
 	@param obj	l'abonne a ajouter a la BD. Ne doit pas dejat etre dans la BD
 	@return vrais si l'ajout est reussi
 	 **/
@@ -80,11 +80,10 @@ public class AbonneDAO extends DAO<Abonne> {
     }
     
     /**
-	Ajoute l'objet obj a la BD.
-	N'ajoute pas les enfants et location de obj.
-	Suppose que obj n'est pas dans la BD.
-	@param obj	l'abonne a ajouter a la BD. Ne doit pas dejat etre dans la BD
-	@return vrais si l'ajout est reussi
+	Creer l'abonnes obj a partir de son id.
+	Ne remplie pas les listes contenue dans obj
+	@param obj	(integer) l'id de l'abonne
+	@return l'Abonne ou null en cas d'echec
 	 **/
     public Abonne read (Object obj) {
     	ResultSet res1 = null;
@@ -136,7 +135,13 @@ public class AbonneDAO extends DAO<Abonne> {
 			}
     	}
     }
-
+    
+    /**
+	Mes a jour l'abonne obj dans la bd.
+	Permet de changer son nom, prenom, credit, adrMail et adrPhysique
+	@param obj	l'abonne a mettre a jour
+	@return vrais si l'ajout est reussi
+	 **/
     public boolean update (Abonne obj) {
     	PreparedStatement statmAbonne = null;
     		try {
@@ -170,13 +175,19 @@ public class AbonneDAO extends DAO<Abonne> {
     		}
     		
     }
-
+    
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
     public boolean delete(Abonne obj) {
         return false;
     }
 
-
-	@Override
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
 	public HashSet<Abonne> readAll(Object obj) throws SQLException {
 		return null;
 	}

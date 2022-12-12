@@ -7,11 +7,15 @@ import java.util.HashSet;
 
 import fc.BluRay;
 
-public class BluRayDAO extends DAO<BluRay> {    
+public abstract class BluRayDAO extends DAO<BluRay> {    
     protected BluRayDAO(Connection conn) {
         super(conn);
     }
     
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
     public boolean create(BluRay obj) {
     	PreparedStatement statm1 = null;
     	try {
@@ -42,15 +46,27 @@ public class BluRayDAO extends DAO<BluRay> {
 			}
 		}
     }
-
+    
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
     public BluRay read (Object obj) {
         return null;
     }
 
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
     public boolean update (BluRay obj) {
         return false;
     }
 
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
     public boolean delete(BluRay obj) {
     	PreparedStatement statm1 = null;
     	try {
@@ -73,9 +89,12 @@ public class BluRayDAO extends DAO<BluRay> {
 		}
     }
 
+    /**
+     * Non utilisee
+	@deprecated
+	 **/
 	@Override
 	public HashSet<BluRay> readAll(Object obj) throws SQLException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

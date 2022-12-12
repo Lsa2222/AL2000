@@ -39,6 +39,12 @@ public class FacadeBD {
 		aboDAO = new AbonneDAO(conn);
 		guestDAO = new GuestDAO(conn);
 		enfDAO = new EnfantDAO(conn,aboDAO);
+		
+		try {
+			conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private static FacadeBD instance = null;
@@ -48,6 +54,11 @@ public class FacadeBD {
 			instance = new FacadeBD();
 		}
 		return instance;
+	}
+	
+	public void reset() {
+		DataBase db = new DataBase(conn);
+		db.resetBD();
 	}
 	
 	static int autoIncrDebug = 8;
