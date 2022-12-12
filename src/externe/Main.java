@@ -17,7 +17,7 @@ public class Main {
 		   t.update_Catalogue_1(c);
 		   
 		   FacadeBD bd =  FacadeBD.creer();
-		   bd.reset();
+		   //bd.reset();
 		   FacadeTLI tli = new FacadeTLI();	   
 //		   Test test = new Test(bd,tli,c);
 //		   test.test1();
