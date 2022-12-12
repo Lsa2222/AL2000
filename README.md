@@ -10,41 +10,21 @@ dans la base de données de cyber vidéo pour louer des Bluray, ou avoir
 temporairement accès au film via un QR code. Le client peut louer des films soit en
 tant qu’abonné, soit en tant que visiteur.
 
-## Pour commencer
+## Executer le programme principale
 
-Veuillez lire attentivement les pré-requis et les conseils d'installation
+L'exécutable jar fournie lance le programme principale en simulant que la carte d’abonné de XXXXX est inséré dans l’AL2000. **Attention** cette executable ne réinitialise pas la base de donnée.
 
-### Pré-requis
+### Execution des tests
 
-Ce qui est requis pour commencer avec votre projet...
-
-- Un environnement Java
-- Une souris
-
-### Installation
-
-Executez la commande ``git clone https://github.com/Lsa2222/AL2000.git`` 
-
-## Démarrage
-
-(voir comment lancer le code et où ser placer)
+Pour lancer les tests unitaire, nous passons par une IDE. **Attention** le driver ojdbc8.jar doit être dans le BuildPath. Lancer *TestBD* permet de réinitialiser la base de donnée. Des tests plus poussés demandent de modifier directement le *Main*.
 
 ## Fabriqué avec
 
 * [VisualStudioCode](https://code.visualstudio.com/) - SQL (BDD) et éditeur de texte
 * [Eclips](https://www.eclipse.org/) - Java (Front-end and Back-end)
 
-## Versions
-
-**Dernière version stable :** --  
-**Dernière version :** 0.1  
-Liste des versions : [Cliquer pour afficher](https://github.com/Lsa2222/AL2000/tags)
-
 ## Auteurs
 * **Joan Besante** _alias_ [besantej](https://github.com/besantej)
 * **Timothée Rognon** _alias_ [ar7-612](https://github.com/ar7-612)
 * **Lucas Sauvayre** _alias_ [lsa2222](https://github.com/Lsa2222)
 * **Noé Romain** _alias_ [IronLyzhard](https://github.com/IronLyzhard)
-
-Lisez la liste des [contributeurs](https://github.com/Lsa2222/AL2000/contributors) pour voir qui à aidé au projet !
-
